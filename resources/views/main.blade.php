@@ -50,7 +50,19 @@
                     <label for="slide5"></label>
                 </div>
             </div>
-
+            @foreach($movies as $movie)
+                <div class="main-moviediv">
+                    <div class="main-movieimg" style="background: url({{$movie->image_url}})">
+                    </div>
+                    <div style="height: 70px;">
+                    <a class="main-moviea" href="{{$movie->seo_url}}">
+                    Неоновый демон
+                    </a>
+                    </div>
+                        <button type="button" class="btn btn-success">Купить билет</button>
+                </div>
+            @endforeach
         </div>
     </div>
+
 @endsection

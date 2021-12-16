@@ -1,4 +1,10 @@
 @import url(https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css);
+.auth-form {
+    text-align: center;
+}
+.small-form{
+    width:800px;
+}
 .header-column{
     float: left;
     height: 80px;
@@ -112,10 +118,10 @@ nav ul ul li {
     position: absolute;
     width: inherit;
 }
-.slide2 { background-image: url(http://habrastorage.org/files/3e1/95d/c7f/3e195dc7f5a64469807f49a14f97ba0e.jpg); }
-.slide3 { background-image: url(http://habrastorage.org/files/663/6b1/d4f/6636b1d4f8e643d29eab8c192fc1cea3.jpg); }
-.slide4 { background-image: url(http://habrastorage.org/files/e59/424/c04/e59424c046be4dab897d84ab015c87ea.jpg); }
-.slide5 { background-image: url(http://habrastorage.org/files/53c/ff6/c1c/53cff6c1caf842368c70b8ef892d8402.jpg); }
+.slide2 { }
+.slide3 { }
+.slide4 { }
+.slide5 { }
 .wrapper .controls {
     left: 50%;
     margin-left: -98px;

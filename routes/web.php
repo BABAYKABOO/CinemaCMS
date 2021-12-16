@@ -14,3 +14,10 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', [App\Http\Controllers\MainController::class, 'index'])->name('main');
+Route::get('/login', [App\Http\Controllers\AuthController::class, 'index'])->name('login');
+Route::get('/login/auth', [App\Http\Controllers\AuthController::class, 'auth'])->name('auth');
+Route::middleware('auth')->group(function (){
+    Route::post('/crm', function (){
+        return 'Hello';
+    })->name('crm');
+});

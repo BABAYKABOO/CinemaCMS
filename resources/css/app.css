@@ -1,5 +1,11 @@
 @import url(https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css);
 
+.auth-form {
+    text-align: center;
+}
+.small-form{
+    width:700px;
+}
 .header-column{
     float: left;
     height: 80px;

@@ -17,7 +17,5 @@ Route::get('/', [App\Http\Controllers\MainController::class, 'index'])->name('ma
 Route::get('/login', [App\Http\Controllers\AuthController::class, 'index'])->name('login');
 Route::get('/login/auth', [App\Http\Controllers\AuthController::class, 'auth'])->name('auth');
 Route::middleware('auth')->group(function (){
-    Route::post('/crm', function (){
-        return 'Hello';
-    })->name('crm');
+    Route::get('/crm', [\App\Http\Controllers\CrmController::class, 'index'])->name('crm');
 });

@@ -29,6 +29,6 @@ class AuthController extends Controller
             'email' => $request->input('email'),
             'password' => $request->input('password')]);
 
-        return route('crm');
+        return view('crm');
     }
 }

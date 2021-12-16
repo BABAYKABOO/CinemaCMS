@@ -50,18 +50,84 @@
                     <label for="slide5"></label>
                 </div>
             </div>
-            @foreach($movies as $movie)
+            <h2>Смотрите сегодня, {{$data[2]." ".$data[1]}}</h2>
+            <div style="margin-bottom: 50px">
+            @foreach($moviesToday as $movie)
                 <div class="main-moviediv">
                     <div class="main-movieimg" style="background: url({{$movie->image_url}})">
                     </div>
                     <div style="height: 70px;">
                     <a class="main-moviea" href="{{$movie->seo_url}}">
-                    Неоновый демон
+                        {{$movie->name}}
                     </a>
                     </div>
                         <button type="button" class="btn btn-success">Купить билет</button>
                 </div>
             @endforeach
+            </div>
+            <div style="margin-bottom: 50px">
+                <h2>Смотрите скоро</h2>
+            @foreach($moviesSoon as $movie)
+                <div class="main-moviediv">
+                    <div class="main-movieimg" style="background: url({{$movie->image_url}})">
+                    </div>
+                    <div style="height: 70px;">
+                        <a class="main-moviea" href="{{$movie->seo_url}}">
+                            {{$movie->name}}
+                        </a>
+                    </div>
+                    <p class="main-psoon" >C {{ substr($movie->data, 5)}}</p>
+                </div>
+            @endforeach
+            </div>
+            <div style="margin-bottom: 50px">
+                <h2>Новости и акции</h2>
+                <div class="wrapper-events">
+                    <input type="radio" name="point" id="slide1" checked>
+                    <input type="radio" name="point" id="slide2">
+                    <input type="radio" name="point" id="slide3">
+                    <input type="radio" name="point" id="slide4">
+                    <input type="radio" name="point" id="slide5">
+                    <div class="slider-events">
+                        <div class="slides-events slide1"
+                             style="background-image: url(img/slider.jpg); background-size: 100%;">
+                            <div class="slider-div">
+                                <p class="slider-text">Тор повелитель молота и молнии</p>
+                            </div>
+                        </div>
+                        <div class="slides slide2"
+                             style="background-image: url(img/slider.jpg); background-size: 100%;">
+                            <div class="slider-div">
+                                <p class="slider-text">Тор повелитель молота и молнии</p>
+                            </div>
+                        </div>
+                        <div class="slides slide3"
+                             style="background-image: url(img/slider.jpg); background-size: 100%;">
+                            <div class="slider-div">
+                                <p class="slider-text">Тор повелитель молота и молнии</p>
+                            </div>
+                        </div>
+                        <div class="slides slide4"
+                             style="background-image: url(img/slider.jpg); background-size: 100%;">
+                            <div class="slider-div">
+                                <p class="slider-text">Тор повелитель молота и молнии</p>
+                            </div>
+                        </div>
+                        <div class="slides slide5"
+                             style="background-image: url(img/slider.jpg); background-size: 100%;">
+                            <div class="slider-div">
+                                <p class="slider-text">Тор повелитель молота и молнии</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="controls">
+                        <label for="slide1"></label>
+                        <label for="slide2"></label>
+                        <label for="slide3"></label>
+                        <label for="slide4"></label>
+                        <label for="slide5"></label>
+                    </div>
+            </div>
         </div>
     </div>
 

@@ -81,9 +81,9 @@ nav ul ul li {
 .main-div{
     background-color: #f7f6f6;
     width: 1000px;
-    height: 1500px;
-    text-align: left;
+    text-align: center;
     margin-top: 50px;
+    margin-bottom: 100px;
     display: inline-block;
 }
 
@@ -91,6 +91,7 @@ nav ul ul li {
     height: 500px;
     position: relative;
     width: 1000px;
+    margin-bottom: 75px;
 }
 
 .slider {
@@ -291,6 +292,13 @@ nav ul ul li {
     width:100%;
     background-size: 100%;
 }
+.main-psoon {
+    text-decoration: none;
+    color: #28a745;
+    font-size: 20px;
+    font-weight: 600;
+    border-bottom: 1px solid gray;
+}
 .main-moviea {
     text-decoration: none;
     color: black;
@@ -301,8 +309,5 @@ nav ul ul li {
 }
 .btn-success{
     margin-top: 10px;
-    position: relative;
-    left: 50%;
-    transform: translate(-50%, 0);
 }
 

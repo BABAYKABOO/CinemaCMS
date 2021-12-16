@@ -10,12 +10,26 @@ class MainController extends Controller
 {
     public function index()
     {
-        $movies = DB::table('movies')
-            ->join('images', 'images.image_id', '=', 'movies.mainimg')
-            ->join('seos', 'seos.seo_id', '=', 'movies.seo')
-            ->get();
+        $arr = [
+            'января',
+            'февраля',
+            'марта',
+            'апреля',
+            'мая',
+            'июня',
+            'июля',
+            'августа',
+            'сентября',
+            'октября',
+            'ноября',
+            'декабря'
+        ];
+        $month = date('n')-1;
+
         return view('main', [
-            'movies' => $movies
+            'moviesToday' => Movie::getMovies(date("Y-m-d")),
+            'moviesSoon' => Movie::getMovies("soon"),
+            'data' => [date("Y"), $arr[$month], date("d")]
         ]);
     }
 }

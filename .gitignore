@@ -18,7 +18,6 @@ yarn-error.log
 /public/build/
 /public/.vscode/
 /public/dist/
-/public/js/
 /public/node_modules/
 /public/pages/
 /public/plugins/

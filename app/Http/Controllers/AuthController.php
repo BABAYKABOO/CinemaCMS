@@ -18,17 +18,24 @@ class AuthController extends Controller
     }
     public function auth(Authorize $request)
     {
-        $user = Admin::where('admin_email', $request->input('email'))->first();
-        //$pass = Hash::check($request->input('password'), $user->admin_password);
-        if ($request->input('password') != $user->admin_password){
+        $user = Admin::where('admin_email', $request->input('admin_email'))->first();
+        $pass = Hash::check($request->input('password'), $user->password);
+        if (!$pass){
             throw \Illuminate\Validation\ValidationException::withMessages([
                 'password' => 'Не верный пароль'
             ]);
         }
-        $auth = Auth::attempt([
-            'email' => $request->input('email'),
-            'password' => $request->input('password')]);
-
-        return view('crm');
+        $data = [
+            'admin_email' => $request->input('admin_email'),
+            'password' => $request->input('password'),
+        ];
+        if (Auth::guard('admin')->attempt($data))
+            return redirect(route('statistic'));
+        return redirect(route('statistic'));
+    }
+    public function logout(Request $request)
+    {
+        Auth::guard('admin')->logout();
+        return redirect(route('main'));
     }
 }

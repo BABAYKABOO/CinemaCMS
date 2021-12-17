@@ -23,7 +23,7 @@
     <form class="small-form" action="{{route('auth')}}" method="get">
         <h3 class="text-center">Форма входа</h3>
         <div class="form-group">
-            <input class="form-control item" type="text" name="email" id="email" placeholder="Email">
+            <input class="form-control item" type="text" name="admin_email" id="email" placeholder="Email">
         </div>
         <div class="form-group">
             <input class="form-control item" type="password" name="password" id="password" placeholder="Пароль">

@@ -24,14 +24,14 @@ class Authorize extends FormRequest
     public function rules()
     {
         return [
-            'email' => 'required|exists:admins,admin_email'
+            'admin_email' => 'required|exists:admins,admin_email'
         ];
     }
     public function messages()
     {
         return [
-            'email.required' => 'Введите email',
-            'email.exists' => 'Такого email нет в базе',
+            'admin_email.required' => 'Введите email',
+            'admin_email.exists' => 'Такого email нет в базе',
             'password.required' => 'Введите пароль'
         ];
     }

@@ -12,7 +12,7 @@ class Gallery extends Model
     public $timestamps = false;
 
     protected $fillable = [
-        'gallery_id',s
+        'gallery_id',
         'image_id'
     ];
     public function image()

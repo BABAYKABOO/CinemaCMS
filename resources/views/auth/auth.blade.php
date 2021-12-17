@@ -20,8 +20,9 @@
             </ul>
         </div>
     @endif
-    <form class="small-form" action="{{route('auth')}}" method="get">
-        <h3 class="text-center">Форма входа</h3>
+    <form class="small-form" action="{{route('auth')}}" method="post">
+        @csrf
+        <h3 class="text-center">Вход в CMS</h3>
         <div class="form-group">
             <input class="form-control item" type="text" name="admin_email" id="email" placeholder="Email">
         </div>

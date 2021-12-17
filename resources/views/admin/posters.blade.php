@@ -9,7 +9,7 @@
                 <div class="main-movieimg" style="background: url({{$movie->image_url}})">
                 </div>
                 <div style="height: 70px;">
-                    <a class="main-moviea" href="http://cinema.com/admin/poster/{{$movie->movie_id}}">
+                    <a class="main-moviea" href="http://cinema.com/admin/posters/{{$movie->movie_id}}">
                         {{$movie->name}}
                     </a>
                 </div>
@@ -23,7 +23,7 @@
                     <div class="main-movieimg" style="background: url({{$movie->image_url}})">
                     </div>
                     <div style="height: 70px;">
-                        <a class="main-moviea" href="http://cinema.com/admin/poster/{{$movie->movie_id}}">
+                        <a class="main-moviea" href="http://cinema.com/admin/posters/{{$movie->movie_id}}">
                             {{$movie->name}}
                         </a>
                     </div>

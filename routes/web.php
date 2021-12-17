@@ -15,13 +15,15 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/', [App\Http\Controllers\MainController::class, 'index'])->name('main');
 Route::get('/login', [App\Http\Controllers\AuthController::class, 'index'])->name('login');
-Route::get('/login/auth', [App\Http\Controllers\AuthController::class, 'auth'])->name('auth');
+Route::post('/login/auth', [App\Http\Controllers\AuthController::class, 'auth'])->name('auth');
 Route::get('/login/logout', [App\Http\Controllers\AuthController::class, 'logout'])->name('logout');
 
 Route::middleware([App\Http\Middleware\AuthAdmin::class])->group(function (){
     Route::prefix('admin')->group(function () {
         Route::get('/statistic', [App\Http\Controllers\StatisticController::class, 'index'])->name('statistic');
         Route::get('/posters', [App\Http\Controllers\PosterAdminController::class, 'showMovies'])->name('admin-posters');
+        Route::get('/posters/{id}', [App\Http\Controllers\MovieAdminController::class, 'showCard'])->name('admin-movie_id');
+        Route::post('/posters/{id}/save', [App\Http\Controllers\MovieAdminController::class, 'save'])->name('admin-movie-save');
     });
 
 });

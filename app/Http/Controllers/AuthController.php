@@ -14,6 +14,9 @@ class AuthController extends Controller
 {
     public function index()
     {
+        if(Auth::guard('admin')->check())
+            return redirect(route('statistic'));
+
         return view('auth.auth');
     }
     public function auth(Authorize $request)

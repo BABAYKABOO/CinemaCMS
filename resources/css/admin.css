@@ -1,0 +1,26 @@
+.main-moviediv {
+    width: 200px;
+    margin: 10px 0px 20px 15px;
+    display:inline-block;
+}
+.main-movieimg {
+    margin-bottom: 10px;
+    height: 300px;
+    width:100%;
+    background-size: 100%;
+}
+.main-psoon {
+    text-decoration: none;
+    color: #28a745;
+    font-size: 20px;
+    font-weight: 600;
+    border-bottom: 1px solid gray;
+}
+.main-moviea {
+    text-decoration: none;
+    color: black;
+    margin-left: 5px;
+    font-size: 17px;
+    font-weight: 600;
+    border-bottom: 1px solid gray;
+}

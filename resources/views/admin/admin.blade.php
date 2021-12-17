@@ -7,6 +7,8 @@
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
     <link rel="stylesheet" href="{{ asset('/plugins/fontawesome-free/css/all.min.css')}}">
     <link rel="stylesheet" href="{{ asset('/dist/css/adminlte.min.css')}}">
+    <link href="{{ asset('/css/bootstrap.min.css')}}" rel="stylesheet">
+    <link href="{{ asset('/css/admin.css')}}" rel="stylesheet">
 </head>
 <body class="hold-transition sidebar-mini">
 <div class="wrapper">
@@ -86,7 +88,7 @@
                     </li>
                     <li class="nav-item menu-open">
                         <script type="text/javascript">
-                            document.title === 'Admin - Фильмы' ? document.write('<a href="#" class="nav-link active">') : document.write('<a href="#" class="nav-link">');
+                            document.title === 'Admin - Фильмы' || document.title === 'Admin - Новый фильмы' ? document.write('<a href="#" class="nav-link active">') : document.write('<a href="#" class="nav-link">');
                         </script>
                             <i class="nav-icon fas fa-archive"></i>
                             <p>
@@ -97,7 +99,7 @@
                         <ul class="nav nav-treeview">
                             <li class="nav-item">
                                 <script type="text/javascript">
-                                    document.title === 'Admin - Фильмы' ? document.write('<a href="#" class="nav-link active">') : document.write('<a href="#" class="nav-link">');
+                                    document.title === 'Admin - Фильмы' ? document.write('<a href="{{route('admin-posters')}}" class="nav-link active">') : document.write('<a href="{{route('admin-posters')}}" class="nav-link">');
                                 </script>
                                 <i class="far fa-bars nav-icon"></i>
                                 <p>Фильмы</p>

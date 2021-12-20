@@ -18,40 +18,6 @@ class Image extends Model
         'image_url'
     ];
 
-    static function uploadImage(Request $request, int $id = 0, string $name = null, string $class = null)
-    {
-        if ($id != 0)
-        {
-            $nameclass = $class;
-            $class = '\App\Models\\'.$class;
-            $image_id = $class::where(strtolower($nameclass).'_id', $id)->first()->$name;
-            Image::where('image_id', $image_id)->delete();
-        }
-        else
-            $image_id = Image::latest()->first()->image_id + 1;
-
-
-        if ($request->file($name)) {
-
-            $file = $request->file($name);
-            $upload_folder = 'public/img/'.strtolower($nameclass).'s';
-            $filename = $file->getClientOriginalName(); // image.jpg
-
-            Storage::putFileAs($upload_folder, $file, $filename);
-            Image::insert([
-                'image_id' => $image_id,
-                'image_url' => 'http://cinema.com/img/'.strtolower($nameclass).'s'.'/'.$filename
-            ]);
-            $class::insert([
-                strtolower($class).'_id' => $id,
-                $name => $image_id
-            ]);
-        }
-
-    }
-
-
-
     static function uploadGallery(Request $request, int $id = 0)
     {
         $image_id = Image::latest()->first()->image_id + 1;

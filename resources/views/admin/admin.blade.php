@@ -68,7 +68,7 @@
                          with font-awesome or any other icon font library -->
                     <li class="nav-item">
                         <script type="text/javascript">
-                            document.title === 'Admin - Статистика' ? document.write('<a href="{{route('main')}}" class="nav-link active">') : document.write('<a href="{{route('main')}}" class="nav-link">');
+                            document.title === 'Admin - Статистика' ? document.write('<a href="{{route('statistic')}}" class="nav-link active">') : document.write('<a href="{{route('statistic')}}" class="nav-link">');
                         </script>
                             <i class="nav-icon fas fa-th"></i>
                             <p>

@@ -34,7 +34,6 @@ class Movie extends Model
         return $this->hasOne(Seo::class);
     }
 
-
     static function getMovies($data = null)
     {
         if ($data == "soon"){
@@ -64,10 +63,10 @@ class Movie extends Model
         return $movies;
     }
 
-    static function saveMainImg(Request $request, int $image_id = 0) : int
+    static function saveMainImg(Request $request, string $name, int $image_id = 0) : int
     {
-        if ($request->hasFile('mainimg')) {
-            $path = $request->file('mainimg')->store('img', 'public');
+        if ($request->hasFile($name)) {
+            $path = $request->file($name)->store('img', 'public');
             $path = explode('/', $path);
             if ($image_id != 0) {
                 Storage::delete('public/img/'.Image::where('image_id', $image_id)->first()->image_url);
@@ -82,6 +81,40 @@ class Movie extends Model
         }
         return $image_id;
     }
+    static function uploadGallery(Request $request, int $gallery_id = 0)
+    {
+        if ($gallery_id != 0) {
+            $gallery = Gallery::where('gallery_id', $gallery_id)->get();
+            foreach ($request->Gallery as $key => $image)
+            {
+
+            }
+
+        }
+        else
+            $gallery_id = Gallery::latest()->first()->gallery_id + 1;
+
+        for ($i = 1; $i <= 5; $i++)
+        {
+            if ($request->Gallery[$i]->file('gallery')) {
+
+                $file = $request->file('gallery');
+                $upload_folder = 'public/img/movies';
+                $filename = $file->getClientOriginalName(); // image.jpg
+
+                Storage::putFileAs($upload_folder, $file, $filename);
+                Image::insert([
+                    'image_id' => $image_id,
+                    'image_url' => 'http://cinema.com/img/movies/'.$filename
+                ]);
+                Gallery::insert([
+                    'gallery_id' => $gallery_id,
+                    'image_id' => $image_id
+                ]);
+                $image_id++;
+            }
+        }
+    }
     static function saveMovie(Request $request, int $movie_id)
     {
         $mainimg_id = Movie::where('movie_id', $movie_id)->first()->mainimg;
@@ -91,7 +124,7 @@ class Movie extends Model
                 'movie_id' => $movie_id,
                 'name' => $request->name,
                 'desc' => $request->desc,
-                'mainimg' => Movie::saveMainImg($request, $mainimg_id),
+                'mainimg' => Movie::saveMainImg($request, 'mainimg', $mainimg_id),
                 'gallery' => 1,
                 'trailer' => $request->trailer
             ]);

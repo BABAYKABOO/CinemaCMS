@@ -63,7 +63,7 @@ class Movie extends Model
         return $movies;
     }
 
-    static function saveMainImg(Request $request, string $name, int $image_id = 0) : int
+    static function saveImg(Request $request, string $name, int $image_id = 0) : int
     {
         if ($request->hasFile($name)) {
             $path = $request->file($name)->store('img', 'public');
@@ -90,13 +90,12 @@ class Movie extends Model
             foreach($request->Gallery as $key => $value)
             {
                 $image_old = $gallery[$key]->image_id;
-                $gallery[$key]->image_id = Movie::saveMainImg($request, 'Gallery.'.$key);
+                $gallery[$key]->image_id = Movie::saveImg($request, 'Gallery.'.$key);
 
                 Gallery::where('image_id', $image_old)->update([
                     'image_id' => $gallery[$key]->image_id
                 ]);
 
-                Gallery::where('gallery_id', $gallery_id)->where('image_id', $image_old)->delete();
                 Storage::delete('public/img/'.Image::where('image_id', $image_old)->first()->image_url);
                 Image::where('image_id', $image_old)->delete();
 
@@ -104,7 +103,14 @@ class Movie extends Model
 
         }
         else
-            $gallery_id = Gallery::latest()->first()->gallery_id + 1;
+            $gallery_id = Gallery::max('image_id')+1;
+            foreach($request->Gallery as $key => $value)
+            {
+                Gallery::Insert([
+                    'gallery_id' => $gallery_id,
+                    'image_id' => Movie::saveImg($request, 'Gallery.'.$key)
+                ]);
+            }
 
         return $gallery_id;
 
@@ -118,7 +124,7 @@ class Movie extends Model
                 'movie_id' => $movie_id,
                 'name' => $request->name,
                 'desc' => $request->desc,
-                'mainimg' => Movie::saveMainImg($request, 'mainimg', $movie->mainimg),
+                'mainimg' => Movie::saveImg($request, 'mainimg', $movie->mainimg),
                 'gallery' => Movie::uploadGallery($request, $movie->gallery),
                 'trailer' => $request->trailer
             ]);

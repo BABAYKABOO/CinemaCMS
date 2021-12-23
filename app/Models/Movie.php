@@ -74,19 +74,31 @@ class Movie extends Model
                     'image_url' => 'http://cinema.com/storage/img/'.$path[1]
                 ]);
             }
-            else
+            else {
                 Image::insert([
-                    'image_url' => 'http://cinema.com/storage/img/'.$path[1]
+                    'image_url' => 'http://cinema.com/storage/img/' . $path[1]
                 ]);
+                $image_id = Image::max('image_id');
+            }
         }
         return $image_id;
     }
-    static function uploadGallery(Request $request, int $gallery_id = 0)
+    static function uploadGallery(Request $request, int $gallery_id = 0) : int
     {
         if ($gallery_id != 0) {
             $gallery = Gallery::where('gallery_id', $gallery_id)->get();
-            foreach ($request->Gallery as $key => $image)
+            foreach($request->Gallery as $key => $value)
             {
+                $image_old = $gallery[$key]->image_id;
+                $gallery[$key]->image_id = Movie::saveMainImg($request, 'Gallery.'.$key);
+
+                Gallery::where('image_id', $image_old)->update([
+                    'image_id' => $gallery[$key]->image_id
+                ]);
+
+                Gallery::where('gallery_id', $gallery_id)->where('image_id', $image_old)->delete();
+                Storage::delete('public/img/'.Image::where('image_id', $image_old)->first()->image_url);
+                Image::where('image_id', $image_old)->delete();
 
             }
 
@@ -94,38 +106,20 @@ class Movie extends Model
         else
             $gallery_id = Gallery::latest()->first()->gallery_id + 1;
 
-        for ($i = 1; $i <= 5; $i++)
-        {
-            if ($request->Gallery[$i]->file('gallery')) {
+        return $gallery_id;
 
-                $file = $request->file('gallery');
-                $upload_folder = 'public/img/movies';
-                $filename = $file->getClientOriginalName(); // image.jpg
-
-                Storage::putFileAs($upload_folder, $file, $filename);
-                Image::insert([
-                    'image_id' => $image_id,
-                    'image_url' => 'http://cinema.com/img/movies/'.$filename
-                ]);
-                Gallery::insert([
-                    'gallery_id' => $gallery_id,
-                    'image_id' => $image_id
-                ]);
-                $image_id++;
-            }
-        }
     }
     static function saveMovie(Request $request, int $movie_id)
     {
-        $mainimg_id = Movie::where('movie_id', $movie_id)->first()->mainimg;
+        $movie = Movie::where('movie_id', $movie_id)->first();
         Movie::updateOrInsert(
             ['movie_id' => $movie_id],
             [
                 'movie_id' => $movie_id,
                 'name' => $request->name,
                 'desc' => $request->desc,
-                'mainimg' => Movie::saveMainImg($request, 'mainimg', $mainimg_id),
-                'gallery' => 1,
+                'mainimg' => Movie::saveMainImg($request, 'mainimg', $movie->mainimg),
+                'gallery' => Movie::uploadGallery($request, $movie->gallery),
                 'trailer' => $request->trailer
             ]);
     }

@@ -36,7 +36,6 @@ class MovieAdminController extends Controller
 
     public function save(Request $request, int $id)
     {
-        dd($request);
         $movie = Movie::where('movie_id', $id)->first();
         $seo_id = Seo::where('seo_id', $movie->seo)->first()->seo_id;
         Seo::saveSeo($request->Seo, $seo_id);

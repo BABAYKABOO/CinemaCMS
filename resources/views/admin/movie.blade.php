@@ -54,31 +54,31 @@
                         <label for="icon_upload">Image:<br>
                             <div class="icon_wrapper"><div id="preview_1" style="background: url({{$gallery[0]->image_url}}); background-size: 100%"></div></div>
                         </label>
-                        <input type="file" name="Gallery[1]" preview-target-id="preview_1" title="1">
+                        <input type="file" name="Gallery[0]" preview-target-id="preview_1" title="1">
                     </div>
                     <div class="col-sm" style="width: 200px">
                         <label for="icon_upload">Image:<br>
                             <div class="icon_wrapper"><div id="preview_2" style="background: url({{$gallery[1]->image_url}}); background-size: 100%"></div></div>
                         </label>
-                        <input type="file" name="Gallery[2]" preview-target-id="preview_2">
+                        <input type="file" name="Gallery[1]" preview-target-id="preview_2">
                     </div>
                     <div class="col-sm" style="width: 200px">
                         <label for="icon_upload">Image:<br>
                             <div class="icon_wrapper"><div id="preview_3" style="background: url({{$gallery[2]->image_url}}); background-size: 100%"></div></div>
                         </label>
-                        <input type="file" name="Gallery[3]" preview-target-id="preview_3">
+                        <input type="file" name="Gallery[2]" preview-target-id="preview_3">
                     </div>
                     <div class="col-sm" style="width: 200px">
                         <label for="icon_upload">Image:<br>
                             <div class="icon_wrapper"><div id="preview_4" style="background: url({{$gallery[3]->image_url}}); background-size: 100%"></div></div>
                         </label>
-                        <input type="file" name="Gallery[4]" preview-target-id="preview_4">
+                        <input type="file" name="Gallery[3]" preview-target-id="preview_4">
                     </div>
                     <div class="col-sm" style="width: 200px">
                         <label for="icon_upload">Image:<br>
                             <div class="icon_wrapper"><div id="preview_5" style="background: url({{$gallery[4]->image_url}}); background-size: 100%"></div></div>
                         </label>
-                        <input type="file" name="Gallery[5]" preview-target-id="preview_5">
+                        <input type="file" name="Gallery[4]" preview-target-id="preview_5">
                     </div>
                     <style>
                         .icon_wrapper {

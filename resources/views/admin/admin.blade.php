@@ -78,7 +78,7 @@
                     </li>
                     <li class="nav-item">
                         <script type="text/javascript">
-                            document.title === 'Admin - Баннеры' ? document.write('<a href="#" class="nav-link active">') : document.write('<a href="#" class="nav-link">');
+                            document.title === 'Admin - Баннеры' ? document.write('<a href="{{route('banners')}}" class="nav-link active">') : document.write('<a href="{{route('banners')}}" class="nav-link">');
                         </script>
                             <i class="nav-icon fas fa-th"></i>
                             <p>
@@ -159,15 +159,15 @@
     </aside>
     <!-- /.control-sidebar -->
 
-    <!-- Main Footer -->
-    <footer class="main-footer">
-        <!-- To the right -->
-        <div class="float-right d-none d-sm-inline">
-            Anything you want
-        </div>
-        <!-- Default to the left -->
-        <strong>Copyright &copy; 2021 <a href="https://cinema.com">Cinema.com</a>.</strong> All rights reserved.
-    </footer>
+{{--    <!-- Main Footer -->--}}
+{{--    <footer class="main-footer">--}}
+{{--        <!-- To the right -->--}}
+{{--        <div class="float-right d-none d-sm-inline">--}}
+{{--            Anything you want--}}
+{{--        </div>--}}
+{{--        <!-- Default to the left -->--}}
+{{--        <strong>Copyright &copy; 2021 <a href="https://cinema.com">Cinema.com</a>.</strong> All rights reserved.--}}
+{{--    </footer>--}}
 </div>
 <!-- ./wrapper -->
 

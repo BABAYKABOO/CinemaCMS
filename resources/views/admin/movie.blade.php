@@ -50,9 +50,9 @@
             <div class="mb-3">
                 <label>Галерея</label>
                 <div class="row">
-                    <div class="col-sm" style="width: 200px; ">
+                    <div class="col-sm" style="width: 200px;">
                         <label for="icon_upload">Image:<br>
-                            <div class="icon_wrapper"><div id="preview_1" style="background: url({{$gallery[0]->image_url}}); background-size: 100%"></div></div>
+                            <div class="icon_wrapper"><div id="preview_1" style="background: url({{$gallery[1]->image_url}}); background-size: 100%"></div></div>
                         </label>
                         <input type="file" name="Gallery[0]" preview-target-id="preview_1" title="1">
                     </div>
@@ -96,10 +96,7 @@
                             color: transparent;
                         }
                     </style>
-                    <script
-                        src="https://code.jquery.com/jquery-3.6.0.min.js"
-                        integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4="
-                        crossorigin="anonymous"></script>
+                    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
                     <script>
                         $('input[type="file"][preview-target-id]').on('change', function() {
                             var input = $(this)
@@ -107,7 +104,6 @@
                             if (input[0].files && input[0].files[0]) {
                                 var reader = new FileReader()
                                 reader.onload = function (e) {
-                                    document.getElementById('preview-target-id').innerHTML = "";
                                     var target = $('#' + input.attr('preview-target-id'))
                                     var background_image = 'url(' + e.target.result + ')'
                                     target.css('background-image', background_image)
@@ -155,7 +151,7 @@
                     <input type="text" class="form-control" id="seo_keywords" name="Seo[keywords]" value="{{$seo->keywords}}">
                     <label class="form-label">Desc</label>
                     <textarea class="form-control" aria-label="With textarea" name="Seo[desc]" id="seo_desc">{{$seo->desc}}</textarea>
-                </div>
+                    </div>
             </div>
             <button type="submit" class="btn btn-primary" style="display: inline-block; margin: 10px 0px 50px 30px">Сохранить</button>
             <a  class="btn btn-primary" style="display: inline-block;  margin: 10px 0px 50px 30px" href="{{route('admin-movie_id', $movie->movie_id)}}">
@@ -163,43 +159,4 @@
             </a>
         </form>
     </div>
-    <script>
-        $('input[type="file"][preview-target-id]').on('change', function() {
-            var input = $(this)
-            if (!window.FileReader) return false // check for browser support
-            if (input[0].files && input[0].files[0]) {
-                var reader = new FileReader()
-                reader.onload = function (e) {
-                    var target = $('#' + input.attr('preview-target-id'))
-                    var background_image = 'url(' + e.target.result + ')'
-                    target.css('background-image', background_image)
-                    target.parent().show()
-                }
-                reader.readAsDataURL(input[0].files[0]);
-            }
-        })
-
-        // function handleFileSelect(evt) {
-        //     var file = evt.target.files; // FileList object
-        //     var f = file[0];
-        //     // Only process image files.
-        //     if (!f.type.match('image.*')) {
-        //         alert("Image only please....");
-        //     }
-        //     var reader = new FileReader();
-        //     // Closure to capture the file information.
-        //     reader.onload = (function(theFile) {
-        //         return function(e) {
-        //             // Render thumbnail.
-        //             var span = document.createElement('span');
-        //             span.innerHTML = ['<img class="thumb" height="300px" width="200px" title="', escape(theFile.name), '" src="', e.target.result, '" />'].join('');
-        //             document.getElementById('output').innerHTML = "";
-        //             document.getElementById('output').insertBefore(span, null);
-        //         };
-        //     })(f);
-        //     // Read in the image file as a data URL.
-        //     reader.readAsDataURL(f);
-        // }
-        // document.getElementById('file').addEventListener('change', handleFileSelect, false);
-    </script>
 @endsection

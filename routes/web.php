@@ -21,6 +21,10 @@ Route::get('/login/logout', [App\Http\Controllers\AuthController::class, 'logout
 Route::middleware([App\Http\Middleware\AuthAdmin::class])->group(function (){
     Route::prefix('admin')->group(function () {
         Route::get('/statistic', [App\Http\Controllers\StatisticController::class, 'index'])->name('statistic');
+
+        Route::get('/banners', [App\Http\Controllers\BannersAdminController::class, 'showPage'])->name('banners');
+        Route::post('/banners/{id}', [App\Http\Controllers\BannersAdminController::class, 'save'])->name('admin-banner-save');
+
         Route::get('/posters', [App\Http\Controllers\PostersAdminController::class, 'showMovies'])->name('admin-posters');
         Route::get('/posters/{id}', [App\Http\Controllers\MovieAdminController::class, 'showCard'])->name('admin-movie_id');
         Route::post('/posters/{id}/save', [App\Http\Controllers\MovieAdminController::class, 'save'])->name('admin-movie-save');

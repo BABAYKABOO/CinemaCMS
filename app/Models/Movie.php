@@ -63,44 +63,18 @@ class Movie extends Model
         return $movies;
     }
 
-    static function saveImg(Request $request, string $name, int $image_id = 0) : int
-    {
-        if ($request->hasFile($name)) {
-            $path = $request->file($name)->store('img', 'public');
-            $path = explode('/', $path);
-            if ($image_id != 0) {
-                Storage::delete('public/img/'.Image::where('image_id', $image_id)->first()->image_url);
-                Image::where('image_id', $image_id)->update([
-                    'image_url' => 'http://cinema.com/storage/img/'.$path[1]
-                ]);
-            }
-            else {
-                Image::insert([
-                    'image_url' => 'http://cinema.com/storage/img/' . $path[1]
-                ]);
-                $image_id = Image::max('image_id');
-            }
-        }
-        return $image_id;
-    }
     static function uploadGallery(Request $request, int $gallery_id = 0) : int
     {
         if ($gallery_id != 0) {
             $gallery = Gallery::where('gallery_id', $gallery_id)->get();
             foreach($request->Gallery as $key => $value)
             {
-                $image_old = $gallery[$key]->image_id;
-                $gallery[$key]->image_id = Movie::saveImg($request, 'Gallery.'.$key);
+                $gallery[$key]->image_id = Image::saveImg($request, 'Gallery.'.$key, $gallery[$key]->image_id);
 
-                Gallery::where('image_id', $image_old)->update([
+                Gallery::where('image_id', $gallery[$key]->image_id)->update([
                     'image_id' => $gallery[$key]->image_id
                 ]);
-
-                Storage::delete('public/img/'.Image::where('image_id', $image_old)->first()->image_url);
-                Image::where('image_id', $image_old)->delete();
-
             }
-
         }
         else
             $gallery_id = Gallery::max('image_id')+1;
@@ -108,7 +82,7 @@ class Movie extends Model
             {
                 Gallery::Insert([
                     'gallery_id' => $gallery_id,
-                    'image_id' => Movie::saveImg($request, 'Gallery.'.$key)
+                    'image_id' => Image::saveImg($request, 'Gallery.'.$key)
                 ]);
             }
 
@@ -124,7 +98,7 @@ class Movie extends Model
                 'movie_id' => $movie_id,
                 'name' => $request->name,
                 'desc' => $request->desc,
-                'mainimg' => Movie::saveImg($request, 'mainimg', $movie->mainimg),
+                'mainimg' => Image::saveImg($request, 'mainimg', $movie->mainimg),
                 'gallery' => Movie::uploadGallery($request, $movie->gallery),
                 'trailer' => $request->trailer
             ]);

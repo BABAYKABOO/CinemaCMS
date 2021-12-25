@@ -22,7 +22,7 @@ Route::middleware([App\Http\Middleware\AuthAdmin::class])->group(function (){
     Route::prefix('admin')->group(function () {
         Route::get('/statistic', [App\Http\Controllers\StatisticController::class, 'index'])->name('statistic');
 
-        Route::get('/banners', [App\Http\Controllers\BannersAdminController::class, 'showPage'])->name('banners');
+        Route::get('/banners', [App\Http\Controllers\BannersAdminController::class, 'showPage'])->name('admin-banners');
         Route::post('/banners/{id}', [App\Http\Controllers\BannersAdminController::class, 'save'])->name('admin-banner-save');
 
         Route::get('/posters', [App\Http\Controllers\PostersAdminController::class, 'showMovies'])->name('admin-posters');

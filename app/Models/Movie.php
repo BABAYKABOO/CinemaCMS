@@ -78,17 +78,18 @@ class Movie extends Model
         }
         else
             $gallery_id = Gallery::max('image_id')+1;
-            foreach($request->Gallery as $key => $value)
-            {
-                Gallery::Insert([
-                    'gallery_id' => $gallery_id,
-                    'image_id' => Image::saveImg($request, 'Gallery.'.$key)
-                ]);
-            }
+        foreach($request->Gallery as $key => $value)
+        {
+            Gallery::Insert([
+                'gallery_id' => $gallery_id,
+                'image_id' => Image::saveImg($request, 'Gallery.'.$key)
+            ]);
+        }
 
         return $gallery_id;
 
     }
+
     static function saveMovie(Request $request, int $movie_id)
     {
         $movie = Movie::where('movie_id', $movie_id)->first();

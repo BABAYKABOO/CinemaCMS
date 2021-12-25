@@ -23,8 +23,9 @@ class BannersAdminController extends Controller
             'status' => $status
         ]);
     }
-    public function save(Request $request, int $id)
+    public function save(Request $request, int $position)
     {
-        dd($request);
+        Banner::saveBanner($request, $position);
+        return redirect(route('admin-banners'));
     }
 }

@@ -105,39 +105,37 @@
                                     <div id="preview_{{$banner->banner_id}}" style="background: url({{$banner->image_url}}); background-size: 100%"></div>
                                 </div>
                             </label><br/>
-                            <input type="file" name="{{$banner->banner_id}}[img]" preview-target-id="preview_{{$banner->banner_id}}"><br/>
+                            <input type="file" name="Banner_{{$banner->banner_id}}_img" preview-target-id="preview_{{$banner->banner_id}}"><br/>
                             <label>Url:</label>
-                            <input type="text" name="{{$banner->banner_id}}[url]" value="{{$banner->url}}"><br/>
+                            <input type="text" name="Banner[{{$banner->banner_id}}][url]" value="{{$banner->url}}"><br/>
                             <label>Текст:</label>
-                            <input type="text" name="{{$banner->banner_id}}[text]" value="{{$banner->text}}">
+                            <input type="text" name="Banner[{{$banner->banner_id}}][text]" value="{{$banner->text}}">
                         </div>
                         @endforeach
 
                     </div>
                     <div class="row" style="width: 90%; margin: 0 auto;" id="rowDiv">
-                        @for($i = count($position[0]); $i < 5 + count($position[0]); $i++)
-                            <div class="col-sm" id="divHidden{{$i}}" style="width: 200px; display: none;">
-                                <label for="icon_upload"><br/>
-                                    <div class="icon_wrapper">
-                                        <div id="add-preview_{{$i}}" style="background-size: 100%"></div>
-                                    </div>
-                                </label><br/>
-                                <input type="file" name="new_{{$i}}[img]" preview-target-id="add-preview_{{$i}}"><br/>
-                                <label>Url:</label>
-                                <input type="text" name="new_{{$i}}[url]"><br/>
-                                <label>Текст:</label>
-                                <input type="text" name="new_{{$i}}[text]">
-                                <div onclick="deleteDiv('divHidden{{$i}}')" style="margin: 30px 0px 0px 70px; color: white;"><a class="btn btn-danger">Удалить</a></div>
-                            </div>
-                        @endfor
                     </div>
                     <div onclick="addDiv()" style="margin: 30px 0px 0px 70px; color: white;"><a class="btn btn-secondary">Добавить баннер</a></div>
                     <script>
-                        var countDiv = 6;
+                        var countDiv = {{count($position[0])}} + 1;
                         function addDiv() {
                             if (countDiv < 10) {
-                                var DivHidden = document.getElementById ( 'divHidden' + countDiv);
-                                DivHidden.style = 'width: 200px;';
+                                var DivHidden = document.getElementById ('rowDiv');
+                                var str = '<div class="col-sm" id="divHidden' + countDiv + '" style="width: 200px;">' +
+                                    '<label for="icon_upload"><br/>' +
+                                    '<div class="icon_wrapper">' +
+                                    '<div id="add-preview_' + countDiv + '" style="background-size: 100%"></div>' +
+                                    '</div>' +
+                                    '</label><br/>' +
+                                    '<input type="file" name="newBanner[' + countDiv + '][img]" preview-target-id="add-preview_' + countDiv + '"><br/>' +
+                                    '<label>Url:</label><br/>' +
+                                    '<input type="text" name="newBanner[' + countDiv + '][url]"><br/>' +
+                                    '<label>Текст:</label><br/>' +
+                                    '<input type="text" name="newBanner[' + countDiv + '][text]"><br/>' +
+                                    '<div onclick="deleteDiv(\''+ 'divHidden' + countDiv +'\')" style="margin: 30px 0px 0px 70px; color: white;"><a class="btn btn-danger">Удалить</a></div>' +
+                                    '</div>';
+                                $(DivHidden).append(str);
                                 countDiv++;
                             } else
                             {

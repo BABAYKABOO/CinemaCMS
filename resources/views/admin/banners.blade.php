@@ -97,9 +97,14 @@
                     </div>
                 </div>
                     <div class="row" id="rowDiv" style="width: 90%; margin: 0 auto;">
-
+                        @php
+                            $i = 0;
+                        @endphp
                         @foreach($position[0] as $banner)
-                        <div class="col-sm" style="width: 200px;">
+                            @php
+                                $i++;
+                            @endphp
+                        <div class="col-sm" id="divCurrent{{$banner->banner_id}}" style="width: 200px;">
                             <label for="icon_upload"><br/>
                                 <div class="icon_wrapper">
                                     <div id="preview_{{$banner->banner_id}}" style="background: url({{$banner->image_url}}); background-size: 100%"></div>
@@ -110,9 +115,13 @@
                             <input type="text" name="Banner[{{$banner->banner_id}}][url]" value="{{$banner->url}}"><br/>
                             <label>Текст:</label><br/>
                             <input type="text" name="Banner[{{$banner->banner_id}}][text]" value="{{$banner->text}}"><br/>
+                            @if($i > 5)
+                                <div onclick="deleteDiv('divCurrent{{$banner->banner_id}}')" style="margin: 30px 0px 0px 70px; color: white;">
+                                    <a class="btn btn-danger">Удалить</a>
+                                </div>
+                            @endif
                         </div>
                         @endforeach
-
                     </div>
                     <div onclick="addDiv()" style="margin: 30px 0px 0px 70px; color: white;"><a class="btn btn-secondary">Добавить баннер</a></div>
                     <script>

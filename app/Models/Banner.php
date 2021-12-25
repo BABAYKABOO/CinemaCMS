@@ -54,14 +54,15 @@ class Banner extends Model
         {
             foreach($request->newBanner as $id => $banner)
             {
-                Banner::where('position_id', $position)->where('banner_id', $id)->update([
-                    'img' => Image::saveImg($request, 'newBanner.'.$id.'.img')
+                Banner::insert([
+                    'banner_id' => $id,
+                    'position_id' => $position,
+                    'url' => $banner['url'],
+                    'text' => $banner['text'],
+                    'img' => Image::saveImg($request,
+                        'newBanner_' . $id . '_img')
                 ]);
-                dd(Banner::where('position_id', $position)->where('banner_id', $id)->get());
-                foreach ($banner as $col => $value)
-                {
-                    Banner::insert('position_id', $position)->where('banner_id', $id)->update($col, $value);
-                }
+                $request->files->remove('newBanner_'.$id.'_img');
             }
         }
     }

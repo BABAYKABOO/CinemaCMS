@@ -96,7 +96,7 @@
                         </label>
                     </div>
                 </div>
-                    <div class="row" style="width: 90%; margin: 0 auto;">
+                    <div class="row" id="rowDiv" style="width: 90%; margin: 0 auto;">
 
                         @foreach($position[0] as $banner)
                         <div class="col-sm" style="width: 200px;">
@@ -106,21 +106,19 @@
                                 </div>
                             </label><br/>
                             <input type="file" name="Banner_{{$banner->banner_id}}_img" preview-target-id="preview_{{$banner->banner_id}}"><br/>
-                            <label>Url:</label>
+                            <label>Url:</label><br/>
                             <input type="text" name="Banner[{{$banner->banner_id}}][url]" value="{{$banner->url}}"><br/>
-                            <label>Текст:</label>
-                            <input type="text" name="Banner[{{$banner->banner_id}}][text]" value="{{$banner->text}}">
+                            <label>Текст:</label><br/>
+                            <input type="text" name="Banner[{{$banner->banner_id}}][text]" value="{{$banner->text}}"><br/>
                         </div>
                         @endforeach
 
-                    </div>
-                    <div class="row" style="width: 90%; margin: 0 auto;" id="rowDiv">
                     </div>
                     <div onclick="addDiv()" style="margin: 30px 0px 0px 70px; color: white;"><a class="btn btn-secondary">Добавить баннер</a></div>
                     <script>
                         var countDiv = {{count($position[0])}} + 1;
                         function addDiv() {
-                            if (countDiv < 10) {
+                            if (countDiv < 11) {
                                 var DivHidden = document.getElementById ('rowDiv');
                                 var str = '<div class="col-sm" id="divHidden' + countDiv + '" style="width: 200px;">' +
                                     '<label for="icon_upload"><br/>' +
@@ -128,7 +126,7 @@
                                     '<div id="add-preview_' + countDiv + '" style="background-size: 100%"></div>' +
                                     '</div>' +
                                     '</label><br/>' +
-                                    '<input type="file" name="newBanner[' + countDiv + '][img]" preview-target-id="add-preview_' + countDiv + '"><br/>' +
+                                    '<input type="file" name="newBanner_' + countDiv + '_img" preview-target-id="add-preview_' + countDiv + '"><br/>' +
                                     '<label>Url:</label><br/>' +
                                     '<input type="text" name="newBanner[' + countDiv + '][url]"><br/>' +
                                     '<label>Текст:</label><br/>' +

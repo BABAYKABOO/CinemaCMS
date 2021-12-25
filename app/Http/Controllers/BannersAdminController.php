@@ -25,7 +25,13 @@ class BannersAdminController extends Controller
     }
     public function save(Request $request, int $position)
     {
-        Banner::saveBanner($request, $position);
+        Banner::saveBanners($request, $position);
+        return redirect(route('admin-banners'));
+    }
+
+    public function saveOneBanner(Request $request, int $position)
+    {
+        Banner::saveOneBanner($request, $position);
         return redirect(route('admin-banners'));
     }
 }

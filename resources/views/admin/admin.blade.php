@@ -88,34 +88,31 @@
                     </li>
                     <li class="nav-item menu-open">
                         <script type="text/javascript">
-                            document.title === 'Admin - Фильмы' || document.title === 'Admin - Новый фильмы' ? document.write('<a href="#" class="nav-link active">') : document.write('<a href="#" class="nav-link">');
+                            document.title === 'Admin - Фильмы' ? document.write('<a href="{{route('admin-posters')}}" class="nav-link active">') : document.write('<a href="{{route('admin-posters')}}" class="nav-link">');
                         </script>
-                            <i class="nav-icon fas fa-archive"></i>
-                            <p>
-                                Фильмы
-                                <i class="right fas fa-angle-left"></i>
-                            </p>
+                        <i class="nav-icon fas fa-archive"></i>
+                        <p>Фильмы</p>
                         </a>
-                        <ul class="nav nav-treeview">
-                            <li class="nav-item">
-                                <script type="text/javascript">
-                                    document.title === 'Admin - Фильмы' ? document.write('<a href="{{route('admin-posters')}}" class="nav-link active">') : document.write('<a href="{{route('admin-posters')}}" class="nav-link">');
-                                </script>
-                                <i class="far fa-bars nav-icon"></i>
-                                <p>Фильмы</p>
-                                </a>
-                            </li>
-                        </ul>
-                        <ul class="nav nav-treeview">
-                            <li class="nav-item">
-                                <script type="text/javascript">
-                                    document.title === 'Admin - Новый фильм' ? document.write('<a href="#" class="nav-link active">') : document.write('<a href="#" class="nav-link">');
-                                </script>
-                                    <i class="far fa-circle nav-icon"></i>
-                                    <p>Новый фильм</p>
-                                </a>
-                            </li>
-                        </ul>
+{{--                        <ul class="nav nav-treeview">--}}
+{{--                            <li class="nav-item">--}}
+{{--                                <script type="text/javascript">--}}
+{{--                                    document.title === 'Admin - Фильмы' ? document.write('<a href="{{route('admin-posters')}}" class="nav-link active">') : document.write('<a href="{{route('admin-posters')}}" class="nav-link">');--}}
+{{--                                </script>--}}
+{{--                                <i class="nav-icon fas fa-archive"></i>--}}
+{{--                                <p>Фильмы</p>--}}
+{{--                                </a>--}}
+{{--                            </li>--}}
+{{--                        </ul>--}}
+{{--                        <ul class="nav nav-treeview">--}}
+{{--                            <li class="nav-item">--}}
+{{--                                <script type="text/javascript">--}}
+{{--                                    document.title === 'Admin - Новый фильм' ? document.write('<a href="#" class="nav-link active">') : document.write('<a href="#" class="nav-link">');--}}
+{{--                                </script>--}}
+{{--                                    <i class="far fa-circle nav-icon"></i>--}}
+{{--                                    <p>Новый фильм</p>--}}
+{{--                                </a>--}}
+{{--                            </li>--}}
+{{--                        </ul>--}}
                     </li>
                 </ul>
             </nav>
@@ -130,9 +127,6 @@
         <div class="content-header">
             <div class="container-fluid">
                 <div class="row mb-2">
-                    <div class="col-sm-6">
-                        <h1 class="m-0">@yield('title')</h1>
-                    </div><!-- /.col -->
                     <div class="col-sm-6">
 
                     </div><!-- /.col -->

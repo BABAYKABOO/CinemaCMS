@@ -18,13 +18,20 @@ class Image extends Model
         'image_url'
     ];
 
+    static function deleteImg(int $image_id)
+    {
+        Storage::delete('public/img/'.Image::where('image_id', $image_id)->first()->image_url);
+        Image::where('image_id', $image_id)->delete();
+    }
+
     static function saveImg(Request $request, string $name, int $image_id = 0) : int
     {
         if ($request->hasFile($name)) {
             $path = $request->file($name)->store('img', 'public');
             $path = explode('/', $path);
             if ($image_id != 0) {
-                Storage::delete('public/img/'.Image::where('image_id', $image_id)->first()->image_url);
+                $old_path = explode('/', Image::where('image_id', $image_id)->first()->image_url);
+                Storage::delete('public/img/'.$old_path[count($old_path)-1]);
                 Image::where('image_id', $image_id)->update([
                     'image_url' => 'http://cinema.com/storage/img/'.$path[1]
                 ]);

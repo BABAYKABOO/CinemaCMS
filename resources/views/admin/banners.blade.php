@@ -1,4 +1,5 @@
 @extends('admin.admin')
+@section('title', 'Баннеры')
 @section('content')
     <style>
         .icon_wrapper {
@@ -153,6 +154,7 @@
                     <div class="row" style="width: 90%; margin: 50px 0px 30px 150px;">
                         <div class="col-2">
                             <select name="time" style="height: 30px; width: 60px">
+                                <option value="" selected="selected" hidden="hidden">{{$status[0]->time}}c</option>
                                 <option>5c</option>
                                 <option>3с</option>
                                 <option>10с</option>
@@ -167,13 +169,11 @@
         </div>
         <h1>Сквозной банер на заднем фоне</h1>
         <div class="div-banner">
-            <form action="{{route('admin-banner-save', $status[1]->position_id)}}" enctype="multipart/form-data" method="post">
+            <form action="{{route('admin-banner_one-save', $status[1]->position_id)}}" enctype="multipart/form-data" method="post">
                 @csrf
                 <div class="row" style="width: 90%; margin: 50px 0px 0px 0px;">
                     <div class="col-2">
                         <label style="margin: 10px 0px 0px 10px">Размер:  2000х3000</label>
-                    </div>
-                    <div class="col-10" style="text-align: right;">
                     </div>
                 </div>
                     @foreach($position[1] as $banner)
@@ -184,7 +184,7 @@
                                 </label>
                             </div>
                             <div class="col-6" style="padding: 50px">
-                                <input type="file" name="{{$banner->banner_id}}[img]" preview-target-id="main-preview_1" title="1">
+                                <input type="file" name="Banner_{{$banner->banner_id}}_img" preview-target-id="main-preview_1" title="1">
                                 <button type="submit" class="btn btn-primary">Сохранить</button>
                             </div>
                         </div>
@@ -194,7 +194,7 @@
         </div>
         <h1>На главной Новости Акции </h1>
         <div class="div-banner">
-            <form action="{{route('admin-banner-save', $status[0]->position_id)}}" enctype="multipart/form-data" method="post">
+            <form action="{{route('admin-banner-save', $status[2]->position_id)}}" enctype="multipart/form-data" method="post">
                 @csrf
                 <div class="row" style="width: 90%; margin: 50px 0px 30px 30px;">
                     <div class="col-2">
@@ -202,47 +202,59 @@
                     </div>
                     <div class="col-10" style="text-align: right;">
                         <label class="switch">
-                            <input type="checkbox" checked>
+                            <input type="checkbox" name="status" {{$status[2]->status == 1 ? 'checked' : ''}}>
                             <span class="slider round"></span>
                         </label>
                     </div>
                 </div>
-                <div class="row" style="width: 90%; margin: 0 auto;">
-                    @foreach($position[0] as $banner)
-                        <div class="col-sm" style="width: 200px;">
-                            <label for="icon_upload"><br>
-                                <div class="icon_wrapper"><div id="news-preview_{{$banner->banner_id}}" style="background: url({{$banner->image_url}}); background-size: 100%"></div></div>
-                            </label><br/>
-                            <input type="file" name="{{$banner->banner_id}}[img]" preview-target-id="news-preview_{{$banner->banner_id}}" title="1"><br/>
-                            <label>Url:</label>
-                            <input type="text" name="{{$banner->banner_id}}[url]" value="{{$banner->url}}"><br/>
-                        </div>
-                    @endforeach
-                </div>
-                <div class="row" style="width: 90%; margin: 0 auto;" id="rowDiv">
-                    @for($i = count($position[0]); $i < 5 + count($position[0]); $i++)
-                    <div class="col-sm" id="news-divHidden{{$i}}" style="width: 200px; display: none;">
-                        <label for="icon_upload"><br/>
-                            <div class="icon_wrapper">
-                                <div id="add-news-preview_{{$i}}" style="background-size: 100%"></div>
+                    <div class="row" id="newsRowDiv" style="width: 90%; margin: 0 auto;">
+                        @php
+                            $i = 0;
+                        @endphp
+                        @foreach($position[2] as $banner)
+                            @php
+                                $i++;
+                            @endphp
+                            <div class="col-sm" id="divNewsCurrent{{$banner->banner_id}}" style="width: 200px;">
+                                <label for="icon_upload"><br/>
+                                    <div class="icon_wrapper">
+                                        <div id="preview_{{$banner->banner_id}}" style="background: url({{$banner->image_url}}); background-size: 100%"></div>
+                                    </div>
+                                </label><br/>
+                                <input type="file" name="Banner_{{$banner->banner_id}}_img" preview-target-id="preview_{{$banner->banner_id}}"><br/>
+                                <label>Url:</label><br/>
+                                <input type="text" name="Banner[{{$banner->banner_id}}][url]" value="{{$banner->url}}"><br/>
+                                <label>Текст:</label><br/>
+                                <input type="text" name="Banner[{{$banner->banner_id}}][text]" value="{{$banner->text}}"><br/>
+                                @if($i > 5)
+                                    <div onclick="deleteDiv('divNewsCurrent{{$banner->banner_id}}')" style="margin: 30px 0px 0px 70px; color: white;">
+                                        <a class="btn btn-danger">Удалить</a>
+                                    </div>
+                                @endif
                             </div>
-                        </label><br/>
-                        <input type="file" name="new_{{$i}}[img]" preview-target-id="add-news-preview_{{$i}}"><br/>
-                        <label>Url:</label>
-                        <input type="text" name="new_{{$i}}[url]"><br/>
-                        <div onclick="deleteDiv('news-divHidden{{$i}}')" style="margin: 30px 0px 0px 70px; color: white;"><a class="btn btn-danger">Удалить</a></div>
+                        @endforeach
                     </div>
-                    @endfor
-                </div>
-
                 <div onclick="addNewsDiv('news-divHidden')" style="margin: 30px 0px 0px 70px; color: white;"><a class="btn btn-secondary">Добавить баннер</a></div>
                 <script>
-                    var x = {{count($position[0])}};
-                    function addNewsDiv(id) {
-                        if (x < {{count($position[0]) + 5}}) {
-                            var DivHidden = document.getElementById ( id + x);
-                            DivHidden.style = 'width: 200px;';
-                            x++;
+                    var x = {{count($position[2])}};
+                    function addNewsDiv() {
+                        if (countDiv < 11) {
+                            var newsDivHidden = document.getElementById ('newsRowDiv');
+                            var str = '<div class="col-sm" id="newsdivHidden' + countDiv + '" style="width: 200px;">' +
+                                '<label for="icon_upload"><br/>' +
+                                '<div class="icon_wrapper">' +
+                                '<div id="add-news-preview_' + countDiv + '" style="background-size: 100%"></div>' +
+                                '</div>' +
+                                '</label><br/>' +
+                                '<input type="file" name="newBanner_' + countDiv + '_img" preview-target-id="add-news-preview_' + countDiv + '"><br/>' +
+                                '<label>Url:</label><br/>' +
+                                '<input type="text" name="newBanner[' + countDiv + '][url]"><br/>' +
+                                '<label>Текст:</label><br/>' +
+                                '<input type="text" name="newBanner[' + countDiv + '][text]"><br/>' +
+                                '<div onclick="deleteDiv(\''+ 'divNewsHidden' + countDiv +'\')" style="margin: 30px 0px 0px 70px; color: white;"><a class="btn btn-danger">Удалить</a></div>' +
+                                '</div>';
+                            $(newsDivHidden).append(str);
+                            countDiv++;
                         } else
                         {
                             alert('Невозможно добавить больше баннеров!');
@@ -273,7 +285,8 @@
                 </script>
                 <div class="row" style="width: 90%; margin: 50px 0px 30px 150px;">
                     <div class="col-2">
-                        <select style="height: 30px; width: 60px">
+                        <select name="time" style="height: 30px; width: 60px">
+                            <option value="" selected="selected" hidden="hidden">{{$status[2]->time}}c</option>
                             <option>5c</option>
                             <option>3с</option>
                             <option>10с</option>

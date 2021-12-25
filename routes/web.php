@@ -23,7 +23,8 @@ Route::middleware([App\Http\Middleware\AuthAdmin::class])->group(function (){
         Route::get('/statistic', [App\Http\Controllers\StatisticController::class, 'index'])->name('statistic');
 
         Route::get('/banners', [App\Http\Controllers\BannersAdminController::class, 'showPage'])->name('admin-banners');
-        Route::post('/banners/{id}', [App\Http\Controllers\BannersAdminController::class, 'save'])->name('admin-banner-save');
+        Route::post('/banners/{id}/save', [App\Http\Controllers\BannersAdminController::class, 'save'])->name('admin-banner-save');
+        Route::post('/banners/{id}/save-one', [App\Http\Controllers\BannersAdminController::class, 'saveOneBanner'])->name('admin-banner_one-save');
 
         Route::get('/posters', [App\Http\Controllers\PostersAdminController::class, 'showMovies'])->name('admin-posters');
         Route::get('/posters/{id}', [App\Http\Controllers\MovieAdminController::class, 'showCard'])->name('admin-movie_id');

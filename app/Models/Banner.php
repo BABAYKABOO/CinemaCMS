@@ -33,18 +33,21 @@ class Banner extends Model
                     break;
                 }
             }
-            if ($isDelete)
+            if ($isDelete) {
+                Image::deleteImg($old_banner->img);
                 Banner::where('position_id', $old_banner->position_id)->where('banner_id', $old_banner->banner_id)->delete();
+            }
         }
     }
-    static function saveBanner(Request $request , int $position)
+
+    static function saveBanners(Request $request , int $position)
     {
         PositionBanner::where('position_id', $position)->update([
             'status' => $request->status == 'on' ? 1 : 0
         ]);
         if (isset($request->time))
             PositionBanner::where('position_id', $position)->update([
-                'time' => (int)($request->time[0])
+                'time' => (int)preg_replace("/[^0-9]/", '', $request->time)
             ]);
 
 
@@ -84,5 +87,13 @@ class Banner extends Model
                 $request->files->remove('newBanner_'.$id.'_img');
             }
         }
+    }
+
+    static function saveOneBanner(Request $request , int $position)
+    {
+        $banner = Banner::where('position_id', $position)->first();
+        Banner::where('position_id', $position)->update([
+            'img' => Image::saveImg($request, 'Banner_'.$banner->banner_id.'_img', $banner->img)
+        ]);
     }
 }

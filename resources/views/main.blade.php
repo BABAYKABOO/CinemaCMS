@@ -4,52 +4,66 @@
 @section('content')
     <div style="text-align: center;">
         <div class="main-div" style="background-color: #f7f6f6">
-            <div class="wrapper">
-                <input type="radio" name="point" id="slide1" checked>
-                <input type="radio" name="point" id="slide2">
-                <input type="radio" name="point" id="slide3">
-                <input type="radio" name="point" id="slide4">
-                <input type="radio" name="point" id="slide5">
-                <div class="slider">
-                    <div class="slides slide1"
-                         style="background-image: url(img/slider.jpg); background-size: 100%;">
-                        <div class="slider-div">
-                            <p class="slider-text">Тор повелитель молота и молнии</p>
-                        </div>
+            <div class="slider">
+                @foreach($banner_main as $banner)
+                    <div class="item">
+                        <img src="{{$banner->image_url}}" alt="слайд">
+                        <div class="slideText">{{$banner->text}}</div>
                     </div>
-                    <div class="slides slide2"
-                         style="background-image: url(img/slider.jpg); background-size: 100%;">
-                        <div class="slider-div">
-                            <p class="slider-text">Тор повелитель молота и молнии</p>
-                        </div>
-                    </div>
-                    <div class="slides slide3"
-                         style="background-image: url(img/slider.jpg); background-size: 100%;">
-                        <div class="slider-div">
-                            <p class="slider-text">Тор повелитель молота и молнии</p>
-                        </div>
-                    </div>
-                    <div class="slides slide4"
-                         style="background-image: url(img/slider.jpg); background-size: 100%;">
-                        <div class="slider-div">
-                            <p class="slider-text">Тор повелитель молота и молнии</p>
-                        </div>
-                    </div>
-                    <div class="slides slide5"
-                         style="background-image: url(img/slider.jpg); background-size: 100%;">
-                        <div class="slider-div">
-                            <p class="slider-text">Тор повелитель молота и молнии</p>
-                        </div>
-                    </div>
-                </div>
-                <div class="controls">
-                    <label for="slide1"></label>
-                    <label for="slide2"></label>
-                    <label for="slide3"></label>
-                    <label for="slide4"></label>
-                    <label for="slide5"></label>
-                </div>
+                @endforeach
+
+                <a class="prev" onclick="minusSlide()">&#10094;</a>
+                <a class="next" onclick="plusSlide()">&#10095;</a>
             </div>
+            <div class="slider-dots">
+                @for($i = 1; $i <= count($banner_main); $i++)
+                    <span class="slider-dots_item" onclick="currentSlide({{$i}})"></span>
+                @endfor
+            </div>
+            <script>
+                /* Индекс слайда по умолчанию */
+                var slideIndex = 1;
+                showSlides(slideIndex);
+                setInterval(plusSlide(), 1000);
+
+                /* Функция увеличивает индекс на 1, показывает следующй слайд*/
+                function plusSlide() {
+                    showSlides(slideIndex += 1);
+                }
+
+                /* Функция уменьшяет индекс на 1, показывает предыдущий слайд*/
+                function minusSlide() {
+                    showSlides(slideIndex -= 1);
+                }
+
+                /* Устанавливает текущий слайд */
+                function currentSlide(n) {
+                    showSlides(slideIndex = n);
+                }
+
+                /* Основная функция слайдера */
+                function showSlides(n) {
+                    var i;
+                    var slides = document.getElementsByClassName("item");
+                    var dots = document.getElementsByClassName("slider-dots_item");
+                    if (n > slides.length) {
+                        slideIndex = 1
+                    }
+                    if (n < 1) {
+                        slideIndex = slides.length
+                    }
+                    for (i = 0; i < slides.length; i++) {
+                        slides[i].style.display = "none";
+                    }
+                    for (i = 0; i < dots.length; i++) {
+                        dots[i].className = dots[i].className.replace(" active", "");
+                    }
+                    slides[slideIndex - 1].style.display = "block";
+                    dots[slideIndex - 1].className += " active";
+                }
+
+            </script>
+
             <h2>Смотрите сегодня, {{$data[2]." ".$data[1]}}</h2>
             <div style="margin-bottom: 50px; width: 90%; margin: 0 auto; text-align: left;">
             @foreach($moviesToday as $movie)
@@ -65,6 +79,7 @@
                 </div>
             @endforeach
             </div>
+
             <h2>Смотрите скоро</h2>
             <div style="margin-bottom: 50px; width: 90%; text-align: left; margin: 0 auto;">
             @foreach($moviesSoon as $movie)
@@ -82,8 +97,65 @@
             </div>
             <div style="margin-bottom: 50px">
                 <h2>Новости и акции</h2>
-                <div class="wrapper-events">
+                <div class="slider">
+                    @foreach($banner_news as $banner)
+                        <div class="news-item">
+                            <img src="{{$banner->image_url}}" alt="слайд">
+                            <div class="slideText">{{$banner->text}}</div>
+                        </div>
+                    @endforeach
+
+                    <a class="prev" onclick="minusNewsSlide()">&#10094;</a>
+                    <a class="next" onclick="plusNewsSlide()">&#10095;</a>
                 </div>
+                <div class="slider-news-dots">
+                    @for($i = 1; $i <= count($banner_news); $i++)
+                        <span class="slider-news-dots_item" onclick="currentNewsSlide({{$i}})"></span>
+                    @endfor
+                </div>
+                <script>
+                    /* Индекс слайда по умолчанию */
+                    var slideIndex = 1;
+                    showNewsSlides(slideIndex);
+
+                    /* Функция увеличивает индекс на 1, показывает следующй слайд*/
+                    function plusNewsSlide() {
+                        setInterval(showNewsSlides(slideIndex += 1), 5000);
+
+                    }
+
+                    /* Функция уменьшает индекс на 1, показывает предыдущий слайд*/
+                    function minusNewsSlide() {
+                        setInterval(showNewsSlides(slideIndex -= 1), 5000);
+                    }
+
+                    /* Устанавливает текущий слайд */
+                    function currentNewsSlide(n) {
+                        showNewsSlides(slideIndex = n);
+                    }
+
+                    /* Основная функция слайдера */
+                    function showNewsSlides(n) {
+                        var i;
+                        var slides = document.getElementsByClassName("news-item");
+                        var dots = document.getElementsByClassName("slider-news-dots_item");
+                        if (n > slides.length) {
+                            slideIndex = 1
+                        }
+                        if (n < 1) {
+                            slideIndex = slides.length
+                        }
+                        for (i = 0; i < slides.length; i++) {
+                            slides[i].style.display = "none";
+                        }
+                        for (i = 0; i < dots.length; i++) {
+                            dots[i].className = dots[i].className.replace(" active", "");
+                        }
+                        slides[slideIndex - 1].style.display = "block";
+                        dots[slideIndex - 1].className += " active";
+                    }
+
+                </script>
             </div>
         </div>
     </div>

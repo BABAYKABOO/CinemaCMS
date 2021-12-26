@@ -1,6 +1,7 @@
 @extends('admin.admin')
 @section('title', 'Фильмы')
 @section('content')
+    <a class="btn btn-secondary" style="color: white" href="{{route('admin-movie_new')}}">Добавить фильм</a>
     <div style="text-align: center">
     <h1>Список фильмов текущих</h1>
     <div style="width: 70%; margin: 0 auto; margin-bottom: 50px; text-align: left;">
@@ -9,7 +10,7 @@
                 <div class="main-movieimg" style="background: url({{$movie->image_url}})">
                 </div>
                 <div style="height: 70px;">
-                    <a class="main-moviea" href="http://cinema.com/admin/posters/{{$movie->movie_id}}">
+                    <a class="main-moviea" href="{{route('admin-movie_id', $movie->movie_id)}}">
                         {{$movie->name}}
                     </a>
                 </div>
@@ -23,7 +24,7 @@
                     <div class="main-movieimg" style="background: url({{$movie->image_url}})">
                     </div>
                     <div style="height: 70px;">
-                        <a class="main-moviea" href="http://cinema.com/admin/posters/{{$movie->movie_id}}">
+                        <a class="main-moviea" href="{{route('admin-movie_id', $movie->movie_id)}}">
                             {{$movie->name}}
                         </a>
                     </div>

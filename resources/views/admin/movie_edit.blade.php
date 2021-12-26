@@ -127,7 +127,10 @@
                             <td>
                                 <label class="form-check-label" for="exampleCheck1">{{$type->name}}</label>
                                 <input type="checkbox" class="form-check-input mt-4" name="Types[{{$type->type_id}}]" checked>
-                            </td>{{$all_type = null}}
+                            </td>
+                            @php
+                              $all_type = null
+                            @endphp
                             @break
                         @endif
                     @endforeach
@@ -154,7 +157,7 @@
                     </div>
             </div>
             <button type="submit" class="btn btn-primary" style="display: inline-block; margin: 10px 0px 50px 30px">Сохранить</button>
-            <a  class="btn btn-primary" style="display: inline-block;  margin: 10px 0px 50px 30px" href="{{route('admin-movie_id', $movie->movie_id)}}">
+            <a class="btn btn-secondary" style="display: inline-block;  margin: 10px 0px 50px 30px" href="{{route('admin-movie_id', $movie->movie_id)}}">
                 Вернуть базовую версию
             </a>
         </form>

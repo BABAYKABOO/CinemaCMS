@@ -21,12 +21,22 @@ class Seo extends Model
 
     static function saveSeo(array $arr, int $seo_id)
     {
-        Seo::upsert(
-            ['seo_id' => $seo_id,
+        Seo::where('seo_id', $seo_id)->update([
                 'seo_url' => $arr['url'],
                 'title' => $arr['title'],
                 'keywords' => $arr['keywords'],
                 'desc' => $arr['desc']
-            ], ['seo_id'], ['seo_url', 'title', 'keywords', 'desc']);
+            ]);
+    }
+
+    static function createSeo(array $arr)
+    {
+        Seo::insert([
+            'seo_url' => $arr['url'],
+            'title' => $arr['title'],
+            'keywords' => $arr['keywords'],
+            'desc' => $arr['desc']
+        ]);
+        return Seo::max('seo_id');
     }
 }

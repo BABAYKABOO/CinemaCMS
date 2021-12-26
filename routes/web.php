@@ -27,8 +27,10 @@ Route::middleware([App\Http\Middleware\AuthAdmin::class])->group(function (){
         Route::post('/banners/{id}/save-one', [App\Http\Controllers\BannersAdminController::class, 'saveOneBanner'])->name('admin-banner_one-save');
 
         Route::get('/posters', [App\Http\Controllers\PostersAdminController::class, 'showMovies'])->name('admin-posters');
-        Route::get('/posters/{id}', [App\Http\Controllers\MovieAdminController::class, 'showCard'])->name('admin-movie_id');
-        Route::post('/posters/{id}/save', [App\Http\Controllers\MovieAdminController::class, 'save'])->name('admin-movie-save');
+        Route::get('/posters/edit/{id}', [App\Http\Controllers\MovieEdit_AdminController::class, 'showCard'])->name('admin-movie_id');
+        Route::post('/posters/edit/{id}/save', [App\Http\Controllers\MovieEdit_AdminController::class, 'save'])->name('admin-movie-save');
+        Route::get('/posters/add/new_movie', [App\Http\Controllers\MovieCreate_AdminController::class, 'showView'])->name('admin-movie_new');
+        Route::post('/posters/add/new_movie/create', [App\Http\Controllers\MovieCreate_AdminController::class, 'create'])->name('admin-movie_create');
     });
 
 });

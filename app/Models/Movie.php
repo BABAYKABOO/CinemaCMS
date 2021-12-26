@@ -89,15 +89,25 @@ class Movie extends Model
     static function saveMovie(Request $request, int $movie_id)
     {
         $movie = Movie::where('movie_id', $movie_id)->first();
-        Movie::updateOrInsert(
-            ['movie_id' => $movie_id],
-            [
-                'movie_id' => $movie_id,
+        Movie::where('movie_id', $movie_id)->update([
                 'name' => $request->name,
                 'desc' => $request->desc,
                 'mainimg' => Image::saveImg($request, 'mainimg', $movie->mainimg),
                 'gallery' => Movie::uploadGallery($request, $movie->gallery),
                 'trailer' => $request->trailer
             ]);
+    }
+
+    static function createMovie(Request $request, int $seo_id)
+    {
+        Movie::insert([
+                'name' => $request->name,
+                'desc' => $request->desc,
+                'mainimg' => Image::saveImg($request, 'mainimg'),
+                'gallery' => Movie::uploadGallery($request),
+                'trailer' => $request->trailer,
+                'seo' => $seo_id
+            ]);
+        return Movie::max('movie_id');
     }
 }

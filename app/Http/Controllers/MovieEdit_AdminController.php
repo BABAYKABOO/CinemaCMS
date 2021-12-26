@@ -10,7 +10,7 @@ use App\Models\Seo;
 use App\Models\Type;
 use Illuminate\Http\Request;
 
-class MovieAdminController extends Controller
+class MovieEdit_AdminController extends Controller
 {
     public function showCard(int $id)
     {
@@ -25,7 +25,7 @@ class MovieAdminController extends Controller
                  ->where('movie_id', $id)->get();
         $all_types = Type::get();
 
-        return view('admin.movie', [
+        return view('admin.movie_edit', [
             'movie' => $movie,
             'gallery' => $gallery,
             'seo' => $seo,

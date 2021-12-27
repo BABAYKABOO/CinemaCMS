@@ -34,14 +34,28 @@ class MovieEdit_AdminController extends Controller
         ]);
     }
 
-    public function save(Request $request, int $id)
+    public function save(Request $request, int $movie_id)
     {
-        $movie = Movie::where('movie_id', $id)->first();
+        $movie = Movie::where('movie_id', $movie_id)->first();
         $seo_id = Seo::where('seo_id', $movie->seo)->first()->seo_id;
         Seo::saveSeo($request->Seo, $seo_id);
-        MovieType::saveTypes($request->Types, $id);
-        Movie::saveMovie($request, $id);
+        MovieType::saveTypes($request->Types, $movie_id);
+        Movie::saveMovie($request, $movie_id);
 
-        return redirect(route('admin-movie_id', $id));
+        return redirect(route('admin-movie_id', $movie_id));
+    }
+
+    public function delete(int $movie_id)
+    {
+        $movie = Movie::where('movie_id', $movie_id)->first();
+
+        Movie::where('movie_id', $movie_id)->delete();
+
+        foreach (Gallery::where('gallery_id', $movie->gallery)->get() as $image)
+            Image::deleteImg($image->image_id);
+
+        Image::deleteImg($movie->mainimg);
+        Seo::where('seo_id', $movie->seo)->delete();
+        return redirect(route('admin-posters'));
     }
 }

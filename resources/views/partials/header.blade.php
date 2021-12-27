@@ -2,7 +2,7 @@
     <div class="container mt-5" style="text-align: center;">
         <div class="row">
             <div class="col-4">
-                <img class="logo" src="img/logo.png" alt="logo">
+                <a href="{{route('main')}}"><img class="logo" src="img/logo.png" alt="logo"></a>
             </div>
             <div class="col-8" style="overflow: hidden;">
                 <div class="header-column" style="width: 200px">
@@ -39,7 +39,7 @@
             <div class="col-8" style="border: 1px solid black; background-color: white; height: 30px">
                 <nav>
                     <ul>
-                        <li class="menu"><a href="#">Афиша</a></li>
+                        <li class="menu"><a href="{{route('posters')}}">Афиша</a></li>
                         <li class="menu"><a href="#">Расписание</a></li>
                         <li class="menu"><a href="#">Скоро</a></li>
                         <li class="menu"><a href="#">Кинотеатры</a></li>

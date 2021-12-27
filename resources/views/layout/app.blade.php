@@ -6,6 +6,7 @@
     <title>@yield('title')</title>
     <link href="{{ asset('/css/bootstrap.min.css')}}" rel="stylesheet">
     <link href="{{ asset('/css/app.css')}}" rel="stylesheet">
+    <link href="{{ asset('/css/')}}@yield('style')" rel="stylesheet">
 
 </head>
 <body style="background: url(@yield('img'));">

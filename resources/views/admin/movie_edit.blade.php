@@ -160,6 +160,10 @@
             <a class="btn btn-secondary" style="display: inline-block;  margin: 10px 0px 50px 30px" href="{{route('admin-movie_id', $movie->movie_id)}}">
                 Вернуть базовую версию
             </a>
+            <a class="btn btn-danger" style="display: inline-block;  margin: 10px 0px 50px 30px" href="{{route('admin-movie_delete', $movie->movie_id)}}">
+                Удалить фильм
+            </a>
+
         </form>
     </div>
 @endsection

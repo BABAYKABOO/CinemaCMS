@@ -86,7 +86,7 @@ nav ul ul li {
     border: 1px solid black;
 }
 /*             Menu                 */
-.main-div{
+.main-div {
     background-color: #f7f6f6;
     width: 1000px;
     text-align: center;
@@ -94,6 +94,38 @@ nav ul ul li {
     margin-bottom: 100px;
     display: inline-block;
 }
+.main-moviediv {
+    height: 450px;
+    width: 200px;
+    margin: 30px 0px 0px 15px;
+    display:inline-block;
+    text-align: center;
+}
+.main-movieimg {
+    margin-bottom: 10px;
+    height: 300px;
+    width:100%;
+    background-size: 100%;
+}
+.main-psoon {
+    text-decoration: none;
+    color: #28a745;
+    font-size: 20px;
+    font-weight: 600;
+    border-bottom: 1px solid gray;
+}
+.main-moviea {
+    text-decoration: none;
+    color: black;
+    margin-left: 5px;
+    font-size: 17px;
+    font-weight: 600;
+    border-bottom: 1px solid gray;
+}
+.btn-success{
+    margin-top: 10px;
+}
+
 /*              Main                */
 
 .slider{
@@ -103,7 +135,6 @@ nav ul ul li {
     height: 500px;
     margin-bottom: 15px;
 }
-/* Картинка мастабируется по отношению к родительскому элементу */
 .slider .item img {
     object-fit: cover;
     width: 100%;
@@ -118,7 +149,6 @@ nav ul ul li {
     border: none !important;
     box-shadow: none !important;
 }
-/* Кнопки вперед и назад */
 .slider .prev, .slider .next {
     cursor: pointer;
     position: absolute;
@@ -137,26 +167,21 @@ nav ul ul li {
     right: 0;
     border-radius: 3px 0 0 3px;
 }
-/* При наведении на кнопки добавляем фон кнопок */
 .slider .prev:hover,
 .slider .next:hover {
     background-color: rgba(0, 0, 0, 0.8);
 }
-/* Заголовок слайда */
 .slideText {
     position: absolute;
     color: #fff;
     font-size: 35px;
-    /* Выравнивание текста по горизонтали и по вертикали*/
     left: 20%;
     top: 80%;
     background-color: gray;
     width: 400px;
     transform: translate(-50%, -50%);
-    /* Тень*/
     text-shadow: 1px 1px 1px #000, 0 0 1em #000;
 }
-/* Кружочки */
 .slider-dots {
     text-align: center;
 }
@@ -192,7 +217,6 @@ nav ul ul li {
 .slider-news-dots_item:hover {
     background-color: #aaa;
 }
-/* Анимация слайдов */
 .slider .item {
     -webkit-animation-name: fade;
     -webkit-animation-duration: 1.5s;
@@ -312,34 +336,3 @@ nav ul ul li {
 }
 /*                Footer              */
 
-.main-moviediv {
-    height: 450px;
-    width: 200px;
-    margin: 30px 0px 0px 15px;
-    display:inline-block;
-    text-align: center;
-}
-.main-movieimg {
-    margin-bottom: 10px;
-    height: 300px;
-    width:100%;
-    background-size: 100%;
-}
-.main-psoon {
-    text-decoration: none;
-    color: #28a745;
-    font-size: 20px;
-    font-weight: 600;
-    border-bottom: 1px solid gray;
-}
-.main-moviea {
-    text-decoration: none;
-    color: black;
-    margin-left: 5px;
-    font-size: 17px;
-    font-weight: 600;
-    border-bottom: 1px solid gray;
-}
-.btn-success{
-    margin-top: 10px;
-}

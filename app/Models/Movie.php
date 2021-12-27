@@ -63,10 +63,9 @@ class Movie extends Model
         return $movies;
     }
 
-    static function getConcreteMovie(int $id)
+    static function getConcreteMovie(int $movie_id)
     {
-        return Movie::where('movie_id', $id)
-                ->join('timetables', 'timetables.movie_id', '=', 'movies.movie_id');
+        return Movie::where('movies.movie_id', $movie_id);
     }
 
     static function uploadGallery(Request $request, int $gallery_id = 0) : int

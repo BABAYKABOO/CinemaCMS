@@ -1,6 +1,8 @@
+<hr style="color: #8edfce; margin-top: 50px; margin-bottom: 0px; width: 70%">
 <div class="footer-clean">
     <footer>
         <div class="container">
+
             <div class="row justify-content-center">
                 <div class="col-sm-4 col-md-3 item">
                     <h3>Мобильные приложения</h3>

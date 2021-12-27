@@ -35,4 +35,8 @@ class Timetable extends Model
         return $this->hasOne(Movie::class);
     }
 
+    static function getConcreteTimetables(int $movie_id)
+    {
+        return Timetable::where('movie_id', $movie_id);
+    }
 }

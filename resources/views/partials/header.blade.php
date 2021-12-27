@@ -2,7 +2,7 @@
     <div class="container mt-5" style="text-align: center;">
         <div class="row">
             <div class="col-4">
-                <a href="{{route('main')}}"><img class="logo" src="img/logo.png" alt="logo"></a>
+                <a href="{{route('main')}}"><img class="logo" src="http://cinema.com/storage/img/logo.png" alt="logo"></a>
             </div>
             <div class="col-8" style="overflow: hidden;">
                 <div class="header-column" style="width: 200px">

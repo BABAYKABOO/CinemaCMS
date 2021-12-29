@@ -1,5 +1,5 @@
 @extends('admin.admin')
-@section('title', 'Фильмы')
+@section('title', 'Кинотеатры')
 @section('content')
     <style>
         .cinema-div{
@@ -14,7 +14,7 @@
             background-repeat: no-repeat;
         }
     </style>
-    <a class="btn btn-secondary" style="color: white" href="{{route('admin-movie_new')}}">Добавить кинотеатров</a>
+    <a class="btn btn-secondary" style="color: white" href="{{route('admin-cinema_new')}}">Добавить кинотеатр</a>
     <div style="text-align: center">
         <h1>Список кинотеатров</h1>
         <div style="width: 70%; margin: 0 auto; margin-bottom: 50px; text-align: left;">

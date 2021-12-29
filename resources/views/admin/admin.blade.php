@@ -24,7 +24,7 @@
                 <a href="{{route('main')}}" class="nav-link">Главная</a>
             </li>
             <li class="nav-item d-none d-sm-inline-block">
-                <a href="#" class="nav-link">Contact</a>
+                <a href="{{route('posters')}}" class="nav-link">Афиша</a>
             </li>
         </ul>
         <div class="col-10" style="text-align: right">

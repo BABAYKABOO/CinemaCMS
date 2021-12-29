@@ -2,8 +2,10 @@
 
 namespace App\Models;
 
+use App\Filters\QueryFilter;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Builder;
 
 class Timetable extends Model
 {
@@ -35,8 +37,8 @@ class Timetable extends Model
         return $this->hasOne(Movie::class);
     }
 
-    static function getConcreteTimetables(int $movie_id)
+    public function scopeFilter(Builder $builder, QueryFilter $filter)
     {
-        return Timetable::where('movie_id', $movie_id);
+        return $filter->apply($builder);
     }
 }

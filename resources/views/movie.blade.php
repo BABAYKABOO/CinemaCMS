@@ -2,7 +2,7 @@
 @section('title', 'Фильмы')
 @section('style', '/movie.css')
 @section('content')
-    <div style="margin-top: 50px">
+    <div style="margin-top: 50px; margin-bottom: 50px">
         <iframe width="100%" height="600"
                 src="{{$movie->trailer}}"
                 title="YouTube video player" frameborder="0"
@@ -10,10 +10,33 @@
                 allowfullscreen>
         </iframe>
     </div>
-    <div>
-        Timetables for Cinema
+    <div style="width: 80%; margin: 0 auto">
+        <form action="{{route('movie', $movie->movie_id)}}" method="get">
+        <span style="font-size: 40px"> Расписание сеансов кинотеатра:</span>
+        <select name="cinema_id" style="margin-left: 100px; font-size: 20px; height: 40px; width: 250px">
+            <option value="" hidden="hidden">Выберите кинотеатр</option>
+            @foreach($cinemas as $cinema)
+                <option value="{{$cinema->cinema_id}}" @if(isset($_GET['cinema_id'])) @if($_GET['cinema_id'] == $cinema->cinema_id) selected @endif @endif>
+                    {{$cinema->name}}
+                </option>
+            @endforeach
+        </select>
+            <div style="margin-top: 20px; text-align:right">
+            <button type="submit" class="btn btn-primary ml-5" style="font-size: 25px;">Поиск расписания</button>
+            </div>
+        </form>
+        <div class="row mt-5">
+{{--            @if(isset($timetables[0]->timetable_id))--}}
+{{--                @foreach($timetables as $timetable)--}}
+{{--                    <div class="col-lg-4">--}}
+{{--                        <h5>{{$timetable->data}}</h5>--}}
+{{--                    </div>--}}
+{{--                @endforeach--}}
+{{--            @endif--}}
+
+        </div>
     </div>
-    <div>
+    <div style="margin-top: 50px;">
         <div class="row" style="margin: 0 auto; width: 90%;" align="center">
             <div class="col">
                 <img src="{{$movie->image_url}}"/>

@@ -18,6 +18,8 @@ Route::get('/', [App\Http\Controllers\MainController::class, 'index'])->name('ma
 Route::get('/posters', [App\Http\Controllers\PostersController::class, 'showMovies'])->name('posters');
 Route::get('/posters/{id}', [App\Http\Controllers\MovieController::class, 'showMovie'])->name('movie');
 
+Route::get('/cinemas', [App\Http\Controllers\CinemasController::class, 'showCinemas'])->name('cinemas');
+
 Route::get('/login', [App\Http\Controllers\AuthController::class, 'index'])->name('login');
 Route::post('/login/auth', [App\Http\Controllers\AuthController::class, 'auth'])->name('auth');
 Route::get('/login/logout', [App\Http\Controllers\AuthController::class, 'logout'])->name('logout');

@@ -7,12 +7,12 @@
             <div style="height: 200px; width:100%;">
                 <script type="text/javascript">
                     document.title === 'Афиша' ?
-                        document.write('<a href="{{route('posters')}}" class="poster-a" style="color: black; margin-bottom: 50px"><div class="arrow-button-active">Афиша</div><div class="arrow-left-active"></div></a>') :
+                        document.write('<a href="{{route('posters')}}" class="poster-a" style="color: black; margin-bottom: 50px"><div class="arrow-button-active" style="margin-right: -10px">Афиша</div><div class="arrow-left-active"></div></a>') :
                          document.write('<a href="{{route('posters')}}" class="poster-a" style="color: black; margin-bottom: 50px"><div class="arrow-button">Афиша</div></a>');
                 </script>
                 <script type="text/javascript">
                     document.title === 'Скоро' ?
-                        document.write('<a href=\'{{route('posters')}}\' class="poster-a" style="color: black; margin-bottom: 50px"><div class="arrow-button-active">Скоро</div><div class="arrow-left-active"></div></a>') :
+                        document.write('<a href=\'{{route('posters')}}\' class="poster-a" style="color: black; margin-bottom: 50px"><div class="arrow-button-active" style="margin-right: -10px">Скоро</div><div class="arrow-left-active"></div></a>') :
                         document.write('<a href="{{route('posters')}}" class="poster-a" style="color: black; margin-bottom: 50px"><div class="arrow-button">Скоро</div></a>');
                 </script>
             </div>

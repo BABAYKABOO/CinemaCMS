@@ -16,8 +16,6 @@
                         document.write('<a href="{{route('posters')}}" class="poster-a" style="color: black; margin-bottom: 50px"><div class="arrow-button">Скоро</div></a>');
                 </script>
             </div>
-            <div style="margin-top: 70px; border: 1px solid black; width:100%; height: 300px; background-color: #e6e6e6">
-            </div>
         </div>
         <div class="col-9" style="margin-left: auto;">
             <div style=" width:100%; background-color: #161f27;">

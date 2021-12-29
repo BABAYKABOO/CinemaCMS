@@ -42,7 +42,7 @@
                         <li class="menu"><a href="{{route('posters')}}">Афиша</a></li>
                         <li class="menu"><a href="#">Расписание</a></li>
                         <li class="menu"><a href="#">Скоро</a></li>
-                        <li class="menu"><a href="#">Кинотеатры</a></li>
+                        <li class="menu"><a href="{{route('cinemas')}}">Кинотеатры</a></li>
                         <li class="menu"><a href="#">Акции</a></li>
                         <li class="menu"><a href="#">О кинотеатре</a>
                             <ul>

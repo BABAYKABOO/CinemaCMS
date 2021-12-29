@@ -145,7 +145,10 @@
                             Дата создания
                         </div>
                         <div class="col-2" style="border: 1px solid black; background-color: white">
-                            <a href="{{route('admin-cinema_hall-edit', $cinema->cinema_id,$hall->hall_id)}}"><img width="20" height="20" src="http://cinema.com/storage/img/editicon.png"/></a>
+                            <a href="{{route('admin-cinema_hall-edit', [
+             'cinema_id' => $cinema->cinema_id,
+             'hall_id' => $hall->hall_id
+          ])}}"><img width="20" height="20" src="http://cinema.com/storage/img/editicon.png"/></a>
                             <a><img width="20" height="20" src="http://cinema.com/storage/img/deleteicon.png"/></a>
                         </div>
                     @endforeach

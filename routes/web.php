@@ -40,6 +40,9 @@ Route::middleware([App\Http\Middleware\AuthAdmin::class])->group(function (){
         Route::get('/posters/add/new_movie', [App\Http\Controllers\MovieCreate_AdminController::class, 'showView'])->name('admin-movie_new');
         Route::post('/posters/add/new_movie/create', [App\Http\Controllers\MovieCreate_AdminController::class, 'create'])->name('admin-movie_create');
 
+        Route::get('/cinemas', [App\Http\Controllers\Cinemas_AdminController::class, 'showCinemas'])->name('admin-cinemas');
+        Route::get('/cinemas/{id}', [App\Http\Controllers\CinemaID_AdminController::class, 'showCinema'])->name('admin-cinema_id');
+
     });
 
 });

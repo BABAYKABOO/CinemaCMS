@@ -26,6 +26,9 @@
             <li class="nav-item d-none d-sm-inline-block">
                 <a href="{{route('posters')}}" class="nav-link">Афиша</a>
             </li>
+            <li class="nav-item d-none d-sm-inline-block">
+                <a href="{{route('cinemas')}}" class="nav-link">Кинотеатры</a>
+            </li>
         </ul>
         <div class="col-10" style="text-align: right">
             <a href="{{route('logout')}}" style="color:black;">Log out</a>
@@ -113,6 +116,18 @@
 {{--                                </a>--}}
 {{--                            </li>--}}
 {{--                        </ul>--}}
+                    </li>
+                    <li class="nav-item">
+                        <script type="text/javascript">
+                            document.title === 'Admin - Кинотеатры' ?
+                                document.write('<a href="{{route('admin-cinemas')}}" class="nav-link active">') :
+                                document.write('<a href="{{route('admin-cinemas')}}" class="nav-link">');
+                        </script>
+                        <i class="nav-icon fas fa-th"></i>
+                        <p>
+                            Кинотеатры
+                        </p>
+                        </a>
                     </li>
                 </ul>
             </nav>

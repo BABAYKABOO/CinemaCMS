@@ -30,17 +30,20 @@ class Image extends Model
             if ($gallery_id != 0) {
                 $gallery = Gallery::where('gallery_id', $gallery_id)->get();
                 foreach ($request->Gallery as $key => $value) {
+
                     Gallery::where('image_id', $gallery[$key]->image_id)->update([
                         'image_id' => Image::saveImg($request, 'Gallery.' . $key, $gallery[$key]->image_id)
                     ]);
                 }
-            } else
+            }
+            else {
                 $gallery_id = Gallery::max('image_id') + 1;
-            foreach ($request->Gallery as $key => $value) {
-                Gallery::Insert([
-                    'gallery_id' => $gallery_id,
-                    'image_id' => Image::saveImg($request, 'Gallery.' . $key)
-                ]);
+                foreach ($request->Gallery as $key => $value) {
+                    Gallery::Insert([
+                        'gallery_id' => $gallery_id,
+                        'image_id' => Image::saveImg($request, 'Gallery.' . $key)
+                    ]);
+                }
             }
         }
         return $gallery_id;

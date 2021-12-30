@@ -9,7 +9,7 @@
             @csrf
             <div class="mb-3">
                 <label class="form-label">Название зала</label>
-                <input type="text" class="form-control" id="name" name="name" value="{{$hall->number}}">
+                <input type="text" class="form-control" id="name" name="number" value="{{$hall->number}}">
             </div>
             <div class="mb-3">
                 <label class="form-label">Описание</label>
@@ -19,13 +19,13 @@
                 <label for="icon_upload">Схема зала:<br>
                     <div class="icon_wrapper" style="height: 150px; width: 200px;"><div id="schema-preview_1" style="height: 150px; width: 200px; background: url({{$img['schema']}}); background-size: 100%"></div></div>
                 </label>
-                <input type="file" name="Gallery[0]" preview-target-id="schema-preview_1" title="1">
+                <input type="file" name="schema" preview-target-id="schema-preview_1" title="1">
             </div>
             <div class="mb-3" style="width: 200px;">
                 <label for="icon_upload">Фото верхнего баннера:<br>
                     <div class="icon_wrapper"><div id="topbanner-preview_1" style="background: url({{$img['topbanner']}}); background-size: 100%"></div></div>
                 </label>
-                <input type="file" name="Gallery[0]" preview-target-id="topbanner-preview_1" title="1">
+                <input type="file" name="topbanner" preview-target-id="topbanner-preview_1" title="1">
             </div>
             <div class="mb-3">
                 <label>Галерея</label>
@@ -36,30 +36,30 @@
                         </label><br/>
                         <input type="file" name="Gallery[0]" preview-target-id="gallery-preview_1" title="1">
                     </div>
-                    {{--                    <div class="col-sm" style="width: 200px">--}}
-                    {{--                        <label for="icon_upload">Image:<br>--}}
-                    {{--                            <div class="icon_wrapper"><div id="gallery-preview_2" style="background: url({{$img['gallery'][1]->image_url}}); background-size: 100%"></div></div>--}}
-                    {{--                        </label>--}}
-                    {{--                        <input type="file" name="Gallery[1]" preview-target-id="gallery-preview_2">--}}
-                    {{--                    </div>--}}
-                    {{--                    <div class="col-sm" style="width: 200px">--}}
-                    {{--                        <label for="icon_upload">Image:<br>--}}
-                    {{--                            <div class="icon_wrapper"><div id="gallery-preview_3" style="background: url({{$img['gallery'][2]->image_url}}); background-size: 100%"></div></div>--}}
-                    {{--                        </label>--}}
-                    {{--                        <input type="file" name="Gallery[2]" preview-target-id="gallery-preview_3">--}}
-                    {{--                    </div>--}}
-                    {{--                    <div class="col-sm" style="width: 200px">--}}
-                    {{--                        <label for="icon_upload">Image:<br>--}}
-                    {{--                            <div class="icon_wrapper"><div id="gallery-preview_4" style="background: url({{$img['gallery'][3]->image_url}}); background-size: 100%"></div></div>--}}
-                    {{--                        </label>--}}
-                    {{--                        <input type="file" name="Gallery[3]" preview-target-id="gallery-preview_4">--}}
-                    {{--                    </div>--}}
-                    {{--                    <div class="col-sm" style="width: 200px">--}}
-                    {{--                        <label for="icon_upload">Image:<br>--}}
-                    {{--                            <div class="icon_wrapper"><div id="gallery-preview_5" style="background: url({{$img['gallery'][4]->image_url}}); background-size: 100%"></div></div>--}}
-                    {{--                        </label>--}}
-                    {{--                        <input type="file" name="Gallery[4]" preview-target-id="gallery-preview_5">--}}
-                    {{--                    </div>--}}
+                    <div class="col-sm" style="width: 200px">
+                        <label for="icon_upload">Image:<br>
+                            <div class="icon_wrapper"><div id="gallery-preview_2" style="background: url({{$img['gallery'][1]->image_url}}); background-size: 100%"></div></div>
+                        </label>
+                        <input type="file" name="Gallery[1]" preview-target-id="gallery-preview_2">
+                    </div>
+                    <div class="col-sm" style="width: 200px">
+                        <label for="icon_upload">Image:<br>
+                            <div class="icon_wrapper"><div id="gallery-preview_3" style="background: url({{$img['gallery'][2]->image_url}}); background-size: 100%"></div></div>
+                        </label>
+                        <input type="file" name="Gallery[2]" preview-target-id="gallery-preview_3">
+                    </div>
+                    <div class="col-sm" style="width: 200px">
+                        <label for="icon_upload">Image:<br>
+                            <div class="icon_wrapper"><div id="gallery-preview_4" style="background: url({{$img['gallery'][3]->image_url}}); background-size: 100%"></div></div>
+                        </label>
+                        <input type="file" name="Gallery[3]" preview-target-id="gallery-preview_4">
+                    </div>
+                    <div class="col-sm" style="width: 200px">
+                        <label for="icon_upload">Image:<br>
+                            <div class="icon_wrapper"><div id="gallery-preview_5" style="background: url({{$img['gallery'][4]->image_url}}); background-size: 100%"></div></div>
+                        </label>
+                        <input type="file" name="Gallery[4]" preview-target-id="gallery-preview_5">
+                    </div>
                 </div>
             </div>
             <style>

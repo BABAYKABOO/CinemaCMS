@@ -12,7 +12,7 @@ use App\Models\Seo;
 use App\Models\Type;
 use Illuminate\Http\Request;
 
-class CinemaID_AdminController extends Controller
+class CinemaEdit_AdminController extends Controller
 {
     public function showCinema(int $cinema_id)
     {
@@ -54,7 +54,7 @@ class CinemaID_AdminController extends Controller
             ->get();
 
         $seo = Seo::where('seo_id', $cinema->seo)->first();
-        return view('admin.cinema', [
+        return view('admin.cinema_edit', [
             'cinema' => $cinema,
             'img' => $img,
             'types' => $types,

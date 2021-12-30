@@ -9,7 +9,7 @@ use App\Models\Image;
 use App\Models\Seo;
 use Illuminate\Http\Request;
 
-class HallID_AdminController extends Controller
+class HallEdit_AdminController extends Controller
 {
     public function showHall(int $cinema_id, int $hall_id)
     {
@@ -20,15 +20,20 @@ class HallID_AdminController extends Controller
             ->join('images', 'images.image_id', '=', 'galleries.image_id')
             ->get();
         $seo = Seo::where('seo_id', $hall->seo)->first();
-        return view('admin.hall', [
+        return view('admin.hall_edit', [
             'cinema_id' => $cinema_id,
             'hall' => $hall,
             'img' => $img,
             'seo' => $seo
         ]);
     }
-    public function save(Request $request)
+    public function save(Request $request, int $cinema_id, int $hall_id)
     {
-        dd($request);
+        $hall = Hall::where('hall_id', $hall_id)->first();
+        $seo_id = Seo::where('seo_id', $hall->seo)->first()->seo_id;
+        Seo::saveSeo($request->Seo, $seo_id);
+        Hall::saveHall($request, $hall_id);
+
+        return redirect(route('admin-cinema_id', $cinema_id));
     }
 }

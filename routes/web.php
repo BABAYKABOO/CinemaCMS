@@ -46,9 +46,8 @@ Route::middleware([App\Http\Middleware\AuthAdmin::class])->group(function (){
         Route::get('/cinemas', [App\Http\Controllers\Cinemas_AdminController::class, 'showCinemas'])->name('admin-cinemas');
         Route::get('/cinemas/add/cinema_new', [App\Http\Controllers\CinemaCreate_AdminController::class, 'showCinema'])->name('admin-cinema_new');
         Route::post('/cinemas/add/cinema_new/hall', [App\Http\Controllers\CinemaCreate_AdminController::class, 'addHall'])->name('admin-hall_new');
-
-
         Route::get('/cinemas/add/cinema_new/create', [App\Http\Controllers\CinemaCreate_AdminController::class, 'create'])->name('admin-cinema_create');
+
         Route::get('/cinemas/edit/{id}', [App\Http\Controllers\CinemaID_AdminController::class, 'showCinema'])->name('admin-cinema_id');
         Route::post('/cinemas/edit/{id}/save', [App\Http\Controllers\CinemaID_AdminController::class, 'save'])->name('admin-cinema_save');
         Route::get('/cinemas/edit/{cinema_id}/hall/{hall_id}', [App\Http\Controllers\HallID_AdminController::class, 'showHall'])->name('admin-cinema_hall-edit');

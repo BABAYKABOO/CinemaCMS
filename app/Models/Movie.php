@@ -68,28 +68,6 @@ class Movie extends Model
         return Movie::where('movies.movie_id', $movie_id);
     }
 
-    static function uploadGallery(Request $request, int $gallery_id = 0) : int
-    {
-        if ($gallery_id != 0) {
-            $gallery = Gallery::where('gallery_id', $gallery_id)->get();
-            foreach($request->Gallery as $key => $value)
-            {
-                Gallery::where('image_id', $gallery[$key]->image_id)->update([
-                    'image_id' => Image::saveImg($request, 'Gallery.'.$key, $gallery[$key]->image_id)
-                ]);
-            }
-        }
-        else
-            $gallery_id = Gallery::max('image_id')+1;
-            foreach($request->Gallery as $key => $value)
-            {
-                Gallery::Insert([
-                    'gallery_id' => $gallery_id,
-                    'image_id' => Image::saveImg($request, 'Gallery.'.$key)
-                ]);
-            }
-        return $gallery_id;
-    }
 
     static function saveMovie(Request $request, int $movie_id)
     {
@@ -98,7 +76,7 @@ class Movie extends Model
                 'name' => $request->name,
                 'desc' => $request->desc,
                 'mainimg' => Image::saveImg($request, 'mainimg', $movie->mainimg),
-                'gallery' => Movie::uploadGallery($request, $movie->gallery),
+                'gallery' => Image::uploadGallery($request, $movie->gallery),
                 'trailer' => $request->trailer
             ]);
     }

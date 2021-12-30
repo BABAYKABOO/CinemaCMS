@@ -4,27 +4,31 @@
     <div style="text-align: left; margin-left: 20px">
         <form action="{{route('admin-cinema_save', $cinema->cinema_id)}}" enctype="multipart/form-data" method="post">
             @csrf
-            <div class="mb-3">
+            <div class="mb-5">
                 <label class="form-label">Название фильма</label>
                 <input type="text" class="form-control" id="name" name="name" value="{{$cinema->name}}">
             </div>
-            <div class="mb-3">
+            <div class="mb-5">
                 <label class="form-label">Описание</label>
                 <textarea class="form-control" aria-label="With textarea" name="desc" id="desc">{{$cinema->desc}}</textarea>
             </div>
-            <div class="mb-3">
+            <div class="mb-5">
                 <label class="form-label">Условия</label>
                 <section class="container">
                     <div>
-                        <select name="VERY_IMPORTANT[]" id="leftValues" size="8" multiple></select>
+                        <select name="conditions_active[]" id="leftValues" size="8" multiple>
+                            @foreach($conditions_active as $condition)
+                                <option name="conditions_active[]" value="{{$condition->condition_id}}" selected>{{$condition->condition_name}}</option>
+                            @endforeach
+                        </select>
                     </div>
                     <div>
                         <input type="button" id="btnLeft" value="&lt;&lt;" />
                         <input type="button" id="btnRight" value="&gt;&gt;" />
                     </div>
                     <div>
-                        <select id="rightValues" style="width: 300px" size="7" multiple>
-                            @foreach($conditions as $condition)
+                        <select id="rightValues" name="conditions_inactive[]" style="width: 300px" size="7" multiple>
+                            @foreach($conditions_inactive as $condition)
                                 <option value="{{$condition->condition_id}}">{{$condition->condition_name}}</option>
                             @endforeach
                         </select>
@@ -70,27 +74,27 @@
                     });
                 </script>
             </div>
-            <div class="mb-3" style="width: 200px;">
+            <div class="mb-5" style="width: 200px;">
                 <label for="icon_upload">Главная:<br>
                     <div class="icon_wrapper" style="height: 150px; width: 200px;"><div id="main-preview_1" style="height: 150px; width: 200px; background: url({{$cinema->image_url}}); background-size: 100%"></div></div>
                 </label>
-                <input type="file" name="Gallery[0]" preview-target-id="main-preview_1" title="1">
+                <input type="file" name="mainimg" preview-target-id="main-preview_1" title="1">
             </div>
 
-            <div class="mb-3" style="width: 200px;">
+            <div class="mb-5" style="width: 200px;">
                 <label for="icon_upload">Logo:<br>
                     <div class="icon_wrapper"><div id="logo-preview_1" style="background: url({{$img['logo']}}); background-size: 100%"></div></div>
                 </label>
-                <input type="file" name="Gallery[0]" preview-target-id="logo-preview_1" title="1">
+                <input type="file" name="logo" preview-target-id="logo-preview_1" title="1">
             </div>
 
-            <div class="mb-3" style="width: 200px;">
+            <div class="mb-5" style="width: 200px;">
                 <label for="icon_upload">Фото верхнего баннера:<br>
                     <div class="icon_wrapper"><div id="topbanner-preview_1" style="background: url({{$img['topbanner']}}); background-size: 100%"></div></div>
                 </label>
-                <input type="file" name="Gallery[0]" preview-target-id="topbanner-preview_1" title="1">
+                <input type="file" name="topbanner" preview-target-id="topbanner-preview_1" title="1">
             </div>
-            <div class="mb-3">
+            <div class="mb-5" style="margin-bottom: 30px">
                 <label>Галерея</label>
                 <div class="row">
                     <div class="col-sm" style="width: 200px;">
@@ -99,30 +103,30 @@
                         </label><br/>
                         <input type="file" name="Gallery[0]" preview-target-id="gallery-preview_1" title="1">
                     </div>
-{{--                    <div class="col-sm" style="width: 200px">--}}
-{{--                        <label for="icon_upload">Image:<br>--}}
-{{--                            <div class="icon_wrapper"><div id="gallery-preview_2" style="background: url({{$img['gallery'][1]->image_url}}); background-size: 100%"></div></div>--}}
-{{--                        </label>--}}
-{{--                        <input type="file" name="Gallery[1]" preview-target-id="gallery-preview_2">--}}
-{{--                    </div>--}}
-{{--                    <div class="col-sm" style="width: 200px">--}}
-{{--                        <label for="icon_upload">Image:<br>--}}
-{{--                            <div class="icon_wrapper"><div id="gallery-preview_3" style="background: url({{$img['gallery'][2]->image_url}}); background-size: 100%"></div></div>--}}
-{{--                        </label>--}}
-{{--                        <input type="file" name="Gallery[2]" preview-target-id="gallery-preview_3">--}}
-{{--                    </div>--}}
-{{--                    <div class="col-sm" style="width: 200px">--}}
-{{--                        <label for="icon_upload">Image:<br>--}}
-{{--                            <div class="icon_wrapper"><div id="gallery-preview_4" style="background: url({{$img['gallery'][3]->image_url}}); background-size: 100%"></div></div>--}}
-{{--                        </label>--}}
-{{--                        <input type="file" name="Gallery[3]" preview-target-id="gallery-preview_4">--}}
-{{--                    </div>--}}
-{{--                    <div class="col-sm" style="width: 200px">--}}
-{{--                        <label for="icon_upload">Image:<br>--}}
-{{--                            <div class="icon_wrapper"><div id="gallery-preview_5" style="background: url({{$img['gallery'][4]->image_url}}); background-size: 100%"></div></div>--}}
-{{--                        </label>--}}
-{{--                        <input type="file" name="Gallery[4]" preview-target-id="gallery-preview_5">--}}
-{{--                    </div>--}}
+                    <div class="col-sm" style="width: 200px">
+                        <label for="icon_upload">Image:<br>
+                            <div class="icon_wrapper"><div id="gallery-preview_2" style="background: url({{$img['gallery'][1]->image_url}}); background-size: 100%"></div></div>
+                        </label>
+                        <input type="file" name="Gallery[1]" preview-target-id="gallery-preview_2">
+                    </div>
+                    <div class="col-sm" style="width: 200px">
+                        <label for="icon_upload">Image:<br>
+                            <div class="icon_wrapper"><div id="gallery-preview_3" style="background: url({{$img['gallery'][2]->image_url}}); background-size: 100%"></div></div>
+                        </label>
+                        <input type="file" name="Gallery[2]" preview-target-id="gallery-preview_3">
+                    </div>
+                    <div class="col-sm" style="width: 200px">
+                        <label for="icon_upload">Image:<br>
+                            <div class="icon_wrapper"><div id="gallery-preview_4" style="background: url({{$img['gallery'][3]->image_url}}); background-size: 100%"></div></div>
+                        </label>
+                        <input type="file" name="Gallery[3]" preview-target-id="gallery-preview_4">
+                    </div>
+                    <div class="col-sm" style="width: 200px">
+                        <label for="icon_upload">Image:<br>
+                            <div class="icon_wrapper"><div id="gallery-preview_5" style="background: url({{$img['gallery'][4]->image_url}}); background-size: 100%"></div></div>
+                        </label>
+                        <input type="file" name="Gallery[4]" preview-target-id="gallery-preview_5">
+                    </div>
                 </div>
             </div>
             <div style="text-align: center; width: 80%; margin: 0 auto">

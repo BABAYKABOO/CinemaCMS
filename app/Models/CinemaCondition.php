@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use Illuminate\Http\Request;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
@@ -23,5 +24,16 @@ class CinemaCondition extends Model
     public function condition()
     {
         return $this->hasOne(Condition::class);
+    }
+
+    static function saveConditions(Request $request, int $cinema_id)
+    {
+        CinemaCondition::where('cinema_id', $cinema_id)->delete();
+        foreach ($request->conditions_active as $condition)
+            CinemaCondition::insert([
+                'cinema_id' =>  $cinema_id,
+                'condition_id' => $condition
+            ]);
+
     }
 }

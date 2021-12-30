@@ -30,7 +30,7 @@
                 <a href="{{route('cinemas')}}" class="nav-link">Кинотеатры</a>
             </li>
         </ul>
-        <div class="col-10" style="text-align: right">
+        <div class="col-9" style="text-align: right">
             <a href="{{route('logout')}}" style="color:black;">Log out</a>
         </div>
     </nav>

@@ -74,4 +74,10 @@ class CinemaEdit_AdminController extends Controller
 
         return redirect(route('admin-cinema_id', $cinema_id));
     }
+
+    public function delete(int $cinema_id)
+    {
+        Cinema::deleteCinema($cinema_id);
+        return redirect(route('admin-cinemas'));
+    }
 }

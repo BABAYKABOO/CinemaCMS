@@ -1,29 +1,29 @@
 @extends('admin.admin')
-@section('title', 'Фильмы')
+@section('title', 'Новый кинотеатр')
 @section('content')
     <div style="text-align: left; margin-left: 20px">
         <form action="{{route('admin-cinema_create')}}" enctype="multipart/form-data" method="post">
             @csrf
             <div class="mb-3">
                 <label class="form-label">Название фильма</label>
-                <input type="text" class="form-control" id="name" name="name" value="">
+                <input type="text" class="form-control" id="name" placeholder="Название" name="name" value="" required>
             </div>
             <div class="mb-3">
                 <label class="form-label">Описание</label>
-                <textarea class="form-control" aria-label="With textarea" name="desc" id="desc"></textarea>
+                <textarea class="form-control" aria-label="With textarea" name="desc" placeholder="Описание" id="desc" required></textarea>
             </div>
             <div class="mb-3">
                 <label class="form-label">Условия</label>
                 <section class="container">
                     <div>
-                        <select name="VERY_IMPORTANT[]" id="leftValues" size="8" multiple></select>
+                        <select name="conditions_active[]" id="leftValues" size="8" multiple></select>
                     </div>
                     <div>
                         <input type="button" id="btnLeft" value="&lt;&lt;" />
                         <input type="button" id="btnRight" value="&gt;&gt;" />
                     </div>
                     <div>
-                        <select id="rightValues" style="width: 300px" size="7" multiple>
+                        <select id="rightValues" name="conditions_inactive[]" style="width: 300px" size="7" multiple>
                             @foreach($conditions as $condition)
                                 <option value="{{$condition->condition_id}}">{{$condition->condition_name}}</option>
                             @endforeach
@@ -74,21 +74,21 @@
                 <label for="icon_upload">Главная:<br>
                     <div class="icon_wrapper" style="height: 150px; width: 200px;"><div id="main-preview_1" style="height: 150px; width: 200px; background-size: 100%"></div></div>
                 </label>
-                <input type="file" name="Gallery[0]" preview-target-id="main-preview_1" title="1">
+                <input type="file" name="mainimg" preview-target-id="main-preview_1" title="1" required>
             </div>
 
             <div class="mb-3" style="width: 200px;">
                 <label for="icon_upload">Logo:<br>
                     <div class="icon_wrapper"><div id="logo-preview_1" style=" background-size: 100%"></div></div>
                 </label>
-                <input type="file" name="Gallery[0]" preview-target-id="logo-preview_1" title="1">
+                <input type="file" name="logo" preview-target-id="logo-preview_1" title="1" required>
             </div>
 
             <div class="mb-3" style="width: 200px;">
                 <label for="icon_upload">Фото верхнего баннера:<br>
                     <div class="icon_wrapper"><div id="topbanner-preview_1" style=" background-size: 100%"></div></div>
                 </label>
-                <input type="file" name="Gallery[0]" preview-target-id="topbanner-preview_1" title="1">
+                <input type="file" name="topbanner" preview-target-id="topbanner-preview_1" title="1" required>
             </div>
             <div class="mb-3">
                 <label>Галерея</label>
@@ -97,66 +97,34 @@
                         <label for="icon_upload">Image:<br>
                             <div class="icon_wrapper"><div id="gallery-preview_1" style=" background-size: 100%"></div></div>
                         </label><br/>
-                        <input type="file" name="Gallery[0]" preview-target-id="gallery-preview_1" title="1">
+                        <input type="file" name="Gallery[0]" preview-target-id="gallery-preview_1" title="1" required>
                     </div>
                     <div class="col-sm" style="width: 200px">
                         <label for="icon_upload">Image:<br>
                             <div class="icon_wrapper"><div id="gallery-preview_2" style=" background-size: 100%"></div></div>
                         </label>
-                        <input type="file" name="Gallery[1]" preview-target-id="gallery-preview_2">
+                        <input type="file" name="Gallery[1]" preview-target-id="gallery-preview_2" required>
                     </div>
                     <div class="col-sm" style="width: 200px">
                         <label for="icon_upload">Image:<br>
                             <div class="icon_wrapper"><div id="gallery-preview_3" style=" background-size: 100%"></div></div>
                         </label>
-                        <input type="file" name="Gallery[2]" preview-target-id="gallery-preview_3">
+                        <input type="file" name="Gallery[2]" preview-target-id="gallery-preview_3" required>
                     </div>
                     <div class="col-sm" style="width: 200px">
                         <label for="icon_upload">Image:<br>
                             <div class="icon_wrapper"><div id="gallery-preview_4" style=" background-size: 100%"></div></div>
                         </label>
-                        <input type="file" name="Gallery[3]" preview-target-id="gallery-preview_4">
+                        <input type="file" name="Gallery[3]" preview-target-id="gallery-preview_4" required>
                     </div>
                     <div class="col-sm" style="width: 200px">
                         <label for="icon_upload">Image:<br>
                             <div class="icon_wrapper"><div id="gallery-preview_5" style=" background-size: 100%"></div></div>
                         </label>
-                        <input type="file" name="Gallery[4]" preview-target-id="gallery-preview_5">
+                        <input type="file" name="Gallery[4]" preview-target-id="gallery-preview_5" required>
                     </div>
                 </div>
             </div>
-            <form action="{{route('admin-hall_new')}}" enctype="multipart/form-data" method="post">
-            <div style="text-align: center; width: 80%; margin: 0 auto">
-                <h2 >Список залов</h2>
-                <div class="row" style="text-align: center;">
-                    <div class="col-5" style="height: 40px; border: 1px solid black;background-color: #cbcbcb">
-                        Название
-                    </div>
-                    <div class="col-5" style="border: 1px solid black;background-color: #cbcbcb">
-                        Дата создания
-                    </div>
-                    <div class="col-2" style="border: 1px solid black;background-color: #cbcbcb">
-                        Дата создания
-                    </div>
-                    @if(isset($halls))
-                    @foreach($halls as $hall)
-                        <div class="col-5" style="height: 40px; border: 1px solid black; background-color: white">
-                            {{$hall->number}}
-                        </div>
-                        <div class="col-5" style="border: 1px solid black; background-color: white">
-                            Дата создания
-                        </div>
-                        <div class="col-2" style="border: 1px solid black; background-color: white">
-                            <a href=""><img width="20" height="20" src="http://cinema.com/storage/img/editicon.png"/></a>
-                            <a><img width="20" height="20" src="http://cinema.com/storage/img/deleteicon.png"/></a>
-                        </div>
-                    @endforeach
-                    @endif
-
-                </div>
-                <button type="submit" class="btn btn-success" style="margin-top: 30px">Добавить зал</button>
-            </div>
-            </form>
             <style>
                 .icon_wrapper {
                     height: 90px; width: 200px;
@@ -189,27 +157,23 @@
                     }
                 })
             </script>
-            <label for="exampleInputPassword1" class="form-label">SEO:</label>
+            <label for="label" class="form-label">SEO:</label>
             <div class="mb-3" style="width: 70%; margin-left: 50px">
                 <div class="mb-3" style="">
                     <label class="form-label">URL</label>
-                    <input type="text" class="form-control" id="seo_url" name="Seo[url]" value="">
+                    <input type="text" class="form-control" id="seo_url" name="Seo[url]" placeholder="URL" value="" required>
                     <label class="form-label">Title</label>
-                    <input type="text" class="form-control" id="seo_title" name="Seo[title]" value="">
+                    <input type="text" class="form-control" id="seo_title" name="Seo[title]" placeholder="Title"  value="" required>
                     <label class="form-label">Keywords</label>
-                    <input type="text" class="form-control" id="seo_keywords" name="Seo[keywords]" value="">
+                    <input type="text" class="form-control" id="seo_keywords" name="Seo[keywords]" placeholder="Word"  value="" required>
                     <label class="form-label">Desc</label>
-                    <textarea class="form-control" aria-label="With textarea" name="Seo[desc]" id="seo_desc"></textarea>
+                    <textarea class="form-control" aria-label="With textarea" name="Seo[desc]" placeholder="Description"  id="seo_desc" required></textarea>
                 </div>
             </div>
             <button type="submit" class="btn btn-primary" style="display: inline-block; margin: 10px 0px 50px 30px">Сохранить</button>
             <a class="btn btn-secondary" style="display: inline-block;  margin: 10px 0px 50px 30px" href="">
                 Вернуть базовую версию
             </a>
-            <a class="btn btn-danger" style="display: inline-block;  margin: 10px 0px 50px 30px" href="">
-                Удалить фильм
-            </a>
-
         </form>
     </div>
 @endsection

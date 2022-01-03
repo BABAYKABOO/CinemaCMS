@@ -1,5 +1,5 @@
 @extends('admin.admin')
-@section('title', 'Фильмы')
+@section('title', 'Редактировать кинотеатр')
 @section('content')
     <div style="text-align: left; margin-left: 20px">
         <form action="{{route('admin-cinema_save', $cinema->cinema_id)}}" enctype="multipart/form-data" method="post">
@@ -146,18 +146,22 @@
                             {{$hall->number}}
                         </div>
                         <div class="col-5" style="border: 1px solid black; background-color: white">
-                            Дата создания
+                            {{$hall->created_at}}
                         </div>
                         <div class="col-2" style="border: 1px solid black; background-color: white">
                             <a href="{{route('admin-cinema_hall-edit', [
              'cinema_id' => $cinema->cinema_id,
              'hall_id' => $hall->hall_id
           ])}}"><img width="20" height="20" src="http://cinema.com/storage/img/editicon.png"/></a>
-                            <a><img width="20" height="20" src="http://cinema.com/storage/img/deleteicon.png"/></a>
+
+                            <a href="{{route('admin-cinema_hall-delete', [
+             'cinema_id' => $cinema->cinema_id,
+             'hall_id' => $hall->hall_id
+          ])}}"><img width="20" height="20" src="http://cinema.com/storage/img/deleteicon.png"/></a>
                         </div>
                     @endforeach
                 </div>
-                <button type="button" class="btn btn-success" style="margin-top: 30px">Добавить зал</button>
+                <a href="{{route('admin-cinema_hall-new', $cinema->cinema_id)}}"><button type="button" class="btn btn-success" style="margin-top: 30px">Добавить зал</button></a>
             </div>
             <style>
                 .icon_wrapper {
@@ -208,8 +212,8 @@
                 <a class="btn btn-secondary" style="display: inline-block;  margin: 10px 0px 50px 30px" href="{{route('admin-cinema_id', $cinema->cinema_id)}}">
                     Вернуть базовую версию
                 </a>
-                <a class="btn btn-danger" style="display: inline-block;  margin: 10px 0px 50px 30px" href="{{}}">
-                    Удалить фильм
+                <a class="btn btn-danger" style="display: inline-block;  margin: 10px 0px 50px 30px" href="{{route('admin-cinema-delete', $cinema->cinema_id)}}">
+                    Удалить кинотеатр
                 </a>
 
         </form>

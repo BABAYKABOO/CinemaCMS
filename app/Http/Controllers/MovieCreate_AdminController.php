@@ -20,11 +20,9 @@ class MovieCreate_AdminController extends Controller
 
     public function create(Request $request)
     {
-
         MovieType::saveTypes($request->Types,
             Movie::createMovie($request,
                 Seo::createSeo($request->Seo)));
-
 
         return redirect(route('admin-posters'));
     }

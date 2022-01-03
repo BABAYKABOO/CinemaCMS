@@ -29,7 +29,7 @@ class CinemaCondition extends Model
     static function saveConditions(Request $request, int $cinema_id)
     {
         CinemaCondition::where('cinema_id', $cinema_id)->delete();
-        foreach ($request->conditions_active as $condition)
+        foreach ($request->VERY_IMPORTANT as $condition)
             CinemaCondition::insert([
                 'cinema_id' =>  $cinema_id,
                 'condition_id' => $condition

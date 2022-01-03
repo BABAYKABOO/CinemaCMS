@@ -27,6 +27,7 @@ class HallEdit_AdminController extends Controller
             'seo' => $seo
         ]);
     }
+
     public function save(Request $request, int $cinema_id, int $hall_id)
     {
         $hall = Hall::where('hall_id', $hall_id)->first();
@@ -34,6 +35,12 @@ class HallEdit_AdminController extends Controller
         Seo::saveSeo($request->Seo, $seo_id);
         Hall::saveHall($request, $hall_id);
 
+        return redirect(route('admin-cinema_id', $cinema_id));
+    }
+
+    public function delete(int $cinema_id, int $hall_id)
+    {
+        Hall::deleteHall($hall_id);
         return redirect(route('admin-cinema_id', $cinema_id));
     }
 }

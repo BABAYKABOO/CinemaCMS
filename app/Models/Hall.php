@@ -45,4 +45,33 @@ class Hall extends Model
             'gallery' => Image::uploadGallery($request, $hall->gallery),
         ]);
     }
+
+    static function createHall(Request $request, int $seo_id)
+    {
+        Hall::insert([
+            'number' => $request->number,
+            'desc' => $request->desc,
+            'schema' => Image::saveImg($request, 'schema'),
+            'topbanner' => Image::saveImg($request, 'topbanner'),
+            'gallery' => Image::uploadGallery($request),
+            'seo' => $seo_id
+        ]);
+        return Hall::max('hall_id');
+    }
+
+    static function deleteHall(int $hall_id)
+    {
+        $hall = Hall::where('hall_id', $hall_id)->first();
+        Timetable::where('hall_id', $hall_id)->delete();
+        CinemaHall::where('hall_id', $hall_id)->delete();
+        Hall::where('hall_id', $hall_id)->delete();
+
+        Image::deleteImg($hall->schema);
+        Image::deleteImg($hall->topbanner);
+
+        foreach (Gallery::where('gallery_id', $hall->gallery)->get() as $image)
+            Image::deleteImg($image->image_id);
+
+        Seo::where('seo_id', $hall->seo)->delete();
+    }
 }

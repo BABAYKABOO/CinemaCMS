@@ -48,4 +48,39 @@ class Cinema extends Model
             'gallery' => Image::uploadGallery($request, $cinema->gallery),
         ]);
     }
+
+    static function createCinema(Request $request, int $seo_id)
+    {
+        Cinema::insert([
+            'name' => $request->name,
+            'desc' => $request->desc,
+            'mainimg' => Image::saveImg($request, 'mainimg'),
+            'logo' => Image::saveImg($request, 'logo'),
+            'topbanner' => Image::saveImg($request, 'topbanner'),
+            'gallery' => Image::uploadGallery($request),
+            'seo' => $seo_id
+        ]);
+        return Cinema::max('cinema_id');
+    }
+
+    static function deleteCinema(int $cinema_id)
+    {
+        $cinema = Cinema::where('cinema_id', $cinema_id)->first();
+        Timetable::where('cinema_id', $cinema_id)->delete();
+
+        foreach (CinemaHall::where('cinema_id', $cinema_id)->get() as $hall)
+            Hall::deleteHall($hall->hall_id);
+
+        CinemaCondition::where('cinema_id', $cinema_id)->delete();
+        Cinema::where('cinema_id', $cinema_id)->delete();
+
+        Image::deleteImg($cinema->mainimg);
+        Image::deleteImg($cinema->logo);
+        Image::deleteImg($cinema->topbanner);
+
+        foreach (Gallery::where('gallery_id', $cinema->gallery)->get() as $image)
+            Image::deleteImg($image->image_id);
+
+        Seo::where('seo_id', $cinema->seo)->delete();
+    }
 }

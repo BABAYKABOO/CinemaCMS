@@ -1,61 +1,61 @@
 @extends('admin.admin')
-@section('title', 'Редактировать зал')
+@section('title', 'Новый зал')
 @section('content')
     <div style="text-align: left; margin-left: 20px">
-        <form action="{{route('admin-cinema_hall-save', $hall->hall_id)}}" enctype="multipart/form-data" method="post">
+        <form action="{{route('admin-cinema_hall-create', $cinema_id)}}" enctype="multipart/form-data" method="post">
             @csrf
             <div class="mb-3">
                 <label class="form-label">Название зала</label>
-                <input type="text" class="form-control" id="name" name="number" value="{{$hall->number}}">
+                <input type="text" class="form-control" id="name" name="number" placeholder="Название зала" value="" required>
             </div>
             <div class="mb-3">
                 <label class="form-label">Описание</label>
-                <textarea class="form-control" aria-label="With textarea" name="desc" id="desc">{{$hall->desc}}</textarea>
+                <textarea class="form-control" aria-label="With textarea" name="desc" placeholder="Описание" id="desc" required></textarea>
             </div>
             <div class="mb-3" style="width: 200px;">
                 <label for="icon_upload">Схема зала:<br>
-                    <div class="icon_wrapper" style="height: 150px; width: 200px;"><div id="schema-preview_1" style="height: 150px; width: 200px; background: url({{$img['schema']}}); background-size: 100%"></div></div>
+                    <div class="icon_wrapper" style="height: 150px; width: 200px;"><div id="schema-preview_1" style="height: 150px; width: 200px; background-size: 100%"></div></div>
                 </label>
-                <input type="file" name="schema" preview-target-id="schema-preview_1" title="1">
+                <input type="file" name="schema" preview-target-id="schema-preview_1" title="1" required>
             </div>
             <div class="mb-3" style="width: 200px;">
                 <label for="icon_upload">Фото верхнего баннера:<br>
-                    <div class="icon_wrapper"><div id="topbanner-preview_1" style="background: url({{$img['topbanner']}}); background-size: 100%"></div></div>
+                    <div class="icon_wrapper"><div id="topbanner-preview_1" style="background-size: 100%"></div></div>
                 </label>
-                <input type="file" name="topbanner" preview-target-id="topbanner-preview_1" title="1">
+                <input type="file" name="topbanner" preview-target-id="topbanner-preview_1" title="1" required>
             </div>
             <div class="mb-3">
                 <label>Галерея</label>
                 <div class="row">
                     <div class="col-sm" style="width: 200px;">
                         <label for="icon_upload">Image:<br>
-                            <div class="icon_wrapper"><div id="gallery-preview_1" style="background: url({{$img['gallery'][0]->image_url}}); background-size: 100%"></div></div>
+                            <div class="icon_wrapper"><div id="gallery-preview_1" style="background-size: 100%"></div></div>
                         </label><br/>
-                        <input type="file" name="Gallery[0]" preview-target-id="gallery-preview_1" title="1">
+                        <input type="file" name="Gallery[0]" preview-target-id="gallery-preview_1" title="1" required>
                     </div>
                     <div class="col-sm" style="width: 200px">
                         <label for="icon_upload">Image:<br>
-                            <div class="icon_wrapper"><div id="gallery-preview_2" style="background: url({{$img['gallery'][1]->image_url}}); background-size: 100%"></div></div>
+                            <div class="icon_wrapper"><div id="gallery-preview_2" style="background-size: 100%"></div></div>
                         </label>
-                        <input type="file" name="Gallery[1]" preview-target-id="gallery-preview_2">
+                        <input type="file" name="Gallery[1]" preview-target-id="gallery-preview_2" required>
                     </div>
                     <div class="col-sm" style="width: 200px">
                         <label for="icon_upload">Image:<br>
-                            <div class="icon_wrapper"><div id="gallery-preview_3" style="background: url({{$img['gallery'][2]->image_url}}); background-size: 100%"></div></div>
+                            <div class="icon_wrapper"><div id="gallery-preview_3" style="background-size: 100%"></div></div>
                         </label>
-                        <input type="file" name="Gallery[2]" preview-target-id="gallery-preview_3">
+                        <input type="file" name="Gallery[2]" preview-target-id="gallery-preview_3" required>
                     </div>
                     <div class="col-sm" style="width: 200px">
                         <label for="icon_upload">Image:<br>
-                            <div class="icon_wrapper"><div id="gallery-preview_4" style="background: url({{$img['gallery'][3]->image_url}}); background-size: 100%"></div></div>
+                            <div class="icon_wrapper"><div id="gallery-preview_4" style="background-size: 100%"></div></div>
                         </label>
-                        <input type="file" name="Gallery[3]" preview-target-id="gallery-preview_4">
+                        <input type="file" name="Gallery[3]" preview-target-id="gallery-preview_4" required>
                     </div>
                     <div class="col-sm" style="width: 200px">
                         <label for="icon_upload">Image:<br>
-                            <div class="icon_wrapper"><div id="gallery-preview_5" style="background: url({{$img['gallery'][4]->image_url}}); background-size: 100%"></div></div>
+                            <div class="icon_wrapper"><div id="gallery-preview_5" style="background-size: 100%"></div></div>
                         </label>
-                        <input type="file" name="Gallery[4]" preview-target-id="gallery-preview_5">
+                        <input type="file" name="Gallery[4]" preview-target-id="gallery-preview_5" required>
                     </div>
                 </div>
             </div>
@@ -96,21 +96,18 @@
             <div class="mb-3" style="width: 70%; margin-left: 50px">
                 <div class="mb-3" style="">
                     <label class="form-label">URL</label>
-                    <input type="text" class="form-control" id="seo_url" name="Seo[url]" value="{{$seo->seo_url}}">
+                    <input type="text" class="form-control" id="seo_url" name="Seo[url]" placeholder="URL" value="" required>
                     <label class="form-label">Title</label>
-                    <input type="text" class="form-control" id="seo_title" name="Seo[title]" value="{{$seo->title}}">
+                    <input type="text" class="form-control" id="seo_title" name="Seo[title]" placeholder="Title" value="" required>
                     <label class="form-label">Keywords</label>
-                    <input type="text" class="form-control" id="seo_keywords" name="Seo[keywords]" value="{{$seo->keywords}}">
+                    <input type="text" class="form-control" id="seo_keywords" name="Seo[keywords]" placeholder="Word" value="" required>
                     <label class="form-label">Desc</label>
-                    <textarea class="form-control" aria-label="With textarea" name="Seo[desc]" id="seo_desc">{{$seo->desc}}</textarea>
+                    <textarea class="form-control" aria-label="With textarea" name="Seo[desc]" placeholder="Desc" id="seo_desc" required></textarea>
                 </div>
             </div>
             <button type="submit" class="btn btn-primary" style="display: inline-block; margin: 10px 0px 50px 30px">Сохранить</button>
-            <a class="btn btn-secondary" style="display: inline-block;  margin: 10px 0px 50px 30px" href="{{route('admin-cinema_hall-edit', $hall->hall_id)}}">
+            <a class="btn btn-secondary" style="display: inline-block;  margin: 10px 0px 50px 30px" href="{{route('admin-cinema_hall-new', $cinema_id)}}">
                 Вернуть базовую версию
-            </a>
-            <a class="btn btn-danger" style="display: inline-block;  margin: 10px 0px 50px 30px" href="{{}}">
-                Удалить фильм
             </a>
 
         </form>

@@ -89,7 +89,7 @@
                             </p>
                         </a>
                     </li>
-                    <li class="nav-item menu-open">
+                    <li class="nav-item">
                         <script type="text/javascript">
                             document.title === 'Admin - Фильмы' ? document.write('<a href="{{route('admin-posters')}}" class="nav-link active">') : document.write('<a href="{{route('admin-posters')}}" class="nav-link">');
                         </script>

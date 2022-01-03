@@ -20,6 +20,8 @@ Route::get('/posters/{id}', [App\Http\Controllers\MovieController::class, 'showM
 
 Route::get('/cinemas', [App\Http\Controllers\CinemasController::class, 'showCinemas'])->name('cinemas');
 Route::get('/cinemas/{id}', [App\Http\Controllers\CinemaIDController::class, 'showCinema'])->name('cinema-id');
+Route::get('/cinemas/{cinema_id}/{hall_id}', [App\Http\Controllers\HallController::class, 'showHall'])->name('cinema-hall');
+
 
 Route::get('/login', [App\Http\Controllers\AuthController::class, 'index'])->name('login');
 Route::post('/login/auth', [App\Http\Controllers\AuthController::class, 'auth'])->name('auth');

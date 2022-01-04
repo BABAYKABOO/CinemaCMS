@@ -51,4 +51,17 @@ class Event extends Model
             'gallery' => Image::uploadGallery($request, $event->gallery)
         ]);
     }
+
+    static function deleteEvent(int $event_id)
+    {
+        $event = Event::where('event_id', $event_id)->first();
+
+        Event::where('event_id', $event_id)->delete();
+        Image::deleteImg($event->mainimg);
+
+        foreach (Gallery::where('gallery_id', $event->gallery)->get() as $image)
+            Image::deleteImg($image->image_id);
+
+        Seo::where('seo_id', $event->seo)->delete();
+    }
 }

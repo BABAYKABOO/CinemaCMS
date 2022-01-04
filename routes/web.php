@@ -27,6 +27,9 @@ Route::get('/discounts', [App\Http\Controllers\DiscountsController::class, 'show
 Route::get('/discounts/{id}', [App\Http\Controllers\DiscountController::class, 'showDiscount'])->name('discount_id');
 
 
+Route::get('/events', [App\Http\Controllers\EventsController::class, 'showEvents'])->name('events');
+
+
 Route::get('/login', [App\Http\Controllers\AuthController::class, 'index'])->name('login');
 Route::post('/login/auth', [App\Http\Controllers\AuthController::class, 'auth'])->name('auth');
 Route::get('/login/logout', [App\Http\Controllers\AuthController::class, 'logout'])->name('logout');

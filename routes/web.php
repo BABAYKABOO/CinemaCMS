@@ -33,6 +33,7 @@ Route::get('/login/logout', [App\Http\Controllers\AuthController::class, 'logout
 
 Route::middleware([App\Http\Middleware\AuthAdmin::class])->group(function (){
     Route::prefix('admin')->group(function () {
+        Route::get('/', [App\Http\Controllers\StatisticController::class, 'index'])->name('statistic');
         Route::get('/statistic', [App\Http\Controllers\StatisticController::class, 'index'])->name('statistic');
 
 
@@ -72,6 +73,14 @@ Route::middleware([App\Http\Middleware\AuthAdmin::class])->group(function (){
         Route::post('/discounts/edit/{id}/save', [App\Http\Controllers\DiscountEdit_AdminController::class, 'save'])->name('admin-discount-save');
         Route::get('/discounts/edit/{id}/delete', [App\Http\Controllers\DiscountEdit_AdminController::class, 'delete'])->name('admin-discount-delete');
 
+
+        Route::get('/events', [App\Http\Controllers\Events_AdminController::class, 'showEvents'])->name('admin-events');
+        Route::get('/events/add/event_new', [App\Http\Controllers\EventCreate_AdminController::class, 'showEvent'])->name('admin-event-new');
+        Route::post('/events/add/event_new/create', [App\Http\Controllers\EventCreate_AdminController::class, 'create'])->name('admin-event-create');
+
+        Route::get('/events/edit/{id}', [App\Http\Controllers\EventEdit_AdminController::class, 'showEvent'])->name('admin-event-edit');
+        Route::post('/events/edit/{id}/save', [App\Http\Controllers\EventEdit_AdminController::class, 'save'])->name('admin-event-save');
+        Route::get('/events/edit/{id}/delete', [App\Http\Controllers\EventEdit_AdminController::class, 'delete'])->name('admin-event-delete');
 
     });
 

@@ -138,9 +138,21 @@
                                 document.write('<a href="{{route('admin-discounts')}}" class="nav-link active">') :
                                 document.write('<a href="{{route('admin-discounts')}}" class="nav-link">');
                         </script>
-                        <i class="nav-icon fas fa-th"></i>
+                        <i class="nav-icon fas fa-archive"></i>
                         <p>
                             Акции
+                        </p>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <script type="text/javascript">
+                            document.title === 'Admin - Новости' ?
+                                document.write('<a href="{{route('admin-events')}}" class="nav-link active">') :
+                                document.write('<a href="{{route('admin-events')}}" class="nav-link">');
+                        </script>
+                        <i class="nav-icon fas fa-th"></i>
+                        <p>
+                            Новости
                         </p>
                         </a>
                     </li>

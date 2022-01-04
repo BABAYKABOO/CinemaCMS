@@ -15,7 +15,7 @@ class EventCreate_AdminController extends Controller
 
     public function create(Request $request)
     {
-        Event::createDiscount($request, Seo::createSeo($request->Seo));
+        Event::createEvent($request, Seo::createSeo($request->Seo));
         return redirect(route('admin-events'));
     }
 }

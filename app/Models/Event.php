@@ -24,7 +24,7 @@ class Event extends Model
         'seo',
     ];
 
-    static function createDiscount(Request $request, int $seo_id) : int
+    static function createEvent(Request $request, int $seo_id) : int
     {
         Event::insert([
             'status' => $request->status == 'on' ? 1 : 0,
@@ -36,6 +36,19 @@ class Event extends Model
             'seo' => $seo_id
         ]);
 
-        return Discount::max('discount_id');
+        return event::max('event_id');
+    }
+
+    static function saveEvent(Request $request, int $event_id)
+    {
+        $event = Event::where('event_id', $event_id)->first();
+        Event::where('event_id', $event_id)->update([
+            'status' => $request->status == 'on' ? 1 : 0,
+            'date' => $request->date,
+            'name' => $request->name,
+            'desc' => $request->desc,
+            'mainimg' => Image::saveImg($request, 'mainimg', $event->mainimg),
+            'gallery' => Image::uploadGallery($request, $event->gallery)
+        ]);
     }
 }

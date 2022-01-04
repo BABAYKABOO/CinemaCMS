@@ -23,6 +23,10 @@ Route::get('/cinemas/{id}', [App\Http\Controllers\CinemaIDController::class, 'sh
 Route::get('/cinemas/{cinema_id}/{hall_id}', [App\Http\Controllers\HallController::class, 'showHall'])->name('cinema-hall');
 
 
+Route::get('/discounts', [App\Http\Controllers\DiscountsController::class, 'showDiscounts'])->name('discounts');
+Route::get('/discounts/{id}', [App\Http\Controllers\DiscountController::class, 'showDiscount'])->name('discount_id');
+
+
 Route::get('/login', [App\Http\Controllers\AuthController::class, 'index'])->name('login');
 Route::post('/login/auth', [App\Http\Controllers\AuthController::class, 'auth'])->name('auth');
 Route::get('/login/logout', [App\Http\Controllers\AuthController::class, 'logout'])->name('logout');
@@ -58,6 +62,17 @@ Route::middleware([App\Http\Middleware\AuthAdmin::class])->group(function (){
 
         Route::get('/cinemas/edit/{cinema_id}/delete-hall_{hall_id}', [App\Http\Controllers\HallEdit_AdminController::class, 'delete'])->name('admin-cinema_hall-delete');
         Route::get('/cinemas/edit/{cinema_id}/delete', [App\Http\Controllers\CinemaEdit_AdminController::class, 'delete'])->name('admin-cinema-delete');
+
+
+        Route::get('/discounts', [App\Http\Controllers\Discounts_AdminController::class, 'showDiscounts'])->name('admin-discounts');
+        Route::get('/discounts/add/discount_new', [App\Http\Controllers\DiscountCreate_AdminController::class, 'showDiscount'])->name('admin-discount-new');
+        Route::post('/discounts/add/discount_new/create', [App\Http\Controllers\DiscountCreate_AdminController::class, 'create'])->name('admin-discount-create');
+
+        Route::get('/discounts/edit/{id}', [App\Http\Controllers\DiscountEdit_AdminController::class, 'showDiscount'])->name('admin-discount-edit');
+        Route::post('/discounts/edit/{id}/save', [App\Http\Controllers\DiscountEdit_AdminController::class, 'save'])->name('admin-discount-save');
+        Route::get('/discounts/edit/{id}/delete', [App\Http\Controllers\DiscountEdit_AdminController::class, 'delete'])->name('admin-discount-delete');
+
+
     });
 
 });

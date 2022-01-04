@@ -6,8 +6,8 @@
             <div class="row justify-content-center">
                 <div class="col-sm-4 col-md-3 item">
                     <h3>Мобильные приложения</h3>
-                    <img src="img/footer/googleplay.png" style="width: 100px"/>
-                    <img src="img/footer/appstore.png" style="width: 100px"/>
+                    <img src="http://cinema.com/storage/img/googleplay.png" style="width: 100px"/>
+                    <img src="http://cinema.com/storage/img/appstore.png" style="width: 100px"/>
                     <p class="copyright">Разработка сайтов: AVADA-MEDIA</p>
                 </div>
                 <div class="col-sm-4 col-md-3 item">

@@ -1,5 +1,5 @@
 @extends('layout.app')
-@section('title', 'Cinemas')
+@section('title', 'Кинотеатры')
 @section('content')
     <div style="margin-top: 50px; margin-bottom: 50px;">
         <img width="100%" height = "600" src="http://cinema.com/storage/img/cinemas.jpg"/>

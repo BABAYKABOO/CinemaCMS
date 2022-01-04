@@ -11,7 +11,6 @@ use Illuminate\Http\Request;
 
 class CinemaCreate_AdminController extends Controller
 {
-    private $halls;
     public function showCinema()
     {
         $conditions = Condition::get();

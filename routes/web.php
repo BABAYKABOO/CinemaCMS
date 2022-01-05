@@ -34,6 +34,9 @@ Route::get('/discounts/{id}', [App\Http\Controllers\DiscountController::class, '
 Route::get('/events', [App\Http\Controllers\EventsController::class, 'showEvents'])->name('events');
 
 
+Route::get('/pages/{id}', [App\Http\Controllers\PageStatic_Controller::class, 'showPage'])->name('page_id');
+
+
 Route::get('/login', [App\Http\Controllers\AuthController::class, 'index'])->name('login');
 Route::post('/login/auth', [App\Http\Controllers\AuthController::class, 'auth'])->name('auth');
 Route::get('/login/logout', [App\Http\Controllers\AuthController::class, 'logout'])->name('logout');
@@ -91,7 +94,13 @@ Route::middleware([App\Http\Middleware\AuthAdmin::class])->group(function (){
 
         Route::get('/pages', [App\Http\Controllers\Pages_AdminController::class, 'showPages'])->name('admin-pages');
 
-        Route::get('/pages/main', [App\Http\Controllers\Main_AdminController::class, 'showPage'])->name('admin-page_main');
+        Route::get('/pages/new_page', [App\Http\Controllers\PageCreate_AdminController::class, 'showPage'])->name('admin-page-new');
+        Route::post('/pages/new_page/create', [App\Http\Controllers\PageCreate_AdminController::class, 'create'])->name('admin-page_id-create');
+
+        Route::get('/pages/{id}/edit', [App\Http\Controllers\PageEdit_AdminController::class, 'showPage'])->name('admin-page_id-edit');
+        Route::get('/pages/{id}/edit/save', [App\Http\Controllers\PageEdit_AdminController::class, 'save'])->name('admin-page_id-save');
+
+        Route::get('/pages/main', [App\Http\Controllers\Main_AdminController::class, 'showPage'])->name('admin-page_main-edit');
         Route::post('/pages/main/save', [App\Http\Controllers\Main_AdminController::class, 'save'])->name('admin-page_main-save');
 
     });

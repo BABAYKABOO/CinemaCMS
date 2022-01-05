@@ -2,12 +2,16 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Page;
 use Illuminate\Http\Request;
 
 class Pages_AdminController extends Controller
 {
     public function showPages()
     {
-        return view('admin.pages');
+        $pages = Page::get();
+        return view('admin.pages', [
+            'pages' => $pages
+        ]);
     }
 }

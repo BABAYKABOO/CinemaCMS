@@ -24,15 +24,15 @@ class Image extends Model
         Image::where('image_id', $image_id)->delete();
     }
 
-    static function uploadGallery(Request $request, int $gallery_id = 0) : int
+    static function uploadGallery(Request $request, string $name = 'Gallery', int $gallery_id = 0) : int
     {
-        if ($request->hasFile('Gallery')) {
+        if ($request->hasFile($name)) {
             if ($gallery_id != 0) {
                 $gallery = Gallery::where('gallery_id', $gallery_id)->get();
                 foreach ($request->Gallery as $key => $value) {
 
                     Gallery::where('image_id', $gallery[$key]->image_id)->update([
-                        'image_id' => Image::saveImg($request, 'Gallery.' . $key, $gallery[$key]->image_id)
+                        'image_id' => Image::saveImg($request, $name.'.'.$key, $gallery[$key]->image_id)
                     ]);
                 }
             }

@@ -2,8 +2,8 @@
 @section('title', 'Main')
 @section('img', 'img/body.jpg')
 @section('content')
-    <div style="text-align: center;">
-        <div class="main-div" style="background-color: #f7f6f6">
+    <div style="text-align: center; margin-bottom: -155px;">
+        <div class="main-div" style="background-color: #f7f6f6;">
             <div class="slider">
                 @foreach($banner_main as $banner)
                     <div class="item">
@@ -156,6 +156,10 @@
                     }
 
                 </script>
+            </div>
+            <div style="text-align: center">
+                <h4>SEO текст</h4>
+                <span>{{$info_page->seo_text}}</span>
             </div>
         </div>
     </div>

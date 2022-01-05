@@ -63,7 +63,7 @@ class Movie extends Model
                     ->first();
                 if (isset($time) && $time->data == $data)
                 {
-                    $movie->data = $data->data;
+                    $movie->data = $time->data;
                     $movies[] = $movie;
                 }
             }

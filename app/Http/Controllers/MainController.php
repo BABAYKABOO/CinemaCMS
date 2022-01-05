@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Banner;
 use App\Models\Movie;
+use App\Models\PageMain;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
@@ -34,6 +35,7 @@ class MainController extends Controller
             'banner_news' => Banner::where('position_id', 3)
                              ->join('images', 'images.image_id', '=', 'banners.img')
                              ->get(),
+            'info_page' => PageMain::first(),
             'moviesToday' => Movie::getMovies(date("Y-m-d")),
             'moviesSoon' => Movie::getMovies("soon"),
             'data' => [date("Y"), $arr[$month], date("d")]

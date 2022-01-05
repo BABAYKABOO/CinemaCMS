@@ -159,6 +159,18 @@
                         </p>
                         </a>
                     </li>
+                    <li class="nav-item">
+                        <script type="text/javascript">
+                            document.title === 'Admin - Страницы' ?
+                                document.write('<a href="{{route('admin-pages')}}" class="nav-link active">') :
+                                document.write('<a href="{{route('admin-pages')}}" class="nav-link">');
+                        </script>
+                        <i class="nav-icon fas fa-th"></i>
+                        <p>
+                            Страницы
+                        </p>
+                        </a>
+                    </li>
                 </ul>
             </nav>
             <!-- /.sidebar-menu -->

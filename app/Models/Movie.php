@@ -37,21 +37,36 @@ class Movie extends Model
     static function getMovies($data = null)
     {
         if ($data == "soon"){
-            $data = date("Y-m-d");
-            $movies = DB::table('timetables')
-                ->join('movies', 'movies.movie_id', '=', 'timetables.movie_id')
-                ->join('images', 'images.image_id', '=', 'movies.mainimg')
-                ->join('seos', 'seos.seo_id', '=', 'movies.seo')
-                ->where('timetables.data', '>', $data)
-                ->get();
+            $movies = [];
+            foreach (Movie::getMovies() as $movie)
+            {
+                $time = Timetable::select('data')
+                    ->orderBy('data')
+                    ->where('movie_id', $movie->movie_id)
+                    ->limit(1)
+                    ->first();
+                if (isset($time) && $time->data > date("Y-m-d"))
+                {
+                    $movie->data = $time->data;
+                    $movies[] = $movie;
+                }
+            }
         }
         else if (isset($data)) {
-            $movies = DB::table('timetables')
-                ->join('movies', 'movies.movie_id', '=', 'timetables.movie_id')
-                ->join('images', 'images.image_id', '=', 'movies.mainimg')
-                ->join('seos', 'seos.seo_id', '=', 'movies.seo')
-                ->where('timetables.data', $data)
-                ->get();
+            $movies = [];
+            foreach (Movie::getMovies() as $movie)
+            {
+                $time = Timetable::select('data')
+                    ->orderBy('data')
+                    ->where('movie_id', $movie->movie_id)
+                    ->limit(1)
+                    ->first();
+                if (isset($time) && $time->data == $data)
+                {
+                    $movie->data = $data->data;
+                    $movies[] = $movie;
+                }
+            }
         }
         else
         {

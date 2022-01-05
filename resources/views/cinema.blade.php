@@ -10,11 +10,10 @@
                     <h3>Количество залов: {{count($halls)}}</h3>
                     <div style="border: 2px solid black">
                         @foreach($halls as $hall)
-
                             <a href="{{route('cinema-hall', [
                                  'cinema_id' => $cinema->cinema_id,
                                  'hall_id' => $hall->hall_id
-                            ])}}}">
+                            ])}}">
                             <div style="height: 50px; width: 101%; margin-left: -1px; border: 2px solid black">
                                 <p style="margin-top: 7px; margin-left: 10px; font-size: 20px;">{{$hall->number}}</p>
                             </div>

@@ -2,7 +2,10 @@
 @section('title', 'Редактировать зал')
 @section('content')
     <div style="text-align: left; margin-left: 20px">
-        <form action="{{route('admin-cinema_hall-save', $hall->hall_id)}}" enctype="multipart/form-data" method="post">
+        <form action="{{route('admin-cinema_hall-save', [
+                                 'cinema_id' => $cinema->cinema_id,
+                                 'hall_id' => $hall->hall_id
+                            ])}}" enctype="multipart/form-data" method="post">
             @csrf
             <div class="mb-3">
                 <label class="form-label">Название зала</label>

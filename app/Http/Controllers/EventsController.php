@@ -10,7 +10,7 @@ class EventsController extends Controller
 {
     public function showEvents()
     {
-        $events = Event::join('images', 'images.image_id', '=', 'events.mainimg')
+        $events = Event::where('status', 1)->join('images', 'images.image_id', '=', 'events.mainimg')
             ->paginate(3);
 
         return view('events', [

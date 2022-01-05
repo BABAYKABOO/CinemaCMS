@@ -18,6 +18,9 @@ Route::get('/', [App\Http\Controllers\MainController::class, 'index'])->name('ma
 Route::get('/posters', [App\Http\Controllers\PostersController::class, 'showMovies'])->name('posters');
 Route::get('/posters/{id}', [App\Http\Controllers\MovieController::class, 'showMovie'])->name('movie');
 
+Route::get('/soon', [App\Http\Controllers\SoonController::class, 'showMovies'])->name('soon');
+Route::get('/soon/{id}', [App\Http\Controllers\MovieController::class, 'showMovie'])->name('soon_movie');
+
 Route::get('/cinemas', [App\Http\Controllers\CinemasController::class, 'showCinemas'])->name('cinemas');
 Route::get('/cinemas/{id}', [App\Http\Controllers\CinemaIDController::class, 'showCinema'])->name('cinema-id');
 Route::get('/cinemas/{cinema_id}/{hall_id}', [App\Http\Controllers\HallController::class, 'showHall'])->name('cinema-hall');

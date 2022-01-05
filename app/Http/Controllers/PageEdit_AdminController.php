@@ -33,4 +33,13 @@ class PageEdit_AdminController extends Controller
            'seo' => $seo,
         ]);
     }
+
+    public function save(Request $request, int $page_id)
+    {
+        $page = Page::where('page_id', $page_id)->first();
+        Seo::saveSeo($request->Seo, $page->seo);
+        Page::savePage($request, $page_id);
+
+        return redirect(route('admin-page_id-edit', $page_id));
+    }
 }

@@ -98,7 +98,9 @@ Route::middleware([App\Http\Middleware\AuthAdmin::class])->group(function (){
         Route::post('/pages/new_page/create', [App\Http\Controllers\PageCreate_AdminController::class, 'create'])->name('admin-page_id-create');
 
         Route::get('/pages/{id}/edit', [App\Http\Controllers\PageEdit_AdminController::class, 'showPage'])->name('admin-page_id-edit');
-        Route::get('/pages/{id}/edit/save', [App\Http\Controllers\PageEdit_AdminController::class, 'save'])->name('admin-page_id-save');
+        Route::post('/pages/{id}/edit/save', [App\Http\Controllers\PageEdit_AdminController::class, 'save'])->name('admin-page_id-save');
+
+        Route::get('/pages/contacts', [App\Http\Controllers\Contacts_AdminController::class, 'showContacts'])->name('admin-contacts-edit');
 
         Route::get('/pages/main', [App\Http\Controllers\Main_AdminController::class, 'showPage'])->name('admin-page_main-edit');
         Route::post('/pages/main/save', [App\Http\Controllers\Main_AdminController::class, 'save'])->name('admin-page_main-save');

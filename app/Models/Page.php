@@ -42,4 +42,18 @@ class Page extends Model
 
         return event::max('event_id');
     }
+
+    static function savePage(Request $request, int $page_id)
+    {
+        $page = Page::where('page_id', $page_id)->first();
+        Page::where('page_id', $page_id)->update([
+            'status' => 1,
+            'name' => $request->name,
+            'topbanner' => Image::saveImg($request, 'topbanner', $page->topbanner),
+            'desc' => $request->desc,
+            'sub_gallery' => Image::uploadGallery($request, 'Sub_Gallery', $page->sub_gallery),
+            'sub_desc' => $request->sub_desc,
+            'gallery' => Image::uploadGallery($request, 'Gallery', $page->gallery)
+        ]);
+    }
 }

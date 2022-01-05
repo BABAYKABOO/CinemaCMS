@@ -46,6 +46,18 @@
                     <a href="{{route('admin-page_id-edit', $page->page_id)}}"><img width="20" height="20" src="http://cinema.com/storage/img/editicon.png"/></a>
                 </div>
             @endforeach
+            <div class="col-4" style="height: 40px; border: 1px solid black; background-color: white">
+                Контакты
+            </div>
+            <div class="col-4" style="border: 1px solid black; background-color: white">
+                2022-01-05 14:59:44
+            </div>
+            <div class="col-2" style="border: 1px solid black; background-color: white">
+                ВКЛ
+            </div>
+            <div class="col-2" style="">
+                <a href="{{route('admin-contacts-edit')}}"><img width="20" height="20" src="http://cinema.com/storage/img/editicon.png"/></a>
+            </div>
         </div>
     </div>
 @endsection

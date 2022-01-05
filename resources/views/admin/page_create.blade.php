@@ -82,8 +82,8 @@
             </div>
             <div class="mb-3" style="width: 200px;">
                 <label for="icon_upload">Верхний баннер:<br>
-                    <div class="icon_wrapper" style="height: 150px; width: 200px;">
-                        <div id="topbanner-preview_1" style="height: 150px; width: 200px; background-size: 100%">
+                    <div class="icon_wrapper" style="height: 80px; width: 200px;">
+                        <div id="topbanner-preview_1" style="height: 80px; width: 200px; background-size: 100%">
 
                         </div>
                     </div>
@@ -99,21 +99,21 @@
                 <div class="row">
                     <div class="col-sm" style="width: 200px;">
                         <label for="icon_upload">Image:<br>
-                            <div class="icon_wrapper"><div id="preview_1" style="background-size: 100%"></div></div>
+                            <div class="icon_wrapper"><div id="sub_preview_1" style="background-size: 100%"></div></div>
                         </label>
-                        <input type="file" name="Sub_Gallery[0]" preview-target-id="preview_1" title="1">
+                        <input type="file" name="Sub_Gallery[0]" preview-target-id="sub_preview_1" title="1">
                     </div>
                     <div class="col-sm" style="width: 200px">
                         <label for="icon_upload">Image:<br>
-                            <div class="icon_wrapper"><div id="preview_2" style=" background-size: 100%"></div></div>
+                            <div class="icon_wrapper"><div id="sub_preview_2" style=" background-size: 100%"></div></div>
                         </label>
-                        <input type="file" name="Sub_Gallery[1]" preview-target-id="preview_2">
+                        <input type="file" name="Sub_Gallery[1]" preview-target-id="sub_preview_2">
                     </div>
                     <div class="col-sm" style="width: 200px">
                         <label for="icon_upload">Image:<br>
-                            <div class="icon_wrapper"><div id="preview_3" style=" background-size: 100%"></div></div>
+                            <div class="icon_wrapper"><div id="sub_preview_3" style=" background-size: 100%"></div></div>
                         </label>
-                        <input type="file" name="Sub_Gallery[2]" preview-target-id="preview_3">
+                        <input type="file" name="Sub_Gallery[2]" preview-target-id="sub_preview_3">
                     </div>
                 </div>
 

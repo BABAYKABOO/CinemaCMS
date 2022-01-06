@@ -57,6 +57,14 @@ class Contact extends Model
                 ]);
                 $request->files->remove('Contact_' . $id . '_logo');
             }
+            else if($request->hasFile('Contact_' . $id . '_mainimg')) {
+                Contact::where('contact_id', $id)->update([
+                    'mainimg' => Image::saveImg($request,
+                        'Contact_' . $id . '_mainimg',
+                        Contact::where('contact_id', $id)->first()->mainimg)
+                ]);
+                $request->files->remove('Contact_' . $id . '_mainimg');
+            }
             foreach ($contact as $col => $value)
                 Contact::where('contact_id', $id)->update([
                     $col => $col == 'status' ? $value == 'on' ? 1 : 0 : $value,

@@ -105,7 +105,17 @@
                             </div>
                         </div>
                     </label>
-                    <input type="file" id="file_{{$contact->contact_id}}" name="Contact_{{$contact->contact_id}}_logo" preview-target-id="logo-preview_{{$contact->contact_id}}" title="1">
+                    <input type="file" name="Contact_{{$contact->contact_id}}_logo" preview-target-id="logo-preview_{{$contact->contact_id}}" title="1">
+                </div>
+                <div class="mb-3" style="width: 200px;">
+                    <label for="icon_upload">Главная картинка:<br>
+                        <div class="icon_wrapper" style="height: 130px; width: 200px;">
+                            <div id="mainimg-preview_{{$contact->contact_id}}" style="background: url({{$mainimg[$contact->contact_id]}}); background-repeat: no-repeat; height: 130px; width: 200px; background-size: 100%">
+
+                            </div>
+                        </div>
+                    </label>
+                    <input type="file" name="Contact_{{$contact->contact_id}}_mainimg" preview-target-id="mainimg-preview_{{$contact->contact_id}}" title="1">
                 </div>
                 <div onclick="deleteDiv('divCurrent_{{$contact->contact_id}}')" style="margin: 30px 0px 0px 70px; color: white;">
                     <a class="btn btn-danger">Удалить</a>
@@ -148,6 +158,15 @@
                                 '        </div>'+
                                 '    </label>'+
                                 '    <input type="file" id="file_'+ countDiv +'" name="newContact_'+ countDiv +'_logo" preview-target-id="logo-preview_'+ countDiv +'" title="1">'+
+                                '</div>'+
+                                '<div class="mb-3" style="width: 200px;">'+
+                                '<label for="icon_upload">Главная картинка:<br>'+
+                                '<div class="icon_wrapper" style="height: 130px; width: 200px;">'+
+                                '<div id="mainimg-preview_'+ countDiv +'" style=" background-repeat: no-repeat; height: 130px; width: 200px; background-size: 100%">'+
+                                '</div>'+
+                                '</div>'+
+                                '</label>'+
+                                '<input type="file" name="Contact_'+ countDiv +'_mainimg" preview-target-id="mainimg-preview_'+ countDiv +'" title="1">'+
                                 '</div>'+
                                 '<div onclick="deleteDiv(\'divNewContact_'+ countDiv +'\')" style="margin: 30px 0px 0px 70px; color: white;">'+
                                 '    <a class="btn btn-danger">Удалить</a>'+

@@ -52,7 +52,7 @@
                                 <li><a href="{{route('page_id', 3)}}">&nbsp;Реклама</a></li>
                                 <li><a href="#">&nbsp;Кафе</a></li>
                                 <li><a href="#">&nbsp;Мобильные прил</a></li>
-                                <li><a href="#">&nbsp;Контакты</a></li>
+                                <li><a href="{{route('contacts')}}">&nbsp;Контакты</a></li>
                             </ul>
                         </li>
                     </ul>

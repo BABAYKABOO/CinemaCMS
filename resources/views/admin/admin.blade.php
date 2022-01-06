@@ -35,6 +35,9 @@
             <li class="nav-item d-none d-sm-inline-block">
                 <a href="{{route('events')}}" class="nav-link">Новости</a>
             </li>
+            <li class="nav-item d-none d-sm-inline-block">
+                <a href="{{route('contacts')}}" class="nav-link">Контакты</a>
+            </li>
         </ul>
         <div class="col-9" style="text-align: right">
             <a href="{{route('logout')}}" style="color:black;">Log out</a>

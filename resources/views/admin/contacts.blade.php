@@ -166,7 +166,7 @@
                                 '</div>'+
                                 '</div>'+
                                 '</label>'+
-                                '<input type="file" name="Contact_'+ countDiv +'_mainimg" preview-target-id="mainimg-preview_'+ countDiv +'" title="1">'+
+                                '<input type="file" name="newContact_'+ countDiv +'_mainimg" preview-target-id="mainimg-preview_'+ countDiv +'" title="1">'+
                                 '</div>'+
                                 '<div onclick="deleteDiv(\'divNewContact_'+ countDiv +'\')" style="margin: 30px 0px 0px 70px; color: white;">'+
                                 '    <a class="btn btn-danger">Удалить</a>'+

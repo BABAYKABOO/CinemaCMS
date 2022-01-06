@@ -82,6 +82,8 @@ class Contact extends Model
                     'coordinates' => $contact['coordinates'],
                     'logo' => Image::saveImg($request,
                         'newContact_' . $id . '_logo'),
+                    'mainimg' => Image::saveImg($request,
+                        'newContact_' . $id . '_mainimg'),
                     'seo' => Contact::first()->seo
                 ]);
                 $request->files->remove('newContact_'.$id.'_img');

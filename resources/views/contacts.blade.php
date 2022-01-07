@@ -9,7 +9,7 @@
     <div style="width: 90%; margin: 0 auto;" id="contacts">
         <h1 style="text-align: center; padding-left: 20px; margin-top: 20px">Контакты</h1>
             @foreach($contacts as $contact)
-                <div class="mb-5" style="width: 80%; margin: 0 auto; background-color: #c8c8c8; border-radius: 30px; padding: 30px;">
+                <div class="mb-5" style="width: 80%; margin: 0 auto; background-color: #dddddd; border-radius: 30px; padding: 30px;">
                     <div class="row">
                         <div class="col-3" style="">
                              <h2>{{$contact->name_cinema}}</h2>
@@ -30,39 +30,38 @@
                         </div>
                     </div>
                 </div>
-            <script>
-                [
-                    @foreach($contacts as $contact)
-                    {
-                        el: '#map-{{$contact->contact_id}}',
-                        center: [parseFloat("{{$contact->coordinates}}".split(',')[0]), parseFloat("{{$contact->coordinates}}".split(',')[1])],
-                        markers: [
-                            [parseFloat("{{$contact->coordinates}}".split(',')[0]), parseFloat("{{$contact->coordinates}}".split(',')[1])],
-                        ],
-                    },
-                    @endforeach
-                ].forEach(initMap);
-
-
-                function initMap({ el, center, markers }) {
-                    el = document.querySelector(el);
-                    el.classList.add('map');
-
-                    const map = new google.maps.Map(el, {
-                        center: new google.maps.LatLng(...center),
-                        zoom: 17,
-                    });
-
-                    markers.forEach(([ lat, lng ]) => {
-                        new google.maps.Marker({
-                            position: { lat, lng },
-                            map,
-                        });
-                    });
-                }
-
-            </script>
            @endforeach
     </div>
+    <script>
+        [
+                @foreach($contacts as $contact)
+            {
+                el: '#map-{{$contact->contact_id}}',
+                center: [parseFloat("{{$contact->coordinates}}".split(',')[0]), parseFloat("{{$contact->coordinates}}".split(',')[1])],
+                markers: [
+                    [parseFloat("{{$contact->coordinates}}".split(',')[0]), parseFloat("{{$contact->coordinates}}".split(',')[1])],
+                ],
+            },
+            @endforeach
+        ].forEach(initMap);
 
+
+        function initMap({ el, center, markers }) {
+            el = document.querySelector(el);
+            el.classList.add('map');
+
+            const map = new google.maps.Map(el, {
+                center: new google.maps.LatLng(...center),
+                zoom: 17,
+            });
+
+            markers.forEach(([ lat, lng ]) => {
+                new google.maps.Marker({
+                    position: { lat, lng },
+                    map,
+                });
+            });
+        }
+
+    </script>
 @endsection

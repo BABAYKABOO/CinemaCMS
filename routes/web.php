@@ -31,11 +31,12 @@ Route::get('/discounts', [App\Http\Controllers\DiscountsController::class, 'show
 Route::get('/discounts/{id}', [App\Http\Controllers\DiscountController::class, 'showDiscount'])->name('discount_id');
 
 
-Route::get('/events', [App\Http\Controllers\EventsController::class, 'showEvents'])->name('events');
-
-
 Route::get('/pages/{id}', [App\Http\Controllers\PageStatic_Controller::class, 'showPage'])->name('page_id');
 
+
+Route::get('/mobile', [App\Http\Controllers\PageMobile_Controller::class, 'showPage'])->name('mobile');
+
+Route::get('/events', [App\Http\Controllers\EventsController::class, 'showEvents'])->name('events');
 
 Route::get('/contacts', [App\Http\Controllers\Contacts_Controller::class, 'showContacts'])->name('contacts');
 

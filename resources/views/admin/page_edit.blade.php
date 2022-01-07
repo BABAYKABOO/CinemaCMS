@@ -118,11 +118,13 @@
                     </div>
                 </div>
             </div>
+            @if(isset($page->sub_desc))
                 <div class="mb-3">
                     <label class="form-label">Описание</label>
                     <textarea class="form-control" aria-label="With textarea" name="sub_desc" id="desc">{{$page->sub_desc}}</textarea>
                 </div>
-
+            @endif
+            @if(isset($gallery[0]))
                 <div class="mb-3">
                     <label>Галерея</label>
                     <div class="row">
@@ -157,6 +159,8 @@
                             <input type="file" name="Gallery[4]" preview-target-id="preview_5">
                         </div>
                     </div>
+                </div>
+            @endif
                     <label for="exampleInputPassword1" class="form-label">SEO:</label>
                     <div class="mb-3" style="width: 70%; margin-left: 50px">
                         <div class="mb-3" style="">
@@ -190,6 +194,7 @@
                             }
                         })
                     </script>
+
         </form>
     </div>
 @endsection

@@ -36,7 +36,7 @@ class Page extends Model
             'desc' => $request->desc,
             'sub_gallery' => Image::uploadGallery($request, 'Sub_Gallery'),
             'sub_desc' => $request->sub_desc,
-            'gallery' => Image::uploadGallery($request),
+            'gallery' => isset($request->Gallery) ? Image::uploadGallery($request) : null,
             'seo' => $seo_id
         ]);
 
@@ -53,7 +53,7 @@ class Page extends Model
             'desc' => $request->desc,
             'sub_gallery' => Image::uploadGallery($request, 'Sub_Gallery', $page->sub_gallery),
             'sub_desc' => $request->sub_desc,
-            'gallery' => Image::uploadGallery($request, 'Gallery', $page->gallery)
+            'gallery' => isset($request->Gallery) ? Image::uploadGallery($request, 'Gallery', $page->gallery) : null
         ]);
     }
 }

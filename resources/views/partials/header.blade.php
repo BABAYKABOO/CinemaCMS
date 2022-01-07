@@ -29,8 +29,8 @@
                     </div>
                 </div>
                 <div class="header-column" style="width: 200px">
-                    <h4>(048) 777-77-77</h4>
-                    <h4>(097) 777-77-77</h4>
+                    <h4>{{\App\Models\PageMain::first()->phone_1}}</h4>
+                    <h4>{{\App\Models\PageMain::first()->phone_2}}</h4>
                 </div>
             </div>
         </div>
@@ -40,7 +40,7 @@
                 <nav>
                     <ul>
                         <li class="menu"><a href="{{route('posters')}}">Афиша</a></li>
-                        <li class="menu"><a href="#">Расписание</a></li>
+                        <li class="menu"><a href="{{route('timetables')}}">Расписание</a></li>
                         <li class="menu"><a href="{{route('soon')}}">Скоро</a></li>
                         <li class="menu"><a href="{{route('cinemas')}}">Кинотеатры</a></li>
                         <li class="menu"><a href="{{route('discounts')}}">Акции</a></li>

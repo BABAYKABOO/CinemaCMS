@@ -9,7 +9,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Nette\Schema\ValidationException;
 
-class AuthController extends Controller
+class AuthAdminController extends Controller
 {
     public function index()
     {

@@ -4,21 +4,15 @@ namespace App\Http\Controllers;
 
 use App\Models\Booking;
 use App\Models\Hall;
+use App\Models\HallSchema;
 use App\Models\Movie;
+use App\Models\Place;
 use App\Models\Timetable;
+use Doctrine\Inflector\Rules\NorwegianBokmal\Inflectible;
 use Illuminate\Http\Request;
 
 class Book_Controller extends Controller
 {
-    public function placeRow(array $places, int $max_place)
-    {
-        $places[] = array();
-        for ($i = 0; $i < $max_place; $i++)
-            $places[count($places)-1][] = true;
-
-        return $places;
-    }
-
     public function showBook(int $timetable_id)
     {
         $timetable = Timetable::where('timetable_id', $timetable_id)->first();
@@ -30,17 +24,9 @@ class Book_Controller extends Controller
             ->join('images', 'images.image_id', '=', 'movies.mainimg')
             ->first();
 
-        $places = array();
-        $places = $this->placeRow($places, 12);
-        $places = $this->placeRow($places, 14);
-        $places = $this->placeRow($places, 15);
-        $places = $this->placeRow($places, 13);
-        $places = $this->placeRow($places, 13);
-        $places = $this->placeRow($places, 13);
-        $places = $this->placeRow($places, 13);
-        $places = $this->placeRow($places, 13);
-        $places = $this->placeRow($places, 13);
-        $places = $this->placeRow($places, 20);
+
+        $places = Booking::bookPlace($timetable_id, $timetable->hall_id);
+
         return view('book', [
             'timetable' => $timetable,
             'date' => $date,
@@ -52,5 +38,6 @@ class Book_Controller extends Controller
     public function book(Request $request, int $timetable_id)
     {
         Booking::createBooking($request, $timetable_id);
+        return redirect(route('book', $timetable_id));
     }
 }

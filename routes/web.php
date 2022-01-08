@@ -50,7 +50,7 @@ Route::post('/admin/login/auth', [App\Http\Controllers\AuthAdminController::clas
 Route::get('/admin/login/logout', [App\Http\Controllers\AuthAdminController::class, 'logout'])->name('logout');
 
 Route::get('/user/registration', [App\Http\Controllers\AuthUserController::class, 'registration'])->name('user_registration');
-Route::get('/user/registration/reg', [App\Http\Controllers\AuthUserController::class, 'reg'])->name('user-reg');
+Route::post('/user/registration/reg', [App\Http\Controllers\AuthUserController::class, 'reg'])->name('user-reg');
 Route::get('/user/login', [App\Http\Controllers\AuthUserController::class, 'index'])->name('user-login');
 Route::post('/user/login/auth', [App\Http\Controllers\AuthUserController::class, 'auth'])->name('user-auth');
 Route::get('/user/login/logout', [App\Http\Controllers\AuthUserController::class, 'logout'])->name('user-logout');

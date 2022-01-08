@@ -127,11 +127,11 @@
                         border-radius: 50%;
                     }
                     .inavailable_place{
-                        display: inline;
+                        float: left;
                         width: 36px;
                         height: 36px;
                         color: transparent;
-                        background-image: url(http://cinema.com/storage/img/book_place.jpg);
+                        background-image: url(http://cinema.com/storage/img/place_inavailable.jpg);
                         margin: 1px;
                         cursor: pointer;
                     }

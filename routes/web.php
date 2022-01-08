@@ -19,7 +19,7 @@ Route::get('/posters', [App\Http\Controllers\PostersController::class, 'showMovi
 Route::get('/posters/{id}', [App\Http\Controllers\MovieController::class, 'showMovie'])->name('movie');
 
 Route::get('/timetables', [App\Http\Controllers\Timetables_Controller::class, 'showTimetables'])->name('timetables');
-Route::get('/timetables/{id}/book', [App\Http\Controllers\Book_Controller::class, 'showBook'])->name('book');
+Route::get('/timetables/{id}/book', [App\Http\Controllers\Book_Controller::class, 'showBook'])->name('timetable-book');
 
 
 Route::get('/soon', [App\Http\Controllers\SoonController::class, 'showMovies'])->name('soon');

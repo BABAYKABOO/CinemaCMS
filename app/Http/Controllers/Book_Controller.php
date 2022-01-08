@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Booking;
 use App\Models\Hall;
 use App\Models\Movie;
 use App\Models\Timetable;
@@ -17,6 +18,7 @@ class Book_Controller extends Controller
 
         return $places;
     }
+
     public function showBook(int $timetable_id)
     {
         $timetable = Timetable::where('timetable_id', $timetable_id)->first();
@@ -45,5 +47,10 @@ class Book_Controller extends Controller
             'movie' => $movie,
             'places' => $places
         ]);
+    }
+
+    public function book(Request $request, int $timetable_id)
+    {
+        Booking::createBooking($request, $timetable_id);
     }
 }

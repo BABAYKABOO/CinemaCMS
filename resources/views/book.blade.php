@@ -47,10 +47,11 @@
                 </div>
             </div>
 
-            <div style="margin: 0 auto; height: 700px;">
+            <div style="margin: 0 auto; height: 800px;">
                     <hr class="rounded_underline"/>
                     <h5 style="text-align: center; margin-top: -80px; margin-bottom: 80px;">ЭКРАН</h5>
                     <form action="{{route('timetable-book', $timetable->timetable_id)}}" enctype="multipart/form-data" method="post">
+                        @csrf
                         @foreach($places as $number => $row)
                             <div style="float: left; width: 60px; margin-right: 50px;">
                                 РЯД {{$number+1}}
@@ -71,7 +72,7 @@
                             </div>
                             <div style="height: 50px;"></div>
                         @endforeach
-                        <button class="btn btn-secondary">Забронировать</button>
+                        <button type="submit" id="button_book" style="display: none; margin: 0 auto; margin-top: 50px;" class="btn btn-secondary">Забронировать</button>
                     </form>
                 <script>
                     $('div[class="place"][target-id]').on('click', function() {
@@ -103,6 +104,15 @@
                                 z_mest++;
                             }
                         }
+                        if (z_mest !== 0)
+                        {
+                            $('#button_book').css('display', 'block');
+                        }
+                        else
+                        {
+                            $('#button_book').css('display', 'none');
+                        }
+
                         return z_mest;
                     }
 

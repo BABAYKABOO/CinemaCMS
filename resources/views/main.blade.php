@@ -1,5 +1,5 @@
 @extends('layout.app')
-@section('title', 'Main')
+@section('title', 'Главная')
 @section('img', 'img/body.jpg')
 @section('content')
     <div style="text-align: center; margin-bottom: -155px;">

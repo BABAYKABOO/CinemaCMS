@@ -19,7 +19,8 @@ Route::get('/posters', [App\Http\Controllers\PostersController::class, 'showMovi
 Route::get('/posters/{id}', [App\Http\Controllers\MovieController::class, 'showMovie'])->name('movie');
 
 Route::get('/timetables', [App\Http\Controllers\Timetables_Controller::class, 'showTimetables'])->name('timetables');
-Route::get('/timetables/{id}/book', [App\Http\Controllers\Book_Controller::class, 'showBook'])->name('timetable-book');
+Route::get('/timetables/{id}/book', [App\Http\Controllers\Book_Controller::class, 'showBook'])->name('book');
+Route::post('/timetables/{id}/book/booking', [App\Http\Controllers\Book_Controller::class, 'book'])->name('timetable-book');
 
 
 Route::get('/soon', [App\Http\Controllers\SoonController::class, 'showMovies'])->name('soon');
@@ -44,9 +45,15 @@ Route::get('/events', [App\Http\Controllers\EventsController::class, 'showEvents
 Route::get('/contacts', [App\Http\Controllers\Contacts_Controller::class, 'showContacts'])->name('contacts');
 
 
-Route::get('/login', [App\Http\Controllers\AuthController::class, 'index'])->name('login');
-Route::post('/login/auth', [App\Http\Controllers\AuthController::class, 'auth'])->name('auth');
-Route::get('/login/logout', [App\Http\Controllers\AuthController::class, 'logout'])->name('logout');
+Route::get('/admin/login', [App\Http\Controllers\AuthAdminController::class, 'index'])->name('login');
+Route::post('/admin/login/auth', [App\Http\Controllers\AuthAdminController::class, 'auth'])->name('auth');
+Route::get('/admin/login/logout', [App\Http\Controllers\AuthAdminController::class, 'logout'])->name('logout');
+
+Route::get('/user/registration', [App\Http\Controllers\AuthUserController::class, 'registration'])->name('user_registration');
+Route::get('/user/registration/reg', [App\Http\Controllers\AuthUserController::class, 'reg'])->name('user-reg');
+Route::get('/user/login', [App\Http\Controllers\AuthUserController::class, 'index'])->name('user-login');
+Route::post('/user/login/auth', [App\Http\Controllers\AuthUserController::class, 'auth'])->name('user-auth');
+Route::get('/user/login/logout', [App\Http\Controllers\AuthUserController::class, 'logout'])->name('user-logout');
 
 Route::middleware([App\Http\Middleware\AuthAdmin::class])->group(function (){
     Route::prefix('admin')->group(function () {

@@ -14,20 +14,6 @@ class Timetables_Controller extends Controller
 {
     public function translateDate(string $date) : string
     {
-        $month = [
-            'января',
-            'февраля',
-            'марта',
-            'апреля',
-            'мая',
-            'июня',
-            'июля',
-            'августа',
-            'сентября',
-            'октября',
-            'ноября',
-            'декабря'
-        ];
         $week = [
             'воскресенье',
           'понедельник',
@@ -39,7 +25,7 @@ class Timetables_Controller extends Controller
         ];
 
         $arr = new DateTime($date);
-        return $arr->format('j') . ' ' . $month[$arr->format('n')-1] . ', ' . $week[$arr->format('N')-1];
+        return $arr->format('j') . ' ' . Timetable::translateMonth($arr->format('n')-1) . ', ' . $week[$arr->format('N')-1];
     }
     public function showTimetables(TimetablesFilter $request)
     {

@@ -96,7 +96,7 @@
                         {{$timetable->price}}
                     </div>
                     <div class="col-3" style="border-bottom: 0.5px solid #9f9f9f; margin-bottom: 5px;">
-                        <a href="">БРОНЬ</a>
+                        <a href="{{route('book', $timetable->timetable_id)}}">БРОНЬ</a>
                     </div>
                 </div>
                 @endforeach

@@ -1,6 +1,7 @@
 @extends('admin.admin')
 @section('title', 'Редактировать кинотеатр')
 @section('content')
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
     <div style="text-align: left; margin-left: 20px">
         <form action="{{route('admin-cinema_save', $cinema->cinema_id)}}" enctype="multipart/form-data" method="post">
             @csrf

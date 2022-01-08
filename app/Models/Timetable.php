@@ -22,6 +22,7 @@ class Timetable extends Model
         'hall_id',
         'price'
     ];
+
     public function cinema()
     {
         return $this->hasOne(Cinema::class);
@@ -35,6 +36,26 @@ class Timetable extends Model
     public function movie()
     {
         return $this->hasOne(Movie::class);
+    }
+
+    static function translateMonth(int $month_id)
+    {
+        $month = [
+            'января',
+            'февраля',
+            'марта',
+            'апреля',
+            'мая',
+            'июня',
+            'июля',
+            'августа',
+            'сентября',
+            'октября',
+            'ноября',
+            'декабря'
+        ];
+
+        return $month[$month_id];
     }
 
     public function scopeFilter(Builder $builder, QueryFilter $filter)

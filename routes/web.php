@@ -45,9 +45,9 @@ Route::get('/events', [App\Http\Controllers\EventsController::class, 'showEvents
 Route::get('/contacts', [App\Http\Controllers\Contacts_Controller::class, 'showContacts'])->name('contacts');
 
 
-Route::get('/admin/login', [App\Http\Controllers\AuthAdminController::class, 'index'])->name('login');
-Route::post('/admin/login/auth', [App\Http\Controllers\AuthAdminController::class, 'auth'])->name('auth');
-Route::get('/admin/login/logout', [App\Http\Controllers\AuthAdminController::class, 'logout'])->name('logout');
+Route::get('/login', [App\Http\Controllers\AuthController::class, 'index'])->name('login');
+Route::post('/login/auth', [App\Http\Controllers\AuthController::class, 'auth'])->name('auth');
+Route::get('/login/logout', [App\Http\Controllers\AuthController::class, 'logout'])->name('logout');
 
 Route::get('/user/registration', [App\Http\Controllers\AuthUserController::class, 'registration'])->name('user_registration');
 Route::post('/user/registration/reg', [App\Http\Controllers\AuthUserController::class, 'reg'])->name('user-reg');
@@ -105,6 +105,16 @@ Route::middleware([App\Http\Middleware\AuthAdmin::class])->group(function (){
         Route::get('/events/edit/{id}', [App\Http\Controllers\EventEdit_AdminController::class, 'showEvent'])->name('admin-event-edit');
         Route::post('/events/edit/{id}/save', [App\Http\Controllers\EventEdit_AdminController::class, 'save'])->name('admin-event-save');
         Route::get('/events/edit/{id}/delete', [App\Http\Controllers\EventEdit_AdminController::class, 'delete'])->name('admin-event-delete');
+
+
+        Route::get('/timetables', [App\Http\Controllers\Timetables_AdminController::class, 'showTimetables'])->name('admin-timetables');
+        Route::get('/timetables/add/new', [App\Http\Controllers\TimetablesCreate_AdminController::class, 'showTimetable'])->name('admin-timetable-new');
+        Route::post('/timetables/add/new/create', [App\Http\Controllers\TimetablesCreate_AdminController::class, 'create'])->name('admin-timetable-create');
+
+        Route::get('/timetables/edit/{id}', [App\Http\Controllers\TimetablesEdit_AdminController::class, 'showTimetable'])->name('admin-timetable-edit');
+        Route::get('/timetables/edit/{id}/save', [App\Http\Controllers\TimetablesEdit_AdminController::class, 'save'])->name('admin-timetable-save');
+        Route::post('/timetables/edit/{id}/delete', [App\Http\Controllers\TimetablesEdit_AdminController::class, 'delete'])->name('admin-timetable-delete');
+
 
         Route::get('/pages', [App\Http\Controllers\Pages_AdminController::class, 'showPages'])->name('admin-pages');
 

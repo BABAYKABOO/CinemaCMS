@@ -6,6 +6,7 @@ use App\Filters\QueryFilter;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Builder;
+use Illuminate\Http\Request;
 
 class Timetable extends Model
 {
@@ -61,6 +62,19 @@ class Timetable extends Model
     public function scopeFilter(Builder $builder, QueryFilter $filter)
     {
         return $filter->apply($builder);
+    }
+
+    static function createTimetable(Request $request)
+    {
+        Timetable::insert([
+            'data' => $request->date,
+            'time' => $request->time,
+            'cinema_id' => $request->cinema_id,
+            'movie_id' => $request->movie_id,
+            'hall_id' => $request->hall_id,
+            'type_id' => $request->type_id,
+            'price' => $request->price
+        ]);
     }
 
 

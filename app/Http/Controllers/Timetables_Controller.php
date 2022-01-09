@@ -45,31 +45,32 @@ class Timetables_Controller extends Controller
                         ->get();
         }
 
-        $types = Timetable::filter($request)
-            ->join('types', 'types.type_id', '=', 'timetables.type_id')
+        $types = Timetable::join('types', 'types.type_id', '=', 'timetables.type_id')
             ->get()
             ->unique('type_id');
 
-        $cinemas = Timetable::filter($request)
-            ->join('cinemas', 'cinemas.cinema_id', '=', 'timetables.cinema_id')
+        $cinemas = Timetable::join('cinemas', 'cinemas.cinema_id', '=', 'timetables.cinema_id')
             ->get()
             ->unique('cinema_id');
 
-        $movies = Timetable::filter($request)
-            ->join('movies', 'movies.movie_id', '=', 'timetables.movie_id')
+        $movies = Timetable::join('movies', 'movies.movie_id', '=', 'timetables.movie_id')
             ->get()
             ->unique('movie_id');
 
-        $halls = Timetable::filter($request)
-            ->join('halls', 'halls.hall_id', '=', 'timetables.hall_id')
+        $halls = Timetable::join('halls', 'halls.hall_id', '=', 'timetables.hall_id')
             ->get()
             ->unique('hall_id');
+
+        $dates = Timetable::where('data', '>=', date("Y-m-d"))
+            ->orderBy('data')
+            ->get()
+            ->unique('data');
 
         return view('timetables', [
             'timetables' => $timetables,
             'types' => $types,
             'cinemas' => $cinemas,
-            'dates' => $date,
+            'dates' => $dates,
             'halls' => $halls,
             'movies' => $movies
         ]);

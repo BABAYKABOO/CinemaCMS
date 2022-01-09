@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Booking;
 use App\Models\Cinema;
 use App\Models\Hall;
 use App\Models\Movie;
@@ -32,5 +33,12 @@ class TimetablesEdit_AdminController extends Controller
     {
         Timetable::saveTimetable($request, $timetable_id);
         return redirect(route('admin-timetable-edit', $timetable_id));
+    }
+
+    public function delete(int $timetable_id)
+    {
+        Booking::where('timetable_id', $timetable_id)->delete();
+        Timetable::where('timetable_id', $timetable_id)->delete();
+        return redirect(route('admin-timetables'));
     }
 }

@@ -101,8 +101,8 @@
                     {{$timetable->price}}
                 </div>
                 <div class="col-1" style="text-align: left">
-                    <a href="{{route('admin-page_main-edit')}}"><img width="20" height="20" src="http://cinema.com/storage/img/editicon.png"/></a>
-                    <a href="{{route('admin-page_main-edit')}}"><img width="20" height="20" src="http://cinema.com/storage/img/deleteicon.png"/></a>
+                    <a href="{{route('admin-timetable-edit', $timetable->timetable_id)}}"><img width="20" height="20" src="http://cinema.com/storage/img/editicon.png"/></a>
+                    <a href="{{route('admin-timetable-delete', $timetable->timetable_id)}}"><img width="20" height="20" src="http://cinema.com/storage/img/deleteicon.png"/></a>
                 </div>
             @endforeach
         </div>

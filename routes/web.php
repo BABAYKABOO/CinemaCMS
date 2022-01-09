@@ -112,8 +112,8 @@ Route::middleware([App\Http\Middleware\AuthAdmin::class])->group(function (){
         Route::post('/timetables/add/new/create', [App\Http\Controllers\TimetablesCreate_AdminController::class, 'create'])->name('admin-timetable-create');
 
         Route::get('/timetables/edit/{id}', [App\Http\Controllers\TimetablesEdit_AdminController::class, 'showTimetable'])->name('admin-timetable-edit');
-        Route::get('/timetables/edit/{id}/save', [App\Http\Controllers\TimetablesEdit_AdminController::class, 'save'])->name('admin-timetable-save');
-        Route::post('/timetables/edit/{id}/delete', [App\Http\Controllers\TimetablesEdit_AdminController::class, 'delete'])->name('admin-timetable-delete');
+        Route::post('/timetables/edit/{id}/save', [App\Http\Controllers\TimetablesEdit_AdminController::class, 'save'])->name('admin-timetable-save');
+        Route::get('/timetables/edit/{id}/delete', [App\Http\Controllers\TimetablesEdit_AdminController::class, 'delete'])->name('admin-timetable-delete');
 
 
         Route::get('/pages', [App\Http\Controllers\Pages_AdminController::class, 'showPages'])->name('admin-pages');

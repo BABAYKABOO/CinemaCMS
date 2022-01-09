@@ -76,6 +76,19 @@ class Timetable extends Model
             'price' => $request->price
         ]);
     }
+    static function saveTimetable(Request $request, int $timetable_id)
+    {
+        Timetable::where('timetable_id', $timetable_id)->update([
+            'data' => $request->date,
+            'time' => $request->time,
+            'cinema_id' => $request->cinema_id,
+            'movie_id' => $request->movie_id,
+            'hall_id' => $request->hall_id,
+            'type_id' => $request->type_id,
+            'price' => $request->price
+        ]);
+    }
+
 
 
 }

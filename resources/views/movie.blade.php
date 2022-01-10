@@ -11,7 +11,7 @@
                 allowfullscreen>
         </iframe>
     </div>
-    @if($timetables[0]->data > date('Y-m-d', strtotime($timetables[0]->data . '+ 7 days')))
+    @if($timetables[0]->data <= date('Y-m-d', strtotime($timetables[0]->data . '+ 7 days')))
     <div style="width: 80%; margin: 0 auto">
         <form action="{{route('movie', $movie->movie_id)}}" method="get">
         <span style="font-size: 40px"> Расписание сеансов кинотеатра:</span>
@@ -97,14 +97,83 @@
                 </div>
             </div>
         </div>
-        <div class="row" style="margin: 0 auto; width: 90%;" align="center">
+        <div class="row" style="margin: 0 auto; margin-top: 50px; width: 90%;" align="center">
             <div class="col">
-
+                <div style="width: 90%; border: 1px solid black; background-color: #252f3a; color: white; text-align: left; padding: 20px;">
+                    <div class="row" style="margin:0 auto;width: 100%;background-color: #181f28;">
+                        <div class="col" style="height: 35px; padding: 5px">
+                            <h5>Год</h5>
+                        </div>
+                        <div class="col" style="height: 35px; padding: 5px; color: #99a1aa">
+                            <span class="valuespan">{{$movie->year}}</span>
+                        </div>
+                    </div>
+                    <div class="row" style="margin:0 auto;width: 100%;">
+                        <div class="col" style="height: 35px; padding: 5px">
+                            <h5>Страна</h5>
+                        </div>
+                        <div class="col" style="height: 35px; padding: 5px; color: #99a1aa">
+                            <span class="valuespan">{{$movie->country}}</span>
+                        </div>
+                    </div>
+                    @php($i = true)
+                    @foreach($people as $person)
+                        <div class="row" style="margin:0 auto;width: 100%;@if($i == true) background-color: #181f28; @endif">
+                            <div class="col" style="height: 35px; padding: 5px">
+                                <h5>{{$person->position_name}}</h5>
+                            </div>
+                            <div class="col" style="height: 35px; padding: 5px; color: #99a1aa">
+                                <span class="valuespan">{{$person->name}}</span>
+                            </div>
+                        </div>
+                        @php($i = $i == true ? false : true)
+                    @endforeach
+                    <div class="row" style="margin:0 auto;width: 100%;@if($i == true) background-color: #181f28; @endif">
+                        <div class="col" style="height: 35px; padding: 5px">
+                            <h5>Жанр</h5>
+                        </div>
+                        <div class="col" style="height: 35px; padding: 5px; color: #99a1aa">
+                            <span class="valuespan">@foreach($genres as $genre){{$genre->name . ' | '}}@endforeach</span>
+                        </div>
+                        @php($i = $i == true ? false : true)
+                    </div>
+                    <div class="row" style="margin:0 auto;width: 100%;@if($i == true) background-color: #181f28; @endif">
+                        <div class="col" style="height: 35px; padding: 5px">
+                            <h5>Бюджет</h5>
+                        </div>
+                        <div class="col" style="height: 35px; padding: 5px; color: #99a1aa">
+                            <span class="valuespan">{{$movie->budget}}</span>
+                        </div>
+                        @php($i = $i == true ? false : true)
+                    </div>
+                    <div class="row" style="margin:0 auto;width: 100%;@if($i == true) background-color: #181f28; @endif">
+                        <div class="col" style="height: 35px; padding: 5px">
+                            <h5>Возраст</h5>
+                        </div>
+                        <div class="col" style="height: 35px; padding: 5px; color: #99a1aa">
+                            <span class="valuespan">{{$movie->age}}</span>
+                        </div>
+                        @php($i = $i == true ? false : true)
+                    </div>
+                    <div class="row" style="margin:0 auto;width: 100%;@if($i == true) background-color: #181f28; @endif">
+                        <div class="col" style="height: 35px; padding: 5px">
+                            <h5>Время</h5>
+                        </div>
+                        <div class="col" style="height: 35px; padding: 5px; color: #99a1aa">
+                            <span class="valuespan">{{$movie->movie_time}}</span>
+                        </div>
+                        @php($i = $i == true ? false : true)
+                    </div>
+                </div>
             </div>
             <div class="col">
-                <div style="width: 80%; margin-top: 50px">
+                <div style="width: 80%;">
                     <h3>Кадры и постеры</h3>
                     <style>
+                        .valuespan{
+                            font-size: 15px;
+                            font-weight: 600;
+                        }
                         .slider{
                             max-width: 100%;
                             position: relative;

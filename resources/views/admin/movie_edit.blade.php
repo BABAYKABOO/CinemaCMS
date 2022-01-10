@@ -14,39 +14,12 @@
                 <textarea class="form-control" aria-label="With textarea" name="desc" id="desc">{{$movie->desc}}</textarea>
             </div>
             <div class="mb-3">
-                <div class="row ml-3" style="margin-bottom: 10px">
-                    <span id="output">
-                        <img class="thumb" height="200px" width="125px" src="{{$movie->image_url}}"/>
-                    </span>
+                <div class="col-sm" style="width: 200px;">
+                    <label for="icon_upload">Image:<br>
+                        <div class="icon_wrapper" style="width: 125px; height:200px"><div id="main-preview_1" style="background: url({{$movie->image_url}}); background-size: 100%; width: 125px; height:200px"></div></div>
+                    </label>
+                    <input type="file" name="mainimg" preview-target-id="main-preview_1" title="1">
                 </div>
-                <div class="row ml-3">
-                    <input type="button" id="loadFileXml" value="Добавить" onclick="document.getElementById('file').click();" />
-                    <input type="file" style="display:none;" id="file" name="mainimg" />
-                </div>
-                <script>
-                    function handleFileSelect(evt) {
-                        var file = evt.target.files; // FileList object
-                        var f = file[0];
-                        // Only process image files.
-                        if (!f.type.match('image.*')) {
-                            alert("Image only please....");
-                        }
-                        var reader = new FileReader();
-                        // Closure to capture the file information.
-                        reader.onload = (function(theFile) {
-                            return function(e) {
-                                // Render thumbnail.
-                                var span = document.createElement('span');
-                                span.innerHTML = ['<img class="thumb" height="300px" width="200px" title="', escape(theFile.name), '" src="', e.target.result, '" />'].join('');
-                                document.getElementById('output').innerHTML = "";
-                                document.getElementById('output').insertBefore(span, null);
-                            };
-                        })(f);
-                        // Read in the image file as a data URL.
-                        reader.readAsDataURL(f);
-                    }
-                    document.getElementById('file').addEventListener('change', handleFileSelect, false);
-                </script>
             </div>
             <div class="mb-3">
                 <label>Галерея</label>
@@ -138,7 +111,7 @@
                 </div>
                 <div class="mb-3">
                     <label class="form-label">Длительность</label>
-                    <input type="text" style="width: 90%" class="form-control" name="time" value="{{$movie->time}}"  required>
+                    <input type="text" style="width: 90%" class="form-control" name="movie_time" value="{{$movie->time}}"  required>
                 </div>
                 <div class="mb-3">
                     <label class="form-label">Жанр</label>
@@ -206,7 +179,7 @@
                         <label class="form-label">Должность</label>
                         <select class="form-control" name="People[{{$person->people_id}}][position]">
                             @foreach($positions as $position)
-                                <option @if($person->position_id == $position->position_id) selected @endif value="{{$position->position_id}}">{{$position->name}}</option>
+                                <option @if($person->position_id == $position->position_id) selected @endif value="{{$position->position_id}}">{{$position->position_name}}</option>
                             @endforeach
                         </select>
                         <label class="form-label">Имя</label>
@@ -227,7 +200,7 @@
                         '<label class="form-label">Должность</label>' +
                         '<select class="form-control" name="People[' + countDiv + '][position]">' +
                         '@foreach($positions as $position)' +
-                        '<option value="{{$position->position_id}}">{{$position->name}}</option>' +
+                        '<option value="{{$position->position_id}}">{{$position->position_name}}</option>' +
                         '@endforeach' +
                         '</select>' +
                         '<label class="form-label">Имя</label>' +

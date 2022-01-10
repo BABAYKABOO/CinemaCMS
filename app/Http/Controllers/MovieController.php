@@ -7,6 +7,8 @@ use App\Models\Cinema;
 use App\Models\Gallery;
 use App\Models\Hall;
 use App\Models\Movie;
+use App\Models\MovieGenre;
+use App\Models\MoviePeople;
 use App\Models\Timetable;
 use App\Models\Type;
 use DateTime;
@@ -38,6 +40,11 @@ class MovieController extends Controller
         $gallery = Gallery::where('gallery_id', $movie->gallery)
             ->join('images', 'images.image_id', '=', 'galleries.image_id')
             ->get();
+        $people = MoviePeople::join('people_positions', 'people_positions.position_id', '=', 'movie_people.position_id')
+            ->get();
+        $genres = MovieGenre::join('genres', 'genres.genre_id', '=', 'movie_genres.genre_id')
+            ->get();
+
         $cinemas = Cinema::get();
 
         $start_date = date('Y-m-d');
@@ -56,6 +63,8 @@ class MovieController extends Controller
         return view('movie', [
             'movie' => $movie,
             'gallery' => $gallery,
+            'people' => $people,
+            'genres' => $genres,
             'dates' => $dates,
             'cinemas' => $cinemas,
             'timetables' => $timetables

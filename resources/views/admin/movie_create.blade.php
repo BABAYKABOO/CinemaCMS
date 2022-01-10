@@ -126,7 +126,7 @@
                 </div>
                 <div class="mb-3">
                     <label class="form-label">Длительность</label>
-                    <input type="text" class="form-control" name="time" placeholder="Длительность"  required>
+                    <input type="text" class="form-control" name="movie_time" placeholder="Длительность"  required>
                 </div>
                 <div class="mb-3">
                     <label class="form-label">Жанр</label>
@@ -189,7 +189,7 @@
                     <label class="form-label">Должность</label>
                     <select class="form-control" name="People[1][position]">
                         @foreach($positions as $position)
-                            <option value="{{$position->position_id}}">{{$position->name}}</option>
+                            <option value="{{$position->position_id}}">{{$position->position_name}}</option>
                         @endforeach
                     </select>
                     <label class="form-label">Имя</label>
@@ -208,7 +208,7 @@
                             '<label class="form-label">Должность</label>' +
                             '<select class="form-control" name="People["' + countDiv + '][position]">' +
                             '@foreach($positions as $position)' +
-                            '<option value="{{$position->position_id}}">{{$position->name}}</option>' +
+                            '<option value="{{$position->position_id}}">{{$position->position_name}}</option>' +
                             '@endforeach' +
                             '</select>' +
                             '<label class="form-label">Имя</label>' +

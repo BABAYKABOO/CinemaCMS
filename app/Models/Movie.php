@@ -102,7 +102,7 @@ class Movie extends Model
                 'country' => $request->country,
                 'budget' => $request->budget,
                 'age' => $request->age,
-                'time' => $request->time
+                'movie_time' => $request->movie_time
             ]);
         if (count($request->People) != count(MoviePeople::where('movie_id', $movie_id)->get()))
         {

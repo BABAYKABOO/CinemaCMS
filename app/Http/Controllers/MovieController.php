@@ -9,11 +9,27 @@ use App\Models\Hall;
 use App\Models\Movie;
 use App\Models\Timetable;
 use App\Models\Type;
+use DateTime;
 use Illuminate\Http\Request;
 use Ramsey\Uuid\Type\Time;
 
 class MovieController extends Controller
 {
+    public function translateDate(string $date) : string
+    {
+        $week = [
+            'Вc',
+            'Пн',
+            'Вт',
+            'Ср',
+            'Чт',
+            'Пт',
+            'Сб'
+        ];
+
+        $arr = new DateTime($date);
+        return $arr->format('d') . ' ' . $week[$arr->format('N')-1];
+    }
     public function showMovie(TimetablesFilter $request, int $id)
     {
         $movie = Movie::where('movie_id', $id)
@@ -23,11 +39,24 @@ class MovieController extends Controller
             ->join('images', 'images.image_id', '=', 'galleries.image_id')
             ->get();
         $cinemas = Cinema::get();
-        $timetables = Timetable::filter($request)->where('movie_id', $id);
+
+        $start_date = date('Y-m-d');
+        $dates = array();
+        for ($i = 0; $i < 7; $i++) {
+            $date = date('Y-m-d', strtotime($start_date . '+ ' . $i . 'days'));
+            $dates[$this->translateDate($date)] = $date;
+        }
+        $timetables = Timetable::filter($request)
+            ->where('movie_id', $id)
+            ->orderBy('data')
+            ->join('types', 'types.type_id', '=', 'timetables.type_id')
+            ->join('halls', 'halls.hall_id', '=', 'timetables.hall_id')
+            ->get();
 
         return view('movie', [
             'movie' => $movie,
             'gallery' => $gallery,
+            'dates' => $dates,
             'cinemas' => $cinemas,
             'timetables' => $timetables
         ]);

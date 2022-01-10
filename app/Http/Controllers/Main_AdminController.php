@@ -24,6 +24,6 @@ class Main_AdminController extends Controller
         Seo::saveSeo($request->Seo, $page->seo);
         PageMain::savePage($request, $page->page_id);
 
-        return redirect(route('admin-page_main'));
+        return redirect(route('admin-page_main-edit'));
     }
 }

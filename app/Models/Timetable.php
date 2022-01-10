@@ -23,7 +23,11 @@ class Timetable extends Model
         'hall_id',
         'price'
     ];
-
+    public function getTimeAttribute($value)
+    {
+        $data = explode(':',$value);
+        return $data[0].':'.$data[1];
+    }
     public function cinema()
     {
         return $this->hasOne(Cinema::class);

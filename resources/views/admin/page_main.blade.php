@@ -27,7 +27,7 @@
             </div>
         </div>
         <button type="submit" class="btn btn-primary" style="display: inline-block; margin: 10px 0px 50px 30px">Сохранить</button>
-        <a class="btn btn-secondary" style="display: inline-block;  margin: 10px 0px 50px 30px" href="{{route('admin-page_main')}}">
+        <a class="btn btn-secondary" style="display: inline-block;  margin: 10px 0px 50px 30px" href="{{route('admin-page_main-edit')}}">
             Вернуть базовую версию
         </a>
     </form>

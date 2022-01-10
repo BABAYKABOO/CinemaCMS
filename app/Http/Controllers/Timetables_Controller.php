@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Filters\TimetablesFilter;
 use App\Models\Cinema;
+use App\Models\Hall;
 use App\Models\Movie;
 use App\Models\Timetable;
 use App\Models\Type;
@@ -45,21 +46,13 @@ class Timetables_Controller extends Controller
                         ->get();
         }
 
-        $types = Timetable::join('types', 'types.type_id', '=', 'timetables.type_id')
-            ->get()
-            ->unique('type_id');
+        $types = Type::get();
 
-        $cinemas = Timetable::join('cinemas', 'cinemas.cinema_id', '=', 'timetables.cinema_id')
-            ->get()
-            ->unique('cinema_id');
+        $cinemas = Cinema::get();
 
-        $movies = Timetable::join('movies', 'movies.movie_id', '=', 'timetables.movie_id')
-            ->get()
-            ->unique('movie_id');
+        $movies = Movie::get();
 
-        $halls = Timetable::join('halls', 'halls.hall_id', '=', 'timetables.hall_id')
-            ->get()
-            ->unique('hall_id');
+        $halls = Hall::get();
 
         $dates = Timetable::where('data', '>=', date("Y-m-d"))
             ->orderBy('data')

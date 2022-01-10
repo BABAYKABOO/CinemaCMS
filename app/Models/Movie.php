@@ -23,7 +23,12 @@ class Movie extends Model
         'gallery',
         'trailer',
         'type',
-        'seo'
+        'seo',
+        'year',
+        'counrty',
+        'budget',
+        'age',
+        'time'
     ];
     public function image()
     {
@@ -91,9 +96,26 @@ class Movie extends Model
                 'name' => $request->name,
                 'desc' => $request->desc,
                 'mainimg' => Image::saveImg($request, 'mainimg', $movie->mainimg),
-                'gallery' => Image::uploadGallery($request, $movie->gallery),
-                'trailer' => $request->trailer
+                'gallery' => Image::uploadGallery($request, 'Gallery', $movie->gallery),
+                'trailer' => $request->trailer,
+                'year' => $request->year,
+                'country' => $request->country,
+                'budget' => $request->budget,
+                'age' => $request->age,
+                'time' => $request->time
             ]);
+        if (count($request->People) != count(MoviePeople::where('movie_id', $movie_id)->get()))
+        {
+            MoviePeople::where('movie_id', $movie_id)->delete();
+            MoviePeople::createPeople($request->People, $movie_id);
+        }
+
+        if (count($request->People) != count(MovieGenre::where('movie_id', $movie_id)->get()))
+        {
+            MovieGenre::where('movie_id', $movie_id)->delete();
+            MovieGenre::createMovieGenre($request->genres_active, $movie_id);
+        }
+        return $movie_id;
     }
 
     static function createMovie(Request $request, int $seo_id)
@@ -102,10 +124,18 @@ class Movie extends Model
                 'name' => $request->name,
                 'desc' => $request->desc,
                 'mainimg' => Image::saveImg($request, 'mainimg'),
-                'gallery' => Movie::uploadGallery($request),
+                'gallery' => Image::uploadGallery($request, 'Gallery'),
                 'trailer' => $request->trailer,
+                'year' => $request->year,
+                'country' => $request->country,
+                'budget' => $request->budget,
+                'age' => $request->age,
+                'time' => $request->time,
                 'seo' => $seo_id
             ]);
-        return Movie::max('movie_id');
+        $movie_id = Movie::max('movie_id');
+        MovieGenre::createMovieGenre($request->genres_active, $movie_id);
+        MoviePeople::createPeople($request->People, $movie_id);
+        return $movie_id;
     }
 }

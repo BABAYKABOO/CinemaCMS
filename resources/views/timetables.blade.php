@@ -3,18 +3,20 @@
 @section('content')
     <form action="{{route('timetables')}}" method="get" style="margin: 0 auto; width: 80%; margin-top: 80px;">
         <div class="row">
-            <div class="col">
-                <select name="type_id" style="">
-                    <option value="all">Выберите тип</option>
+            <div class="col" style="background-color: #19212a; padding: 10px; color: white;">
+                    <p style="margin-bottom: 0px;width: max-content;">
+                        <span>Показывать только: </span>
+                    </p>
                     @foreach($types as $type)
-                        <option value="{{$type->type_id}}" @if(isset($_GET['type_id'])) @if($_GET['type_id'] == $type->type_id) selected @endif @endif>
+                        <p style="margin-right: 10px;  width: max-content; display: inline">
+                            <input name="language" type="radio" value="{{$type->type_id}}"
+                                  @if(isset($_GET['type_id'])) @if($_GET['type_id'] == $type->type_id) checked @endif @endif>
                             {{$type->name}}
-                        </option>
+                        </p>
                     @endforeach
-                </select>
             </div>
             <div class="col">
-                <select name="cinema_id" style="">
+                <select class="form-control item" style="border: 1px solid black" name="cinema_id" style="">
                     <option value="all">Выберите кинотеатр</option>
                     @foreach($cinemas as $cinema)
                         <option value="{{$cinema->cinema_id}}" @if(isset($_GET['cinema_id'])) @if($_GET['cinema_id'] == $cinema->cinema_id) selected @endif @endif>
@@ -25,7 +27,7 @@
 
             </div>
             <div class="col">
-                <select name="data" style="">
+                <select class="form-control item" style="border: 1px solid black" name="data" style="">
                     <option value="all">Выберите дату</option>
                     @foreach($dates as $date)
                         <option value="{{$date->data}}" @if(isset($_GET['data'])) @if($_GET['data'] == $date->data) selected @endif @endif>
@@ -35,7 +37,7 @@
                 </select>
             </div>
             <div class="col">
-                <select name="movie_id" style="">
+                <select class="form-control item" style="border: 1px solid black" name="movie_id" style="">
                     <option value="all">Фильмы: все</option>
                     @foreach($movies as $movie)
                         <option value="{{$movie->movie_id}}" @if(isset($_GET['movie_id'])) @if($_GET['movie_id'] == $movie->movie_id) selected @endif @endif>
@@ -45,7 +47,7 @@
                 </select>
             </div>
             <div class="col">
-                <select name="hall_id" style="">
+                <select class="form-control item" style="border: 1px solid black" name="hall_id" style="">
                     <option value="all">Зал: все</option>
                     @foreach($halls as $hall)
                         <option value="{{$hall->hall_id}}" @if(isset($_GET['hall_id'])) @if($_GET['hall_id'] == $hall->hall_id) selected @endif @endif>

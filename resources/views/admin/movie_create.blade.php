@@ -17,6 +17,7 @@
             color: transparent;
         }
     </style>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
     <div style="text-align: left">
         <form action="{{route('admin-movie_create')}}" enctype="multipart/form-data" method="post">
             @csrf
@@ -106,6 +107,120 @@
                     @endforeach
                 </tr>
             </div>
+            <div style="width: 30%; margin-left: 50px;" id="divAppend">
+                <div class="mb-3">
+                    <label class="form-label">Год выпуска</label>
+                    <input type="text" class="form-control" name="year" placeholder="Год выпуска"  required>
+                </div>
+                <div class="mb-3">
+                    <label class="form-label">Страна</label>
+                    <input type="text" class="form-control" name="country" placeholder="Страна"  required>
+                </div>
+                <div class="mb-3">
+                    <label class="form-label">Бюджет</label>
+                    <input type="text" class="form-control" name="budget" placeholder="Бюджет"  required>
+                </div>
+                <div class="mb-3">
+                    <label class="form-label">Минимальный возраст</label>
+                    <input type="text" class="form-control" name="age" placeholder="16"  required>
+                </div>
+                <div class="mb-3">
+                    <label class="form-label">Длительность</label>
+                    <input type="text" class="form-control" name="time" placeholder="Длительность"  required>
+                </div>
+                <div class="mb-3">
+                    <label class="form-label">Жанр</label>
+                    <section class="container">
+                        <div>
+                            <select name="genres_active[]" id="leftValues" size="8" multiple></select>
+                        </div>
+                        <div>
+                            <input type="button" id="btnLeft" value="&lt;&lt;" />
+                            <input type="button" id="btnRight" value="&gt;&gt;" />
+                        </div>
+                        <div>
+                            <select id="rightValues" name="genres_inactive[]" style="width: 200px" size="7" multiple>
+                                @foreach($genres as $genre)
+                                    <option value="{{$genre->genre_id}}">{{$genre->name}}</option>
+                                @endforeach
+                            </select>
+                            <div>
+                                <input type="text" id="txtRight" />
+                            </div>
+                        </div>
+                    </section>
+                    <style>
+                        SELECT, INPUT[type="text"] {
+                            width: 100px;
+                            box-sizing: border-box;
+                        }
+                        SECTION {
+                            padding: 8px;
+                            background-color: #f0f0f0;
+                            overflow: auto;
+                        }
+                        SECTION > DIV {
+                            float: left;
+                            padding: 4px;
+                        }
+                        SECTION > DIV + DIV {
+                            width: 40px;
+                            text-align: center;
+                        }
+                    </style>
+                    <script type="text/javascript">
+                        $("#btnLeft").click(function () {
+                            var selectedItem = $("#rightValues option:selected");
+                            $("#leftValues").append(selectedItem);
+                        });
+
+                        $("#btnRight").click(function () {
+                            var selectedItem = $("#leftValues option:selected");
+                            $("#rightValues").append(selectedItem);
+                        });
+
+                        $("#rightValues").change(function () {
+                            var selectedItem = $("#rightValues option:selected");
+                            $("#txtRight").val(selectedItem.text());
+                        });
+                    </script>
+                </div>
+                <div class="mb-5" id="person_1" style="border: 1px solid black; padding: 10px; border-radius: 20px">
+                    <label class="form-label">Должность</label>
+                    <select class="form-control" name="People[1][position]">
+                        @foreach($positions as $position)
+                            <option value="{{$position->position_id}}">{{$position->name}}</option>
+                        @endforeach
+                    </select>
+                    <label class="form-label">Имя</label>
+                    <input type="text" class="form-control" name="People[1][name]" placeholder="Имя"  required>
+                </div>
+            </div>
+            <div style="width: 30%; margin-left: 50px;">
+                <a class="btn btn-success" style="color: white" onclick="addDiv()">Добавить нового человека</a>
+            </div>
+            <script>
+                    var countDiv = 1;
+                    function addDiv() {
+                        countDiv++;
+                        var DivHidden = $('#divAppend');
+                        var str = '<div id="person_' + countDiv + '" class="mb-3" style="border: 1px solid black; padding: 10px; border-radius: 20px">' +
+                            '<label class="form-label">Должность</label>' +
+                            '<select class="form-control" name="People["' + countDiv + '][position]">' +
+                            '@foreach($positions as $position)' +
+                            '<option value="{{$position->position_id}}">{{$position->name}}</option>' +
+                            '@endforeach' +
+                            '</select>' +
+                            '<label class="form-label">Имя</label>' +
+                            '<input type="text" class="form-control" name="People[' + countDiv + '][name]" placeholder="Длительность"  required>' +
+                            '<a class="btn btn-danger mt-4" style="color: white" onclick="deleteDiv(\'person_' + countDiv + '\')">Удалить</a>';
+                        $(DivHidden).append(str);
+                    }
+                    function deleteDiv(id) {
+                        var DivHidden = document.getElementById (id);
+                        DivHidden.remove();
+                    }
+            </script>
             <label for="exampleInputPassword1" class="form-label">SEO:</label>
             <div class="mb-3" style="width: 70%; margin-left: 50px">
                 <div class="mb-3" style="">

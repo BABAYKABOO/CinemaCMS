@@ -24,7 +24,7 @@ class Image extends Model
         Image::where('image_id', $image_id)->delete();
     }
 
-    static function uploadGallery(Request $request, string $name = 'Gallery', int $gallery_id = 0) : int
+    static function uploadGallery(Request $request, string $name, int $gallery_id = 0) : int
     {
         if ($request->hasFile($name)) {
             if ($gallery_id != 0) {

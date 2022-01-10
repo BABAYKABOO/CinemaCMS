@@ -1,6 +1,7 @@
 @extends('admin.admin')
 @section('title', 'Фильмы')
 @section('content')
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
     <div style="text-align: left">
         <form action="{{route('admin-movie-save', $movie->movie_id)}}" enctype="multipart/form-data" method="post">
             @csrf
@@ -96,7 +97,6 @@
                             color: transparent;
                         }
                     </style>
-                    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
                     <script>
                         $('input[type="file"][preview-target-id]').on('change', function() {
                             var input = $(this)
@@ -113,11 +113,140 @@
                             }
                         })
                     </script>
+                </div>
             </div>
             <div class="mb-3">
                 <label class="form-label">Ссылка на трейлер</label>
                 <input type="text" class="form-control" id="trailer" name="trailer" value="{{$movie->trailer}}">
             </div>
+            <div style="width: 30%; margin-left: 50px;" id="divAppend">
+                <div class="mb-3">
+                    <label class="form-label">Год выпуска</label>
+                    <input type="text" style="width: 90%" class="form-control" name="year" value="{{$movie->year}}" required>
+                </div>
+                <div class="mb-3">
+                    <label class="form-label">Страна</label>
+                    <input type="text" style="width: 90%" class="form-control" name="country" value="{{$movie->country}}"  required>
+                </div>
+                <div class="mb-3">
+                    <label class="form-label">Бюджет</label>
+                    <input type="text" style="width: 90%" class="form-control" name="budget" value="{{$movie->budget}}"  required>
+                </div>
+                <div class="mb-3">
+                    <label class="form-label">Минимальный возраст</label>
+                    <input type="text" style="width: 90%" class="form-control" name="age" value="{{$movie->age}}"  required>
+                </div>
+                <div class="mb-3">
+                    <label class="form-label">Длительность</label>
+                    <input type="text" style="width: 90%" class="form-control" name="time" value="{{$movie->time}}"  required>
+                </div>
+                <div class="mb-3">
+                    <label class="form-label">Жанр</label>
+                    <section class="container">
+                        <div>
+                            <select name="genres_active[]" id="leftValues" size="8" multiple>
+                                    @foreach($genres_active as $genre)
+                                        <option selected value="{{$genre->genre_id}}">{{$genre->name}}</option>
+                                    @endforeach
+                            </select>
+                        </div>
+                        <div>
+                            <input type="button" id="btnLeft" value="&lt;&lt;" />
+                            <input type="button" id="btnRight" value="&gt;&gt;" />
+                        </div>
+                        <div>
+                            <select id="rightValues" name="genres_inactive[]" style="width: 200px" size="7" multiple>
+                                @foreach($genres as $genre)
+                                    <option value="{{$genre->genre_id}}">{{$genre->name}}</option>
+                                @endforeach
+                            </select>
+                            <div>
+                                <input type="text" id="txtRight" />
+                            </div>
+                        </div>
+                    </section>
+                    <style>
+                        SELECT, INPUT[type="text"] {
+                            width: 100px;
+                            box-sizing: border-box;
+                        }
+                        SECTION {
+                            padding: 8px;
+                            background-color: #f0f0f0;
+                            overflow: auto;
+                        }
+                        SECTION > DIV {
+                            float: left;
+                            padding: 4px;
+                        }
+                        SECTION > DIV + DIV {
+                            width: 40px;
+                            text-align: center;
+                        }
+                    </style>
+                    <script type="text/javascript">
+                        $("#btnLeft").click(function () {
+                            var selectedItem = $("#rightValues option:selected");
+                            $("#leftValues").append(selectedItem);
+                        });
+
+                        $("#btnRight").click(function () {
+                            var selectedItem = $("#leftValues option:selected");
+                            $("#rightValues").append(selectedItem);
+                        });
+
+                        $("#rightValues").change(function () {
+                            var selectedItem = $("#rightValues option:selected");
+                            $("#txtRight").val(selectedItem.text());
+                        });
+                    </script>
+                </div>
+                @foreach($people as $person)
+                    <div class="peoples" id="person_{{$person->people_id}}" style="margin-top: 5px; border: 1px solid black; padding: 10px; border-radius: 20px">
+                        <label class="form-label">Должность</label>
+                        <select class="form-control" name="People[{{$person->people_id}}][position]">
+                            @foreach($positions as $position)
+                                <option @if($person->position_id == $position->position_id) selected @endif value="{{$position->position_id}}">{{$position->name}}</option>
+                            @endforeach
+                        </select>
+                        <label class="form-label">Имя</label>
+                        <input type="text" style="width: 90%" class="form-control" name="People[{{$person->people_id}}][name]" placeholder="Имя"  required>
+                        <a class="btn btn-danger mt-4" style="color: white" onclick="deleteDiv('person_{{$person->people_id}}')">Удалить</a>
+                    </div>
+                @endforeach
+            </div>
+            <div style="width: 30%; margin-top: 20px; margin-left: 50px;">
+                <a class="btn btn-success" style="color: white" onclick="addDiv()">Добавить нового человека</a>
+            </div>
+            <script>
+                var countDiv = {{count($people) > 0 ? $people[count($people)-1]->people_id : 0}};
+                function addDiv() {
+                    countDiv++;
+                    var DivHidden = $('#divAppend');
+                    var str = '<div id="person_' + countDiv + '" class="peoples" style="margin-top: 5px; border: 1px solid black; padding: 10px; border-radius: 20px">' +
+                        '<label class="form-label">Должность</label>' +
+                        '<select class="form-control" name="People[' + countDiv + '][position]">' +
+                        '@foreach($positions as $position)' +
+                        '<option value="{{$position->position_id}}">{{$position->name}}</option>' +
+                        '@endforeach' +
+                        '</select>' +
+                        '<label class="form-label">Имя</label>' +
+                        '<input type="text" class="form-control" name="People[' + countDiv + '][name]" placeholder="Длительность"  required>' +
+                        '<a class="btn btn-danger mt-4" style="color: white" onclick="deleteDiv(\'person_' + countDiv + '\')">Удалить</a>';
+                    $(DivHidden).append(str);
+                }
+                function deleteDiv(id) {
+                    var DivHidden = document.getElementById (id);
+                    var peoples = document.getElementsByClassName('peoples');
+                    if (peoples-1 > 0)
+                    {
+                        DivHidden.remove();
+                    }
+                    else {
+                        alert('Нужен хотя-бы один человек');
+                    }
+                }
+            </script>
             <div class="mb-3 form-check">
                 <label class="form-check-label mr-5" for="check">Тип кино</label>
                 <tr>

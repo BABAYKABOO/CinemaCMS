@@ -57,4 +57,9 @@ class User extends \Illuminate\Foundation\Auth\User
             'city'  => $request->input('city'),
         ]);
     }
+    static function deleteUser(int $user_id)
+    {
+        Booking::where('user_id', $user_id)->delete();
+        User::where('user_id', $user_id)->delete();
+    }
 }

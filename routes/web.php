@@ -133,6 +133,10 @@ Route::middleware([App\Http\Middleware\AuthAdmin::class])->group(function (){
         Route::get('/users', [App\Http\Controllers\Users_AdminController::class, 'showUsers'])->name('admin-users');
         Route::get('/users/edit/{id}', [App\Http\Controllers\UserEdit_AdminController::class, 'showUser'])->name('admin-user-edit');
         Route::post('/users/edit/{id}/save', [App\Http\Controllers\UserEdit_AdminController::class, 'showUser'])->name('admin-user-save');
+        Route::get('/users/edit/{id}/delete', [App\Http\Controllers\UserEdit_AdminController::class, 'delete'])->name('admin-user-delete');
+
+
+        Route::get('/send_methods', [App\Http\Controllers\Send_AdminController::class, 'showSendMethods'])->name('admin-send_methods');
 
     });
 

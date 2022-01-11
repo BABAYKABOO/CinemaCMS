@@ -18,4 +18,9 @@ class UserEdit_AdminController extends Controller
         User::saveUser($request, $user_id);
         return redirect(route('admin-users'));
     }
+    public function delete(int $user_id)
+    {
+        User::deleteUser($user_id);
+        return redirect(route('admin-users'));
+    }
 }

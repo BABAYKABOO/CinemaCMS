@@ -70,7 +70,7 @@
                 </div>
                 <div class="col-1" style="text-align: left">
                     <a href="{{route('admin-user-edit', $user->user_id)}}"><img width="20" height="20" src="http://cinema.com/storage/img/editicon.png"/></a>
-                    <a href="{{route('admin-user-edit', $user->user_id)}}"><img width="20" height="20" src="http://cinema.com/storage/img/deleteicon.png"/></a>
+                    <a href="{{route('admin-user-delete', $user->user_id)}}"><img width="20" height="20" src="http://cinema.com/storage/img/deleteicon.png"/></a>
                 </div>
             @endforeach
         </div>

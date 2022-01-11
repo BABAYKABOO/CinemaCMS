@@ -39,7 +39,7 @@
                 <a href="{{route('contacts')}}" class="nav-link">Контакты</a>
             </li>
         </ul>
-        <div class="col-9" style="text-align: right">
+        <div style="width: 80%; text-align: right">
             <a href="{{route('logout')}}" style="color:black;">Log out</a>
         </div>
     </nav>
@@ -195,6 +195,18 @@
                         <i class="nav-icon fas fa-archive"></i>
                         <p>
                             Пользователи
+                        </p>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <script type="text/javascript">
+                            document.title === 'Admin - Рассылка' ?
+                                document.write('<a href="{{route('admin-send_methods')}}" class="nav-link active">') :
+                                document.write('<a href="{{route('admin-send_methods')}}" class="nav-link">');
+                        </script>
+                        <i class="nav-icon fas fa-archive"></i>
+                        <p>
+                            Рассылка
                         </p>
                         </a>
                     </li>

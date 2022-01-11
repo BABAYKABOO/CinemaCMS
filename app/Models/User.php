@@ -29,9 +29,14 @@ class User extends \Illuminate\Foundation\Auth\User
         'sex',
         'phone',
         'birthday',
-        'city'
+        'city',
+        'created_at'
     ];
 
-
+    public function getCreatedAtAttribute($value)
+    {
+        $data = explode(' ',$value);
+        return $data[0];
+    }
 
 }

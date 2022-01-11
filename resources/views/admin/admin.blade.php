@@ -186,6 +186,18 @@
                         </p>
                         </a>
                     </li>
+                    <li class="nav-item">
+                        <script type="text/javascript">
+                            document.title === 'Admin - Пользователи' ?
+                                document.write('<a href="{{route('admin-users')}}" class="nav-link active">') :
+                                document.write('<a href="{{route('admin-users')}}" class="nav-link">');
+                        </script>
+                        <i class="nav-icon fas fa-archive"></i>
+                        <p>
+                            Пользователи
+                        </p>
+                        </a>
+                    </li>
                 </ul>
             </nav>
             <!-- /.sidebar-menu -->

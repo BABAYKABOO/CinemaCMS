@@ -85,14 +85,6 @@
         </div>
         <div class="row" style="margin: 0 auto; margin-top: 30px;  width: 70%">
             <div class="col-2">
-                <h5>Пароль:</h5>
-            </div>
-            <div class="col-4" >
-                <input required class="form-control item" value="{{$user->password}}" type="password" name="password"/>
-            </div>
-        </div>
-        <div class="row" style="margin: 0 auto; margin-top: 30px;  width: 70%">
-            <div class="col-2">
                 <h5>Номер карты:</h5>
             </div>
             <div class="col-4" >
@@ -100,7 +92,7 @@
             </div>
         </div>
         <div  style="margin: 0 auto; margin-top: 50px; width: max-content">
-            <button type="submit" class="btn btn-secondary">Регистрация</button>
+            <button type="submit" class="btn btn-secondary">Сохранить</button>
         </div>
     </form>
 @endsection

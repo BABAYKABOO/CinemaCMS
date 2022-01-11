@@ -13,4 +13,9 @@ class UserEdit_AdminController extends Controller
             'user' => User::where('user_id', $user_id)->first()
         ]);
     }
+    public function save(Request $request, int $user_id)
+    {
+        User::saveUser($request, $user_id);
+        return redirect(route('admin-users'));
+    }
 }

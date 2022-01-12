@@ -76,7 +76,7 @@ class AuthController extends Controller
                 if ($request->session()->has('timetable_id'))
                     return redirect(route('book',  $request->session()->pull('timetable_id')));
                 else
-                    return redirect(route('main'));
+                    return redirect(route('user-cabinet'));
         }
         return redirect(route('user-login'));
     }
@@ -122,16 +122,19 @@ class AuthController extends Controller
                 'address' => $request->input('address'),
                 'password' =>  bcrypt($request->input('password')),
                 'card' => $request->input('card'),
-                'ua/ru' => $request->input('ua/ru') == 'ru' ? 1 : 0,
+                'ua_ru' => $request->input('language') == 'ru' ? 1 : 0,
                 'sex' => $request->input('sex') == 'w' ? 1 : 0,
                 'phone' => $request->input('phone'),
                 'birthday' => $request->input('birthday'),
                 'city'  => $request->input('city'),
             ]);
             if (Auth::guard('web')->attempt($data))
-                return redirect(route('main'));
+                if ($request->session()->has('timetable_id'))
+                    return redirect(route('book',  $request->session()->pull('timetable_id')));
+                else
+                    return redirect(route('user-cabinet'));
         }
-        return redirect(route('user_registration'));
+        return redirect(route('user-reg'));
     }
     public function user_logout(Request $request)
     {

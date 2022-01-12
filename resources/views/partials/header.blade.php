@@ -59,6 +59,7 @@
                                     @endif
                                 @endforeach
                                 <li><a href="{{route('page_contacts')}}">&nbsp;Контакты</a></li>
+                                <li><a href="{{route('user-cabinet')}}">&nbsp;Мой кабинет</a></li>
                             </ul>
                         </li>
                     </ul>

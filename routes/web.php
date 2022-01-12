@@ -20,6 +20,8 @@ Route::get('/posters/{id}', [App\Http\Controllers\MovieController::class, 'showM
 
 Route::get('/timetables', [App\Http\Controllers\Timetables_Controller::class, 'showTimetables'])->name('timetables');
 Route::middleware([App\Http\Middleware\AuthUser::class])->group(function (){
+    Route::get('/user/cabinet', [App\Http\Controllers\UserCabinet_Controller::class, 'showUser'])->name('user-cabinet');
+    Route::post('/user/cabinet/{id}/save', [App\Http\Controllers\UserCabinet_Controller::class, 'save'])->name('user-cabinet-save');
     Route::get('/timetables/{id}/book', [App\Http\Controllers\Book_Controller::class, 'showBook'])->name('book');
     Route::post('/timetables/{id}/book/booking', [App\Http\Controllers\Book_Controller::class, 'book'])->name('timetable-book');
 });
@@ -51,8 +53,11 @@ Route::get('/user/login', [App\Http\Controllers\AuthController::class, 'user_ind
 Route::post('/user/login/auth', [App\Http\Controllers\AuthController::class, 'user_auth'])->name('user-auth');
 Route::get('/user/login/logout', [App\Http\Controllers\AuthController::class, 'user_logout'])->name('user-logout');
 
-Route::get('/user/registration', [App\Http\Controllers\AuthController::class, 'user_index_reg'])->name('user_registration');
-Route::post('/user/registration/reg', [App\Http\Controllers\AuthController::class, 'user_reg'])->name('user-reg');
+Route::get('/user/registration', [App\Http\Controllers\AuthController::class, 'user_index_reg'])->name('user-reg');
+Route::post('/user/registration/reg', [App\Http\Controllers\AuthController::class, 'user_reg'])->name('user-registr');
+
+
+
 
 Route::middleware([App\Http\Middleware\AuthAdmin::class])->group(function (){
     Route::prefix('admin')->group(function () {

@@ -16,7 +16,7 @@
             </div>
         @endif
     </div>
-        <form action="{{route('user-reg')}}" method="post">
+        <form action="{{route('user-registr')}}" method="post">
             @csrf
             <div class="row" style="margin: 0 auto; margin-top: 80px;  width: 70%">
                 <div class="col-2">

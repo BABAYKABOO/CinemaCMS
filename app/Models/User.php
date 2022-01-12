@@ -50,7 +50,7 @@ class User extends Authenticatable
             'address' => $request->input('address'),
             'password' =>  bcrypt($request->input('password')),
             'card' => $request->input('card'),
-            'ua/ru' => $request->input('ua/ru') == 'ru' ? 1 : 0,
+            'ua_ru' => $request->input('language') == 'ru' ? 1 : 0,
             'sex' => $request->input('sex') == 'w' ? 1 : 0,
             'phone' => $request->input('phone'),
             'birthday' => $request->input('birthday'),

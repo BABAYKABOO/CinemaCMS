@@ -18,7 +18,7 @@ class AuthUser
     public function handle(Request $request, Closure $next)
     {
         if (!Auth::guard('web')->check()) {
-            session(['timetable_id' => $next($request)->original->timetable->timetable_id]);
+            session(['timetable_id' => isset($next($request)->original->timetable->timetable_id) ? $next($request)->original->timetable->timetable_id : null]);
             return redirect(route('user-login'));
         }
 

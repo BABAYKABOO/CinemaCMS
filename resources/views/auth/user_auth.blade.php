@@ -31,7 +31,10 @@
             <div class="mt-3">
                 <input required class="form-control item" type="password" name="password" id="password" placeholder="Пароль">
             </div>
-            <div class="mt-5" style="margin: 0 auto; width: max-content;">
+            <div class="mt-2">
+                <a href="{{route('user-reg')}}">Регистрация</a>
+            </div>
+            <div class="mt-4" style="margin: 0 auto; width: max-content;">
                 <button class="btn btn-secondary" type="submit">Вход в аккаунт</button>
             </div>
         </form>

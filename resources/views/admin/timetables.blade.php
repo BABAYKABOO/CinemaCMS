@@ -62,7 +62,7 @@
             <button type="submit" class="btn btn-primary ml-5" style="font-size: 25px;">Поиск расписания</button>
         </div>
     </form>
-    <div style="text-align: center; width: 90%; margin: 0 auto; margin-left: 100px;">
+    <div style="text-align: center; width: 90%; margin: 0 auto; margin-left: 100px; margin-bottom: 50px;">
         <h2>Расписание сеансов</h2>
         <div class="row" style="text-align: center; margin-top: 50px">
             <div class="col-2" style="height: 40px; border: 1px solid black;background-color: #cbcbcb">
@@ -105,6 +105,9 @@
                     <a href="{{route('admin-timetable-delete', $timetable->timetable_id)}}"><img width="20" height="20" src="http://cinema.com/storage/img/deleteicon.png"/></a>
                 </div>
             @endforeach
+        </div>
+        <div style="text-align: center; color: black; height: 100px; margin: 0px 0px 0px 50px">
+            <p>{{ $timetables->links() }}</p>
         </div>
     </div>
 @endsection

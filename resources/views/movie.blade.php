@@ -11,7 +11,7 @@
                 allowfullscreen>
         </iframe>
     </div>
-    @if($timetables[0]->data <= date('Y-m-d', strtotime($timetables[0]->data . '+ 7 days')))
+
     <div style="width: 80%; margin: 0 auto">
         <form action="{{route('movie', $movie->movie_id)}}" method="get">
         <span style="font-size: 40px"> Расписание сеансов кинотеатра:</span>
@@ -56,6 +56,7 @@
                 })
             </script>
         </form>
+        @if(isset($timetables[0]) && $timetables[0]->data <= date('Y-m-d', strtotime($timetables[0]->data . '+ 7 days')))
         <div class="row mt-5">
             @if(isset($_GET['data']))
             @if(isset($timetables[0]->timetable_id))
@@ -81,7 +82,7 @@
     </div>
     @else
         <div>
-            <h1 style="text-align:center">Фильм еще не в показе</h1>
+            <h1 style="text-align:center">Фильм не в показе</h1>
         </div>
     @endif
     <div style="margin-top: 50px;">

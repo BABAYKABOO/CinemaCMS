@@ -48,7 +48,7 @@ class Event extends Model
             'name' => $request->name,
             'desc' => $request->desc,
             'mainimg' => Image::saveImg($request, 'mainimg', $event->mainimg),
-            'gallery' => Image::uploadGallery($request, $event->gallery)
+            'gallery' => Image::uploadGallery($request, $event->gallery, $event->gallery)
         ]);
     }
 

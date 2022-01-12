@@ -15,7 +15,7 @@ class MovieGenre extends Model
         'movie_id'
     ];
 
-    static function createMovieGenre(array $genres, $movie_id)
+    static function createMovieGenre(array $genres, int $movie_id)
     {
         foreach ($genres as $genre)
         {

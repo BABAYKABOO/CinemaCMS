@@ -6,7 +6,7 @@ use App\Models\Banner;
 use App\Models\PositionBanner;
 use Illuminate\Http\Request;
 
-class BannersAdminController extends Controller
+class Banners_AdminController extends Controller
 {
     public function showPage()
     {

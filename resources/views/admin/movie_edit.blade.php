@@ -111,7 +111,7 @@
                 </div>
                 <div class="mb-3">
                     <label class="form-label">Длительность</label>
-                    <input type="text" style="width: 90%" class="form-control" name="movie_time" value="{{$movie->time}}"  required>
+                    <input type="text" style="width: 90%" class="form-control" name="movie_time" value="{{$movie->movie_time}}"  required>
                 </div>
                 <div class="mb-3">
                     <label class="form-label">Жанр</label>
@@ -140,7 +140,6 @@
                     </section>
                     <style>
                         SELECT, INPUT[type="text"] {
-                            width: 100px;
                             box-sizing: border-box;
                         }
                         SECTION {
@@ -183,7 +182,7 @@
                             @endforeach
                         </select>
                         <label class="form-label">Имя</label>
-                        <input type="text" style="width: 90%" class="form-control" name="People[{{$person->people_id}}][name]" placeholder="Имя"  required>
+                        <input type="text" style="width: 90%" class="form-control" name="People[{{$person->people_id}}][name]" value="{{$person->name}}" placeholder="Имя"  required>
                         <a class="btn btn-danger mt-4" style="color: white" onclick="deleteDiv('person_{{$person->people_id}}')">Удалить</a>
                     </div>
                 @endforeach

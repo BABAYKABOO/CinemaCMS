@@ -50,8 +50,9 @@
                                 <li><a href="{{route('page_id', 1)}}">&nbsp;Детская комната</a></li>
                                 <li><a href="{{route('page_id', 2)}}">&nbsp;VIP-зал</a></li>
                                 <li><a href="{{route('page_id', 3)}}">&nbsp;Реклама</a></li>
-                                <li><a href="{{route('mobile')}}">&nbsp;Мобильные прил</a></li>
-                                <li><a href="{{route('contacts')}}">&nbsp;Контакты</a></li>
+                                <li><a href="{{route('page_cafe')}}">&nbsp;Кафе-бар</a></li>
+                                <li><a href="{{route('page_mobile')}}">&nbsp;Мобильные прил</a></li>
+                                <li><a href="{{route('page_contacts')}}">&nbsp;Контакты</a></li>
                             </ul>
                         </li>
                     </ul>

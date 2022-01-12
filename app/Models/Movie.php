@@ -83,12 +83,6 @@ class Movie extends Model
         return $movies;
     }
 
-    static function getConcreteMovie(int $movie_id)
-    {
-        return Movie::where('movies.movie_id', $movie_id);
-    }
-
-
     static function saveMovie(Request $request, int $movie_id)
     {
         $movie = Movie::where('movie_id', $movie_id)->first();

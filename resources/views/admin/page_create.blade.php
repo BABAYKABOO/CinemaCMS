@@ -118,12 +118,12 @@
                 </div>
 
                 <div class="mb-3">
-                    <label class="form-label">Описание</label>
+                    <label class="form-label">Описание (Необязательно)</label>
                     <textarea class="form-control" aria-label="With textarea" name="sub_desc" id="desc"></textarea>
                 </div>
 
                 <div class="mb-3">
-                    <label>Галерея</label>
+                    <label>Галерея (Необязательно)</label>
                     <div class="row">
                         <div class="col-sm" style="width: 200px;">
                             <label for="icon_upload">Image:<br>

@@ -36,13 +36,10 @@ Route::get('/discounts/{id}', [App\Http\Controllers\DiscountController::class, '
 
 
 Route::get('/pages/{id}', [App\Http\Controllers\PageStatic_Controller::class, 'showPage'])->name('page_id');
-
-
-Route::get('/mobile', [App\Http\Controllers\PageMobile_Controller::class, 'showPage'])->name('mobile');
-
 Route::get('/events', [App\Http\Controllers\EventsController::class, 'showEvents'])->name('events');
-
-Route::get('/contacts', [App\Http\Controllers\Contacts_Controller::class, 'showContacts'])->name('contacts');
+Route::get('/mobile', [App\Http\Controllers\PageMobile_Controller::class, 'showPage'])->name('page_mobile');
+Route::get('/cafe-bar', [App\Http\Controllers\PageCafe_Controller::class, 'showPage'])->name('page_cafe');
+Route::get('/contacts', [App\Http\Controllers\Contacts_Controller::class, 'showContacts'])->name('page_contacts');
 
 
 Route::get('/login', [App\Http\Controllers\AuthController::class, 'index'])->name('login');
@@ -61,12 +58,12 @@ Route::middleware([App\Http\Middleware\AuthAdmin::class])->group(function (){
         Route::get('/statistic', [App\Http\Controllers\StatisticController::class, 'index'])->name('statistic');
 
 
-        Route::get('/banners', [App\Http\Controllers\BannersAdminController::class, 'showPage'])->name('admin-banners');
-        Route::post('/banners/{id}/save', [App\Http\Controllers\BannersAdminController::class, 'save'])->name('admin-banner-save');
-        Route::post('/banners/{id}/save-one', [App\Http\Controllers\BannersAdminController::class, 'saveOneBanner'])->name('admin-banner_one-save');
+        Route::get('/banners', [App\Http\Controllers\Banners_AdminController::class, 'showPage'])->name('admin-banners');
+        Route::post('/banners/{id}/save', [App\Http\Controllers\Banners_AdminController::class, 'save'])->name('admin-banner-save');
+        Route::post('/banners/{id}/save-one', [App\Http\Controllers\Banners_AdminController::class, 'saveOneBanner'])->name('admin-banner_one-save');
 
 
-        Route::get('/posters', [App\Http\Controllers\PostersAdminController::class, 'showMovies'])->name('admin-posters');
+        Route::get('/posters', [App\Http\Controllers\Posters_AdminController::class, 'showMovies'])->name('admin-posters');
         Route::get('/posters/edit/{id}', [App\Http\Controllers\MovieEdit_AdminController::class, 'showCard'])->name('admin-movie_id');
         Route::post('/posters/edit/{id}/save', [App\Http\Controllers\MovieEdit_AdminController::class, 'save'])->name('admin-movie-save');
         Route::get('/posters/edit/{id}/delete', [App\Http\Controllers\MovieEdit_AdminController::class, 'delete'])->name('admin-movie_delete');

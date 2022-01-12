@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Movie;
 use Illuminate\Http\Request;
 
-class PostersAdminController extends Controller
+class Posters_AdminController extends Controller
 {
     public function showMovies()
     {

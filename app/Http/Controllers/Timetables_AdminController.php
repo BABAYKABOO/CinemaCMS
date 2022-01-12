@@ -19,7 +19,7 @@ class Timetables_AdminController extends Controller
             ->join('movies', 'movies.movie_id', '=', 'timetables.movie_id')
             ->join('halls', 'halls.hall_id', '=', 'timetables.hall_id')
             ->orderBy('data')
-            ->get();
+            ->paginate(6);
 
 
         $types = Timetable::join('types', 'types.type_id', '=', 'timetables.type_id')

@@ -120,6 +120,7 @@ Route::middleware([App\Http\Middleware\AuthAdmin::class])->group(function (){
 
         Route::get('/pages/{id}/edit', [App\Http\Controllers\PageEdit_AdminController::class, 'showPage'])->name('admin-page_id-edit');
         Route::post('/pages/{id}/edit/save', [App\Http\Controllers\PageEdit_AdminController::class, 'save'])->name('admin-page_id-save');
+        Route::post('/pages/{id}/edit/delete', [App\Http\Controllers\PageEdit_AdminController::class, 'delete'])->name('admin-page_id-delete');
 
         Route::get('/contacts/edit', [App\Http\Controllers\Contacts_AdminController::class, 'showContacts'])->name('admin-contacts-edit');
         Route::post('/contacts/save', [App\Http\Controllers\Contacts_AdminController::class, 'save'])->name('admin-contacts-save');

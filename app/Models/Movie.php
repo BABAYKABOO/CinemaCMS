@@ -50,7 +50,7 @@ class Movie extends Model
                     ->where('movie_id', $movie->movie_id)
                     ->limit(1)
                     ->first();
-                if (isset($time) && $time->data > date("Y-m-d"))
+                if (isset($time) && $time->data > date("Y-m-d", strtotime('+ 7 days')))
                 {
                     $movie->data = $time->data;
                     $movies[] = $movie;

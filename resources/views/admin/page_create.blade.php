@@ -76,6 +76,12 @@
     <div style="text-align: left">
         <form action="{{route('admin-page_id-create')}}" enctype="multipart/form-data" method="post">
             @csrf
+            <div style="text-align: right; margin-right: 100px">
+                <label class="switch">
+                    <input type="checkbox" name="status" checked>
+                    <span class="slider round"></span>
+                </label>
+            </div>
             <div class="mb-3">
                 <label class="form-label">Название страницы</label>
                 <input type="text" class="form-control" id="name" name="name" value="">

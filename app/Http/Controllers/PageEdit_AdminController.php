@@ -42,4 +42,13 @@ class PageEdit_AdminController extends Controller
 
         return redirect(route('admin-page_id-edit', $page_id));
     }
+
+    public function delete(int $page_id)
+    {
+        if ($page_id > 7)
+            Page::deletePage($page_id);
+
+        return redirect(route('admin-pages'));
+
+    }
 }

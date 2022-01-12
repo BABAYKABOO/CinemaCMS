@@ -44,14 +44,20 @@
                         <li class="menu"><a href="{{route('soon')}}">Скоро</a></li>
                         <li class="menu"><a href="{{route('cinemas')}}">Кинотеатры</a></li>
                         <li class="menu"><a href="{{route('discounts')}}">Акции</a></li>
-                        <li class="menu"><a href="{{route('page_id', 7)}}">О кинотеатре</a>
+                        <li class="menu"><a href="{{\App\Models\Page::where('page_id', 7)->first()->status == 1 ? route('page_id', 7) : '#'}}">О кинотеатре</a>
                             <ul>
                                 <li><a href="{{route('events')}}">&nbsp;Новости</a></li>
-                                <li><a href="{{route('page_id', 1)}}">&nbsp;Детская комната</a></li>
-                                <li><a href="{{route('page_id', 2)}}">&nbsp;VIP-зал</a></li>
-                                <li><a href="{{route('page_id', 3)}}">&nbsp;Реклама</a></li>
-                                <li><a href="{{route('page_cafe')}}">&nbsp;Кафе-бар</a></li>
-                                <li><a href="{{route('page_mobile')}}">&nbsp;Мобильные прил</a></li>
+                                @foreach(\App\Models\Page::get() as $page)
+                                    @if($page->status == 1 && $page->page_id != 7)
+                                        @if($page->page_id == 5)
+                                            <li><a href="{{route('page_mobile')}}">&nbsp;Мобильные прил</a></li>
+                                        @elseif($page->page_id == 6)
+                                            <li><a href="{{route('page_cafe')}}">&nbsp;{{$page->name}}</a></li>
+                                        @else
+                                            <li><a href="{{route('page_id', $page->page_id)}}">&nbsp;{{$page->name}}</a></li>
+                                        @endif
+                                    @endif
+                                @endforeach
                                 <li><a href="{{route('page_contacts')}}">&nbsp;Контакты</a></li>
                             </ul>
                         </li>

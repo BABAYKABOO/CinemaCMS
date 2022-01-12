@@ -30,7 +30,7 @@ class Page extends Model
     static function createPage(Request $request, int $seo_id)
     {
         Page::insert([
-            'status' => 1,
+            'status' =>  $request->status == 'on' ? 1 : 0,
             'name' => $request->name,
             'topbanner' => Image::saveImg($request, 'topbanner'),
             'desc' => $request->desc,
@@ -47,7 +47,7 @@ class Page extends Model
     {
         $page = Page::where('page_id', $page_id)->first();
         Page::where('page_id', $page_id)->update([
-            'status' => 1,
+            'status' => $request->status == 'on' ? 1 : 0,
             'name' => $request->name,
             'topbanner' => Image::saveImg($request, 'topbanner', $page->topbanner),
             'desc' => $request->desc,
@@ -55,5 +55,24 @@ class Page extends Model
             'sub_desc' => $request->sub_desc,
             'gallery' => isset($request->Gallery) ? Image::uploadGallery($request, 'Gallery', isset($page->gallery) ? $page->gallery : 0) : null
         ]);
+    }
+
+    static function deletePage(int $page_id)
+    {
+        $page = Page::where('page_id', $page_id)->first();
+        Page::where('page_id', $page_id)->delete();
+
+        foreach (Gallery::where('gallery_id', $page->sub_gallery)->get() as $image)
+            Image::deleteImg($image->image_id);
+        Gallery::where('gallery_id', $page->gallery)->delete();
+
+        if (isset($page->gallery)) {
+            foreach (Gallery::where('gallery_id', $page->gallery)->get() as $image)
+                Image::deleteImg($image->image_id);
+            Gallery::where('gallery_id', $page->gallery)->delete();
+        }
+
+        Image::deleteImg($page->topbanner);
+        Seo::where('seo_id', $page->seo)->delete();
     }
 }

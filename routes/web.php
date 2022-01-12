@@ -142,7 +142,10 @@ Route::middleware([App\Http\Middleware\AuthAdmin::class])->group(function (){
 
 
         Route::get('/send_methods', [App\Http\Controllers\Send_AdminController::class, 'showSendMethods'])->name('admin-send_methods');
-
+        Route::post('/send_methods/send', [App\Http\Controllers\Send_AdminController::class, 'send'])->name('admin-send-sending');
+        Route::get('/send_methods/delete_html/{file}', [App\Http\Controllers\Send_AdminController::class, 'deleteHtml'])->name('admin-send-delete_html');
+        Route::get('/send_methods/choose_users', [App\Http\Controllers\ChooseUsers_AdminController::class, 'showUsers'])->name('admin-send-choose_users');
+        Route::post('/send_methods/choose_users/choose', [App\Http\Controllers\ChooseUsers_AdminController::class, 'choose'])->name('admin-send-choose');
     });
 
 });

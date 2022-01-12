@@ -44,7 +44,7 @@
                         <li class="menu"><a href="{{route('soon')}}">Скоро</a></li>
                         <li class="menu"><a href="{{route('cinemas')}}">Кинотеатры</a></li>
                         <li class="menu"><a href="{{route('discounts')}}">Акции</a></li>
-                        <li class="menu"><a href="#">О кинотеатре</a>
+                        <li class="menu"><a href="{{route('page_id', 7)}}">О кинотеатре</a>
                             <ul>
                                 <li><a href="{{route('events')}}">&nbsp;Новости</a></li>
                                 <li><a href="{{route('page_id', 1)}}">&nbsp;Детская комната</a></li>

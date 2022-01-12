@@ -1,5 +1,5 @@
 @extends('admin.admin')
-@section('title', 'Фильмы')
+@section('title', 'Редактирование страницы')
 @section('content')
     <style>
         .icon_wrapper {
@@ -118,49 +118,45 @@
                     </div>
                 </div>
             </div>
-            @if(isset($page->sub_desc))
                 <div class="mb-3">
                     <label class="form-label">Описание</label>
-                    <textarea class="form-control" aria-label="With textarea" name="sub_desc" id="desc">{{$page->sub_desc}}</textarea>
+                    <textarea class="form-control" aria-label="With textarea" name="sub_desc" id="desc">{{isset($page->sub_desc) ? $page->sub_desc : ''}}</textarea>
                 </div>
-            @endif
-            @if(isset($gallery[0]))
                 <div class="mb-3">
                     <label>Галерея</label>
                     <div class="row">
                         <div class="col-sm" style="width: 200px;">
                             <label for="icon_upload">Image:<br>
-                                <div class="icon_wrapper"><div id="preview_1" style="background: url({{$gallery[0]->image_url}}); background-size: 100%"></div></div>
+                                <div class="icon_wrapper"><div id="preview_1" style="background: url({{isset($gallery[0]->image_url) ? $gallery[0]->image_url : ''}}); background-size: 100%"></div></div>
                             </label>
                             <input type="file" name="Gallery[0]" preview-target-id="preview_1" title="1">
                         </div>
                         <div class="col-sm" style="width: 200px">
                             <label for="icon_upload">Image:<br>
-                                <div class="icon_wrapper"><div id="preview_2" style="background: url({{$gallery[1]->image_url}}); background-size: 100%"></div></div>
+                                <div class="icon_wrapper"><div id="preview_2" style="background: url({{isset($gallery[1]->image_url) ? $gallery[1]->image_url : ''}}); background-size: 100%"></div></div>
                             </label>
                             <input type="file" name="Gallery[1]" preview-target-id="preview_2">
                         </div>
                         <div class="col-sm" style="width: 200px">
                             <label for="icon_upload">Image:<br>
-                                <div class="icon_wrapper"><div id="preview_3" style="background: url({{$gallery[2]->image_url}}); background-size: 100%"></div></div>
+                                <div class="icon_wrapper"><div id="preview_3" style="background: url({{isset($gallery[2]->image_url) ? $gallery[2]->image_url : ''}}); background-size: 100%"></div></div>
                             </label>
                             <input type="file" name="Gallery[2]" preview-target-id="preview_3">
                         </div>
                         <div class="col-sm" style="width: 200px">
                             <label for="icon_upload">Image:<br>
-                                <div class="icon_wrapper"><div id="preview_4" style="background: url({{$gallery[3]->image_url}}); background-size: 100%"></div></div>
+                                <div class="icon_wrapper"><div id="preview_4" style="background: url({{isset($gallery[3]->image_url) ? $gallery[3]->image_url : ''}}); background-size: 100%"></div></div>
                             </label>
                             <input type="file" name="Gallery[3]" preview-target-id="preview_4">
                         </div>
                         <div class="col-sm" style="width: 200px">
                             <label for="icon_upload">Image:<br>
-                                <div class="icon_wrapper"><div id="preview_5" style="background: url({{$gallery[4]->image_url}}); background-size: 100%"></div></div>
+                                <div class="icon_wrapper"><div id="preview_5" style="background: url({{isset($gallery[4]->image_url) ? $gallery[4]->image_url : ''}}); background-size: 100%"></div></div>
                             </label>
                             <input type="file" name="Gallery[4]" preview-target-id="preview_5">
                         </div>
                     </div>
                 </div>
-            @endif
                     <label for="exampleInputPassword1" class="form-label">SEO:</label>
                     <div class="mb-3" style="width: 70%; margin-left: 50px">
                         <div class="mb-3" style="">

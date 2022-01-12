@@ -36,7 +36,7 @@
                 <a href="{{route('events')}}" class="nav-link">Новости</a>
             </li>
             <li class="nav-item d-none d-sm-inline-block">
-                <a href="{{route('contacts')}}" class="nav-link">Контакты</a>
+                <a href="{{route('page_contacts')}}" class="nav-link">Контакты</a>
             </li>
         </ul>
         <div style="width: 80%; text-align: right">

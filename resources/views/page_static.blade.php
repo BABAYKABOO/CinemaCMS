@@ -13,13 +13,13 @@
         </div>
         <div class="row" style="margin-top: 40px; margin-bottom: 40px">
             <div class="col-4">
-                <img style="width: 400px" src="{{$sub_gallery[0]->image_url}}"/>
+                <img style="width: 400px; height: 250px;" src="{{$sub_gallery[0]->image_url}}"/>
             </div>
             <div class="col-4">
-                <img style="width: 400px" src="{{$sub_gallery[1]->image_url}}"/>
+                <img style="width: 400px; height: 250px;" src="{{$sub_gallery[1]->image_url}}"/>
             </div>
             <div class="col-4">
-                <img style="width: 400px" src="{{$sub_gallery[2]->image_url}}"/>
+                <img style="width: 400px; height: 250px;" src="{{$sub_gallery[2]->image_url}}"/>
             </div>
         </div>
         <div style="width: 90%; margin: 0 auto">
@@ -33,14 +33,14 @@
                     max-width: 100%;
                     position: relative;
                     margin: auto;
-                    height: 300px;
+                    height: 400px;
                     margin-bottom: 15px;
                     background-color: #3d4852;
                 }
                 .slider .news-item img {
                     object-fit: cover;
                     width: 100%;
-                    height: 300px;
+                    height: 400px;
                     border: none !important;
                     box-shadow: none !important;
                 }

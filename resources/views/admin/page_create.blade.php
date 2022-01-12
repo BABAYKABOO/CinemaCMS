@@ -1,5 +1,5 @@
 @extends('admin.admin')
-@section('title', 'Фильмы')
+@section('title', 'Создание страницы')
 @section('content')
     <style>
         .icon_wrapper {

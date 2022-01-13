@@ -30,6 +30,6 @@ class MailSender extends Mailable
      */
     public function build()
     {
-        return $this->html(Storage::get('public/emails/'.$this->name_html));
+        return $this->html(Storage::get('emails/'.$this->name_html));
     }
 }

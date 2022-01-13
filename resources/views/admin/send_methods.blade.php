@@ -37,7 +37,7 @@
                 }
             </style>
         </div>
-        <div style="position: absolute; background-color: white; border: 2px solid black; border-radius: 15px; padding: 15px; margin: -140px 0px 0px 600px">
+        <div style="position: absolute; background-color: white; border: 2px solid black; width: 400px; border-radius: 15px; padding: 15px; margin: -140px 0px 0px 550px">
             <span>Список последних загруженных шаблонов</span>
             @foreach($files as $file)
                 <p><input class="old_html" name="old_html[name]" accept="text/html" value="{{$file}}" type="checkbox" /> {{$file}}

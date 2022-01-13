@@ -12,9 +12,9 @@ class Send_AdminController extends Controller
 {
     public function showSendMethods(Request $request)
     {
-        $files = Storage::files('public/emails');
+        $files = Storage::files('emails');
         for ($i = 0; $i < count($files); $i++)
-            $files[$i] = explode('/', $files[$i])[2];
+            $files[$i] = explode('/', $files[$i])[1];
 
         if ($request->session()->has('users'))
             return view('admin.send_methods', [
@@ -28,7 +28,6 @@ class Send_AdminController extends Controller
 
     public function send(Request $request)
     {
-        dd($request->html_pattern);
         if ($request->user_method == 'choose' && count($request->session()->get('users')) == 0)
             throw \Illuminate\Validation\ValidationException::withMessages([
                 'users' => 'Пользователи не выбраны'
@@ -36,10 +35,6 @@ class Send_AdminController extends Controller
         if (!isset($request->html_pattern) && !isset($request->old_html))
             throw \Illuminate\Validation\ValidationException::withMessages([
                 'html' => 'Выберите html шаблон'
-            ]);
-        if (!strpos($request->html_pattern, '.html'))
-            throw \Illuminate\Validation\ValidationException::withMessages([
-                'html' => 'Шаблон не является .html'
             ]);
         if (isset($request->old_html))
         {
@@ -50,18 +45,23 @@ class Send_AdminController extends Controller
             return redirect(route('admin-send_methods'));
         }
 
-        $files = Storage::files('public/emails');
-        dd($files);
+        $files = Storage::files('emails');
         if (count($files) == 5)
-            $this->deleteHtml($files[count($files)]);
-        $path = $request->file($name)->store('img', 'public');
+            $this->deleteHtml($files[4]);
 
-        //Mail::to($request->user())->send(new MailSender($request));
-        return redirect(route('admin-send_methods'))->with('mistake', 'Ошибка');
+        $path = Storage::putFileAs(
+            'emails', $request->file('html_pattern'), $request->file('html_pattern')->getClientOriginalName()
+        );
+        Mail::to($request->session()->has('users') ?
+            $session()->get('users') :
+            User::get())
+            ->send(new MailSender($request->file('html_pattern')->getClientOriginalName()));
+
+        return redirect(route('admin-send_methods'));
     }
     public function deleteHtml($file)
     {
-        Storage::delete('public/emails/'.$file);
+        Storage::delete('emails/'.$file);
         return redirect(route('admin-send_methods'));
     }
 }

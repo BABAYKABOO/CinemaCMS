@@ -112,7 +112,7 @@ class AuthController extends Controller
         else {
             $data = [
                 'email' => $request->input('email'),
-                'password' => bcrypt($request->input('password'))
+                'password' => $request->input('password')
             ];
             User::insert([
                 'name' => $request->input('name'),
@@ -134,7 +134,6 @@ class AuthController extends Controller
                 else
                     return redirect(route('user-cabinet'));
         }
-        return redirect(route('user-reg'));
     }
     public function user_logout(Request $request)
     {

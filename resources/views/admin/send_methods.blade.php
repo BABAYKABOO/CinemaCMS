@@ -15,12 +15,19 @@
                     @endforeach
                 </ul>
             </div>
+        @elseif(isset(session()->done))
+            <div class="alert alert-success">
+                <ul>
+                        <li>{{session()->done}}</li>
+                </ul>
+            </div>
         @endif
+        @dd(session())
     </div>
     <div class="mb-5" style="width: 80%; margin: 0 auto; padding: 30px; border: 2px solid black; border-radius: 15px">
         <form action="{{route('admin-send-sending')}}" enctype="multipart/form-data" method="post">
             @csrf
-        <h1 style="text-align: center">SMS</h1>
+        <h1 style="text-align: center">Email</h1>
         <div style="height: 100px;">
             <label style="float:left;margin-right: 10px;" class="form-label">Выбрать кому отослать:</label>
             <p style="width:max-content;float:left;margin-right: 10px;"><input name="user_method" @if(!isset($users_count)) checked @endif  type="radio" value="all"> Всем пользователям</p>
@@ -55,9 +62,9 @@
         </div>
         <div class="mb-3" style="height: 60px;">
             <label style="margin-right: 30px;" class="form-label">Кол-во писем</label>
-            <a  style="margin-right: 50px;" id="html_use_name">173</a>
+            <a  style="margin-right: 50px;" id="html_use_name">3</a>
             <label style="margin-right: 30px;" class="form-label">Рассылка выполнена на:</label>
-            <a id="html_use_name">45%</a>
+            <a id="html_use_name">100%</a>
         </div>
         <button type="submit" class="btn btn-secondary">Начать рассылку</button>
         </form>

@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Jobs\QueueSenderEmail;
 use App\Mail\MailSender;
 use App\Models\User;
 use Illuminate\Http\Request;
@@ -38,26 +39,26 @@ class Send_AdminController extends Controller
             ]);
         if (isset($request->old_html))
         {
-            Mail::to($request->session()->has('users') ?
+            dispatch(new QueueSenderEmail($request->session()->has('users') ?
                         $session()->get('users') :
-                        User::get())
-                 ->send(new MailSender($request->old_html['name']));
-            return redirect(route('admin-send_methods'));
+                        User::get(), $request->old_html['name']));
+        }
+        else
+        {
+            $files = Storage::files('emails');
+            if (count($files) == 5)
+                $this->deleteHtml($files[4]);
+
+            Storage::putFileAs(
+                'emails', $request->file('html_pattern'), $request->file('html_pattern')->getClientOriginalName()
+            );
+
+            dispatch(new QueueSenderEmail($request->session()->has('users') ?
+                $session()->get('users') :
+                User::get(), $request->file('html_pattern')->getClientOriginalName()));
         }
 
-        $files = Storage::files('emails');
-        if (count($files) == 5)
-            $this->deleteHtml($files[4]);
-
-        $path = Storage::putFileAs(
-            'emails', $request->file('html_pattern'), $request->file('html_pattern')->getClientOriginalName()
-        );
-        Mail::to($request->session()->has('users') ?
-            $session()->get('users') :
-            User::get())
-            ->send(new MailSender($request->file('html_pattern')->getClientOriginalName()));
-
-        return redirect(route('admin-send_methods'));
+        return redirect(route('admin-send_methods'))->with('done', 'OK');
     }
     public function deleteHtml($file)
     {

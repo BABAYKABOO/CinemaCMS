@@ -11,6 +11,7 @@
     <link href="{{ asset('/css/admin.css')}}" rel="stylesheet">
 </head>
 <body class="hold-transition sidebar-mini">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 <div class="wrapper">
 
     <!-- Navbar -->

@@ -6,6 +6,7 @@ use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Mail\Mailable;
 use Illuminate\Queue\SerializesModels;
+use Illuminate\Support\Facades\Storage;
 
 class MailSender extends Mailable
 {
@@ -29,6 +30,6 @@ class MailSender extends Mailable
      */
     public function build()
     {
-        return $this->view('emails.'.$this->name_html);
+        return $this->html(Storage::get('public/emails/'.$this->name_html));
     }
 }

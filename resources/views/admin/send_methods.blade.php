@@ -2,6 +2,21 @@
 @section('title', 'Рассылка')
 @section('content')
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <div class="center" style="
+    margin: 0 auto;
+    margin-top: 30px;
+    width: 40%;
+">
+        @if ($errors->any())
+            <div class="alert alert-danger">
+                <ul>
+                    @foreach($errors->all() as $errors)
+                        <li>{{$errors}}</li>
+                    @endforeach
+                </ul>
+            </div>
+        @endif
+    </div>
     <div class="mb-5" style="width: 80%; margin: 0 auto; padding: 30px; border: 2px solid black; border-radius: 15px">
         <form action="{{route('admin-send-sending')}}" enctype="multipart/form-data" method="post">
             @csrf
@@ -25,7 +40,7 @@
         <div style="position: absolute; background-color: white; border: 2px solid black; border-radius: 15px; padding: 15px; margin: -140px 0px 0px 600px">
             <span>Список последних загруженных шаблонов</span>
             @foreach($files as $file)
-                <p><input class="old_html" name="Old_html[name]" value="{{$file}}" type="checkbox" /> {{$file}}
+                <p><input class="old_html" name="old_html[name]" accept="text/html" value="{{$file}}" type="checkbox" /> {{$file}}
                     <a style="color: red; text-decoration: underline; margin-left: 20px" href="{{route('admin-send-delete_html', $file)}}">Удалить</a>
                 </p>
             @endforeach

@@ -16,7 +16,7 @@ class AuthController extends Controller
     public function admin_index()
     {
         if(Auth::guard('admin')->check())
-            return redirect(route('statistic'));
+            return redirect(route('admin-statistic'));
 
         return view('auth.auth');
     }
@@ -35,8 +35,8 @@ class AuthController extends Controller
             'password' => $request->input('password'),
         ];
         if (Auth::guard('admin')->attempt($data))
-            return redirect(route('statistic'));
-        return redirect(route('statistic'));
+            return redirect(route('admin-statistic'));
+        return redirect(route('admin-statistic'));
     }
 
     public function admin_logout(Request $request)
@@ -45,6 +45,8 @@ class AuthController extends Controller
         return redirect(route('main'));
     }
 
+
+
     public function user_index()
     {
         if(Auth::guard('web')->check())
@@ -52,6 +54,7 @@ class AuthController extends Controller
 
         return view('auth.user_auth');
     }
+
     public function user_auth(Request $request)
     {
         $user = User::where('email', $request->input('email'))->first();
@@ -80,6 +83,7 @@ class AuthController extends Controller
         }
         return redirect(route('user-login'));
     }
+
     public function user_index_reg()
     {
         return view('auth.user_reg');

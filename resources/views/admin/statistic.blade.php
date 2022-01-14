@@ -2,67 +2,17 @@
 @section('title', 'Статистика')
 @section('content')
     <style>
-        .circle {
-            display: block;
-            float: left;
-        }
-        circle {
-            fill: rgba(0,0,0,0);
-            stroke-width: 15;
-            stroke-dasharray: 408px 408px;
-        }
-        circle:nth-child(2n) {
-            fill: rgba(0,0,0,0);
-            stroke: #30bae7;
-            stroke-width: 15;
-        }
-        .gistogram{
-            width: 600px;
-            height: 400px;
-            float:right;
-        }
-        .gistosgram-col{
-            float:left;
-            text-align: center;
-            width: 100px;
-            margin-left: 10px;
-            color: white;
-            background-color: #1f309f;
-        }
     </style>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.5.0/Chart.min.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
     <div style="margin-left: 10px;">
         <h1 >Статистика</h1>
         <div class="row" style="width: 99%; height:350px;">
-            <div class="col-4">
-                <div class="row">
-                    <div class="col">
-                        <div class="circle" style="color: pink">{{100 * count($users->where('sex', 0)->get()) / count($users->get())}}%</div>
-                        <div class="row" style="width: max-content;height: 30px; margin: 0px 0px 0px 180px">
-                            <div class="col" style="padding: 7px; height: 30px;"><div style="width: 10px; height: 10px; background-color: #30bae7;"></div></div>
-                            <div class="col" style="height: 30px;">Мужчины</div>
-                        </div>
-                        <div class="row" style="width: max-content;height: 30px; margin: 0px 0px 0px 180px">
-                            <div class="col" style="padding: 7px; height: 30px;"><div style="width: 10px; height: 10px; background-color: pink;"></div></div>
-                            <div class="col" style="height: 30px;">Женщины</div>
-                        </div>
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col">
-                        <div class="circle" style="color: green">{{100 * count($users->where('ua_ru', 1)->get()) / count($users->get())}}%%</div>
-                        <div class="row" style="width: max-content;height: 30px; margin: 0px 0px 0px 180px">
-                            <div class="col" style="padding: 7px; height: 30px;"><div style="width: 10px; height: 10px; background-color: #30bae7;"></div></div>
-                            <div class="col" style="height: 30px;">Русский</div>
-                        </div>
-                        <div class="row" style="width: max-content;height: 30px; margin: 0px 0px 0px 180px">
-                            <div class="col" style="padding: 7px; height: 30px;"><div style="width: 10px; height: 10px; background-color: green;"></div></div>
-                            <div class="col" style="height: 30px;">Украинский</div>
-                        </div>
-                    </div>
-                </div>
-
+            <div class="col-3">
+                <canvas id="women_men" width="300" height="200"></canvas>
+            </div>
+            <div class="col-3">
+                <canvas id="ru_ua" width="300" height="200"></canvas>
             </div>
             <div class="col">
                 <div class="row" style="width: 500px; float:right; height: 200px; color:white; background-color: #f5c81c">
@@ -101,14 +51,9 @@
                     <label>До:</label>
                     <input class="form-control item" @if(isset($_GET['book_to_when'])) value="{{$_GET['book_to_when']}}" @endif style="width: 200px; display: inline;" type="date" name="book_to_when"/>
                     <br/><button class="btn btn-secondary" type="submit" style="margin-top: 10px; margin-left: 28px;">Обновить</button>
-
-                    @if(isset($books_movie[0]))
-                        <div>
-                            <canvas id="chart_movies_popular"></canvas>
-                        </div>
-                    @else
-                        <h3 style="margin-top: 200px; margin-left: 50px">За этот промежуток не было куплено билетов</h3>
-                    @endif
+                    <div>
+                        <canvas id="chart_movies_popular"></canvas>
+                    </div>
                 </div>
             </div>
             <div class="row" style="height: 600px; margin-top: 50px; width: 99%;">
@@ -125,24 +70,13 @@
                     </div>
                 </div>
             </div>
-            <div class="col" style="padding: 10px;">
+            <div class="col-5" style="padding: 10px;">
                 <h1>Типы устройств пользователей</h1>
-                <div style="margin: 50px 0px 0px 250px ">
-                <div class="circle" style="color: #c40900">{{100 * count($users->where('sex', 0)->get()) / count($users->get())}}%</div>
-                <div class="row" style="width: max-content;height: 30px; margin: 0px 0px 0px 180px">
-                    <div class="col" style="padding: 7px; height: 30px;"><div style="width: 10px; height: 10px; background-color: #30bae7;"></div></div>
-                    <div class="col" style="height: 30px;">ПК</div>
-                </div>
-                <div class="row" style="width: max-content;height: 30px; margin: 0px 0px 0px 180px">
-                    <div class="col" style="padding: 7px; height: 30px;"><div style="width: 10px; height: 10px; background-color: #c40900;"></div></div>
-                    <div class="col" style="height: 30px;">Телефоны</div>
-                </div>
-                </div>
+                <canvas id="pc_mobile" width="300" height="200"></canvas>
             </div>
             </div>
         </form>
     </div>
-    @if(isset($books_movie[0]))
     <script>
         var ctx = document.getElementById("chart_movies_popular");
         var data = {
@@ -208,14 +142,13 @@
                         ticks: {
                             beginAtZero: true,
                             callback: function (value) { if (Number.isInteger(value)) { return value; } },
-                            stepSize: Math.round(({{$books_movie[0]->count}} / 10 ) / {{$books_movie[0]->count}})
+                            stepSize: Math.round(({{isset($books_movie[0]) ?  (($books_movie[0]->count / 10) / $books_movie[0]->count) : 1}}))
                         }
                     }]
                 }
             }
         });
     </script>
-    @endif
     <script>
         var ctx = document.getElementById("chart_timetables");
         var data = {
@@ -282,39 +215,73 @@
             }
         });
     </script>
-{{--    <script>--}}
-{{--        new Chartist.Line('.chart1', {--}}
-{{--            labels: [--}}
-{{--                    @foreach($timetables as $timetable)--}}
-{{--                        '{{$timetable->date}}',--}}
-{{--                    @endforeach--}}
-{{--                    ],--}}
-{{--            series: [--}}
-{{--                [--}}
-{{--                    @foreach($timetables as $timetable)--}}
-{{--                        {{$timetable->count}},--}}
-{{--                    @endforeach--}}
-{{--                ],--}}
-{{--            ]--}}
-{{--        }, {--}}
-{{--            fullWidth: true,--}}
-{{--            fullHeight: true,--}}
-{{--            chartPadding: {--}}
-{{--                right: 50--}}
-{{--            }--}}
-{{--        });--}}
-{{--    </script>--}}
     <script>
-        var Circle = function(sel){
-            var circles = document.querySelectorAll(sel);
-            [].forEach.call(circles,function(el){
-                var valEl = parseFloat(el.innerHTML);
-                var color = $(el).css('color');
-                valEl = valEl*408/100;
-                el.innerHTML = '<svg width="160" height="160"><circle style="stroke: ' + color +';" transform="rotate(-90)" r="65" cx="-80" cy="80" /><circle transform="rotate(-90)" style="stroke-dasharray:'+valEl+'px 408px;" r="65" cx="-80" cy="80" /></svg>';
+        var ru_ua_canvas = document.getElementById("ru_ua");
 
-            });
+        var ru_ua_data = {
+            labels: [
+                "Русский",
+                "Украинский"
+            ],
+            datasets: [
+                {
+                    data: [{{count($users->where('ua_ru', 1)->get())}},{{ count($users->where('ua_ru', 0)->get())}}],
+                    backgroundColor: [
+                        "#e18800",
+                        "green",
+                    ]
+                }]
         };
-        Circle('.circle');
+
+        var pieChart = new Chart(ru_ua_canvas, {
+            type: 'doughnut',
+            data: ru_ua_data
+        });
+    </script>
+    <script>
+        var wmen_canvas = document.getElementById("women_men");
+
+        var wmen_data = {
+            labels: [
+                "Мужчины",
+                "Женщины"
+            ],
+            datasets: [
+                {
+                    data: [{{count($users->where('sex', 0)->get())}},{{count($users->where('sex', 1)->get())}}],
+                    backgroundColor: [
+                        "#30bae7",
+                        "pink",
+                    ]
+                }]
+        };
+
+        var pieChart = new Chart(wmen_canvas, {
+            type: 'doughnut',
+            data: wmen_data
+        });
+    </script>
+    <script>
+        var mobile_canvas = document.getElementById("pc_mobile");
+
+        var mobile_data = {
+            labels: [
+                "Компьютеры",
+                "Мобильные устройства"
+            ],
+            datasets: [
+                {
+                    data: [{{count($visits->get()) - count($visits->where('is_mobile', 1)->get())}},{{count($visits->where('is_mobile', 1)->get())}}],
+                    backgroundColor: [
+                        "#0C8400",
+                        "#a80000",
+                    ]
+                }]
+        };
+
+        var pieChart = new Chart(mobile_canvas, {
+            type: 'pie',
+            data: mobile_data
+        });
     </script>
 @endsection

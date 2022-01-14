@@ -7,6 +7,7 @@ use App\Models\Booking;
 use App\Models\Movie;
 use App\Models\Timetable;
 use App\Models\User;
+use App\Models\Visit;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Http\Request;
 
@@ -51,11 +52,13 @@ class StatisticController extends Controller
             ->orderBy('timetables.data')
             ->get();
 
+        $visits = new Visit;
         return view('admin.statistic', [
             'users' => $users,
             'tickets' => $tickets,
             'books_movie' => $books_movie,
-            'timetables' => $timetables
+            'timetables' => $timetables,
+            'visits' => $visits
         ]);
     }
 }

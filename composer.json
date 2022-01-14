@@ -12,7 +12,8 @@
         "infyomlabs/laravel-ui-adminlte": "^3.2",
         "laravel/framework": "^8.65",
         "laravel/sanctum": "^2.11",
-        "laravel/tinker": "^2.5"
+        "laravel/tinker": "^2.5",
+        "mobiledetect/mobiledetectlib": "^2.8"
     },
     "require-dev": {
         "facade/ignition": "^2.5",

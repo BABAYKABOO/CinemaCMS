@@ -3,22 +3,22 @@
 namespace App\Http\Controllers;
 
 
-use App\Filters\BookingsFilter;
 use App\Models\Booking;
 use App\Models\Movie;
 use App\Models\Timetable;
 use App\Models\User;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Http\Request;
 
 class StatisticController extends Controller
 {
-    public function index(BookingsFilter $request)
+    public function index(Request $request)
     {
         $users = new User;
         $book = new Booking;
-        if ($_GET['book_from_when'] != '')
+        if (isset($_GET['book_from_when']) && $_GET['book_from_when'] != '')
             $book = $book->where('bookings.booking_date', '>', $_GET['book_from_when']);
-        if ($_GET['book_to_when'] != '')
+        if (isset($_GET['book_to_when']) && $_GET['book_to_when'] != '')
             $book = $book->where('bookings.booking_date', '<', $_GET['book_to_when']);
 
         $books_movie = $book->selectRaw('movies.name as name, count(movies.movie_id) as count')
@@ -30,9 +30,9 @@ class StatisticController extends Controller
 
 
         $book = new Booking;
-        if ($_GET['tickets_from_when'] != '')
+        if (isset($_GET['tickets_from_when']) && $_GET['tickets_from_when'] != '')
             $book = $book->where('bookings.booking_date', '>', $_GET['tickets_from_when']);
-        if ($_GET['tickets_to_when'] != '')
+        if (isset($_GET['tickets_to_when']) && $_GET['tickets_to_when'] != '')
             $book = $book->where('bookings.booking_date', '<', $_GET['tickets_from_when']);
 
         $tickets['price'] = $book
@@ -40,12 +40,22 @@ class StatisticController extends Controller
             ->sum('timetables.price');
         $tickets['count'] = count($book->get());
 
+        $book = new Timetable;
+        if (isset($_GET['timetables_from_when']) && $_GET['timetables_from_when'] != '')
+            $book = $book->where('timetables.data', '>', $_GET['timetables_from_when']);
+        if (isset($_GET['timetables_to_when']) && $_GET['timetables_to_when'] != '')
+            $book = $book->where('timetables.data', '<', $_GET['timetables_from_when']);
+
+        $timetables = $book->selectRaw('timetables.data as date, count(timetables.data) as count')
+            ->groupBy('timetables.data')
+            ->orderBy('timetables.data')
+            ->get();
 
         return view('admin.statistic', [
             'users' => $users,
             'tickets' => $tickets,
             'books_movie' => $books_movie,
-
+            'timetables' => $timetables
         ]);
     }
 }

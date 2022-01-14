@@ -20,10 +20,6 @@ class Booking extends Model
         'place_id',
         'booking_date'
     ];
-    public function scopeFilter(Builder $builder, QueryFilter $filter)
-    {
-        return $filter->apply($builder);
-    }
 
     static function createBooking(Request $request, int $timetable_id)
     {

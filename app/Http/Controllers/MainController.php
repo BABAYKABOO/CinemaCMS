@@ -1,7 +1,6 @@
 <?php
 
 namespace App\Http\Controllers;
-
 use App\Models\Banner;
 use App\Models\Movie;
 use App\Models\PageMain;
@@ -14,6 +13,7 @@ class MainController extends Controller
 {
     public function index()
     {
+
         return view('main', [
             'banner_main' => Banner::where('position_id', 1)
                              ->join('images', 'images.image_id', '=', 'banners.img')

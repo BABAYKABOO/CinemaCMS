@@ -21,6 +21,9 @@ class StatisticController extends Controller
             ->where('timetables.data', '>', date("Y-m-d", strtotime('- 7 days')))
             ->get();
 
+        $tickets_count = count(Booking::where('')->get());
+        dd($tickets_count);
+
         return view('admin.statistic', [
             'users' => $users,
             'books_movie' => $books_movie

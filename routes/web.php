@@ -12,52 +12,52 @@ use Illuminate\Support\Facades\Route;
 | contains the "web" middleware group. Now create something great!
 |
 */
+Route::middleware([App\Http\Middleware\CheckVisit::class])->group(function (){
+    Route::get('/', [App\Http\Controllers\MainController::class, 'index'])->name('main');
 
-Route::get('/', [App\Http\Controllers\MainController::class, 'index'])->name('main');
+    Route::get('/posters', [App\Http\Controllers\PostersController::class, 'showMovies'])->name('posters');
+    Route::get('/posters/{id}', [App\Http\Controllers\MovieController::class, 'showMovie'])->name('movie');
 
-Route::get('/posters', [App\Http\Controllers\PostersController::class, 'showMovies'])->name('posters');
-Route::get('/posters/{id}', [App\Http\Controllers\MovieController::class, 'showMovie'])->name('movie');
+    Route::get('/timetables', [App\Http\Controllers\Timetables_Controller::class, 'showTimetables'])->name('timetables');
+    Route::middleware([App\Http\Middleware\AuthUser::class])->group(function (){
+        Route::get('/user/cabinet', [App\Http\Controllers\UserCabinet_Controller::class, 'showUser'])->name('user-cabinet');
+        Route::post('/user/cabinet/{id}/save', [App\Http\Controllers\UserCabinet_Controller::class, 'save'])->name('user-cabinet-save');
+        Route::get('/timetables/{id}/book', [App\Http\Controllers\Book_Controller::class, 'showBook'])->name('book');
+        Route::post('/timetables/{id}/book/booking', [App\Http\Controllers\Book_Controller::class, 'book'])->name('timetable-book');
+    });
 
-Route::get('/timetables', [App\Http\Controllers\Timetables_Controller::class, 'showTimetables'])->name('timetables');
-Route::middleware([App\Http\Middleware\AuthUser::class])->group(function (){
-    Route::get('/user/cabinet', [App\Http\Controllers\UserCabinet_Controller::class, 'showUser'])->name('user-cabinet');
-    Route::post('/user/cabinet/{id}/save', [App\Http\Controllers\UserCabinet_Controller::class, 'save'])->name('user-cabinet-save');
-    Route::get('/timetables/{id}/book', [App\Http\Controllers\Book_Controller::class, 'showBook'])->name('book');
-    Route::post('/timetables/{id}/book/booking', [App\Http\Controllers\Book_Controller::class, 'book'])->name('timetable-book');
+    Route::get('/soon', [App\Http\Controllers\SoonController::class, 'showMovies'])->name('soon');
+    Route::get('/soon/{id}', [App\Http\Controllers\MovieController::class, 'showMovie'])->name('soon_movie');
+
+    Route::get('/cinemas', [App\Http\Controllers\CinemasController::class, 'showCinemas'])->name('cinemas');
+    Route::get('/cinemas/{id}', [App\Http\Controllers\CinemaIDController::class, 'showCinema'])->name('cinema-id');
+    Route::get('/cinemas/{cinema_id}/{hall_id}', [App\Http\Controllers\HallController::class, 'showHall'])->name('cinema-hall');
+
+
+    Route::get('/discounts', [App\Http\Controllers\DiscountsController::class, 'showDiscounts'])->name('discounts');
+    Route::get('/discounts/{id}', [App\Http\Controllers\DiscountController::class, 'showDiscount'])->name('discount_id');
+
+
+    Route::get('/pages/{id}', [App\Http\Controllers\PageStatic_Controller::class, 'showPage'])->name('page_id');
+    Route::get('/events', [App\Http\Controllers\EventsController::class, 'showEvents'])->name('events');
+    Route::get('/mobile', [App\Http\Controllers\PageMobile_Controller::class, 'showPage'])->name('page_mobile');
+    Route::get('/cafe-bar', [App\Http\Controllers\PageCafe_Controller::class, 'showPage'])->name('page_cafe');
+    Route::get('/contacts', [App\Http\Controllers\Contacts_Controller::class, 'showContacts'])->name('page_contacts');
+
+
+    Route::get('/admin/login', [App\Http\Controllers\AuthController::class, 'admin_index'])->name('login');
+    Route::post('/admin/login/auth', [App\Http\Controllers\AuthController::class, 'admin_auth'])->name('auth');
+    Route::get('/admin/login/logout', [App\Http\Controllers\AuthController::class, 'admin_logout'])->name('logout');
+
+    Route::get('/user/login', [App\Http\Controllers\AuthController::class, 'user_index'])->name('user-login');
+    Route::post('/user/login/auth', [App\Http\Controllers\AuthController::class, 'user_auth'])->name('user-auth');
+    Route::get('/user/login/logout', [App\Http\Controllers\AuthController::class, 'user_logout'])->name('user-logout');
+
+    Route::get('/user/registration', [App\Http\Controllers\AuthController::class, 'user_index_reg'])->name('user-reg');
+    Route::post('/user/registration/reg', [App\Http\Controllers\AuthController::class, 'user_reg'])->name('user-registr');
+
+
 });
-
-Route::get('/soon', [App\Http\Controllers\SoonController::class, 'showMovies'])->name('soon');
-Route::get('/soon/{id}', [App\Http\Controllers\MovieController::class, 'showMovie'])->name('soon_movie');
-
-Route::get('/cinemas', [App\Http\Controllers\CinemasController::class, 'showCinemas'])->name('cinemas');
-Route::get('/cinemas/{id}', [App\Http\Controllers\CinemaIDController::class, 'showCinema'])->name('cinema-id');
-Route::get('/cinemas/{cinema_id}/{hall_id}', [App\Http\Controllers\HallController::class, 'showHall'])->name('cinema-hall');
-
-
-Route::get('/discounts', [App\Http\Controllers\DiscountsController::class, 'showDiscounts'])->name('discounts');
-Route::get('/discounts/{id}', [App\Http\Controllers\DiscountController::class, 'showDiscount'])->name('discount_id');
-
-
-Route::get('/pages/{id}', [App\Http\Controllers\PageStatic_Controller::class, 'showPage'])->name('page_id');
-Route::get('/events', [App\Http\Controllers\EventsController::class, 'showEvents'])->name('events');
-Route::get('/mobile', [App\Http\Controllers\PageMobile_Controller::class, 'showPage'])->name('page_mobile');
-Route::get('/cafe-bar', [App\Http\Controllers\PageCafe_Controller::class, 'showPage'])->name('page_cafe');
-Route::get('/contacts', [App\Http\Controllers\Contacts_Controller::class, 'showContacts'])->name('page_contacts');
-
-
-Route::get('/admin/login', [App\Http\Controllers\AuthController::class, 'admin_index'])->name('login');
-Route::post('/admin/login/auth', [App\Http\Controllers\AuthController::class, 'admin_auth'])->name('auth');
-Route::get('/admin/login/logout', [App\Http\Controllers\AuthController::class, 'admin_logout'])->name('logout');
-
-Route::get('/user/login', [App\Http\Controllers\AuthController::class, 'user_index'])->name('user-login');
-Route::post('/user/login/auth', [App\Http\Controllers\AuthController::class, 'user_auth'])->name('user-auth');
-Route::get('/user/login/logout', [App\Http\Controllers\AuthController::class, 'user_logout'])->name('user-logout');
-
-Route::get('/user/registration', [App\Http\Controllers\AuthController::class, 'user_index_reg'])->name('user-reg');
-Route::post('/user/registration/reg', [App\Http\Controllers\AuthController::class, 'user_reg'])->name('user-registr');
-
-
-
 
 Route::middleware([App\Http\Middleware\AuthAdmin::class])->group(function (){
     Route::prefix('admin')->group(function () {

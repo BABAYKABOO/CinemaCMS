@@ -50,7 +50,7 @@
     <!-- Main Sidebar Container -->
     <aside class="main-sidebar sidebar-dark-primary elevation-4">
         <!-- Brand Logo -->
-        <a href="{{route('statistic')}}" class="brand-link">
+        <a href="{{route('admin-statistic')}}" class="brand-link">
             <span class="brand-text font-weight-light" style="margin-left: 10px">CinemaCMS</span>
         </a>
 
@@ -82,7 +82,9 @@
                          with font-awesome or any other icon font library -->
                     <li class="nav-item">
                         <script type="text/javascript">
-                            document.title === 'Admin - Статистика' ? document.write('<a href="{{route('statistic')}}" class="nav-link active">') : document.write('<a href="{{route('statistic')}}" class="nav-link">');
+                            document.title === 'Admin - Статистика' ?
+                                document.write('<a href="{{route('admin-statistic')}}" class="nav-link active">') :
+                                document.write('<a href="{{route('admin-statistic')}}" class="nav-link">');
                         </script>
                             <i class="nav-icon fas fa-th"></i>
                             <p>
@@ -92,7 +94,9 @@
                     </li>
                     <li class="nav-item">
                         <script type="text/javascript">
-                            document.title === 'Admin - Баннеры' ? document.write('<a href="{{route('admin-banners')}}" class="nav-link active">') : document.write('<a href="{{route('admin-banners')}}" class="nav-link">');
+                            document.title === 'Admin - Баннеры' ?
+                                document.write('<a href="{{route('admin-banners')}}" class="nav-link active">') :
+                                document.write('<a href="{{route('admin-banners')}}" class="nav-link">');
                         </script>
                             <i class="nav-icon fas fa-th"></i>
                             <p>
@@ -102,7 +106,9 @@
                     </li>
                     <li class="nav-item">
                         <script type="text/javascript">
-                            document.title === 'Admin - Фильмы' ? document.write('<a href="{{route('admin-posters')}}" class="nav-link active">') : document.write('<a href="{{route('admin-posters')}}" class="nav-link">');
+                            document.title === 'Admin - Фильмы' ?
+                                document.write('<a href="{{route('admin-posters')}}" class="nav-link active">') :
+                                document.write('<a href="{{route('admin-posters')}}" class="nav-link">');
                         </script>
                         <i class="nav-icon fas fa-archive"></i>
                         <p>Фильмы</p>

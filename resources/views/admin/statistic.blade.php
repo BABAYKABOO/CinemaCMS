@@ -77,27 +77,37 @@
             </div>
         </div>
     </div>
+    <form action="{{route('admin-statistic')}}" method="get">
     <div class="row" style="width: 99%; height:500px; margin-left: 10px;">
         <div class="col-5" style="padding-right: 20px;">
             <div style="padding: 10px; border-radius: 15px;">
-            <h1>Куплено билетов за</h1>
-            <label>От:</label>
-            <input class="form-control item" style="width: 190px; display: inline;" type="date" name="from_when"/>
-            <label>До:</label>
-            <input class="form-control item" style="width: 190px; display: inline;" type="date" name="to_when"/>
+
+                    <h1>Куплено билетов за</h1>
+                    <label>От:</label>
+                    <input class="form-control item" @if(isset($_GET['tickets_from_when'])) value="{{$_GET['tickets_from_when']}}" @endif style="width: 190px; display: inline;" type="date" name="tickets_from_when"/>
+                    <label>До:</label>
+                    <input class="form-control item" @if(isset($_GET['tickets_to_when'])) value="{{$_GET['tickets_to_when']}}" @endif style="width: 190px; display: inline;" type="date" name="tickets_to_when"/>
+                    <button class="btn btn-secondary" type="submit">Обновить</button>
+
             <div style="background-color: #f5c81c; height: 200px; width: 90%; margin: 0 auto; color: white; margin-top: 30px; text-align:center; padding-top: 35px;  border-radius: 15px;">
-                <h2>Билетов: 150</h2><br/>
-                <h2>Прибыль: 150000 грн</h2>
+                <h2>Билетов: {{$tickets['count']}}</h2><br/>
+                <h2>Прибыль: {{$tickets['price']}} грн</h2>
             </div>
             </div>
         </div>
         <div class="col-7" style="padding: 10px;border: 1px solid black; border-radius: 15px;">
-            <h1>Самые популярные фильмы за</h1>
-            <label>От:</label>
-            <input class="form-control item" style="width: 200px; display: inline;" type="date" name="from_when"/>
-            <label>До:</label>
-            <input class="form-control item" style="width: 200px; display: inline;" type="date" name="to_when"/>
-            <div id="d3-container" ></div>
+                <h1>Самые популярные фильмы за</h1>
+                <label>От:</label>
+                <input class="form-control item" @if(isset($_GET['book_from_when'])) value="{{$_GET['book_from_when']}}" @endif style="width: 200px; display: inline;" type="date" name="book_from_when"/>
+                <label>До:</label>
+                <input class="form-control item" @if(isset($_GET['book_to_when'])) value="{{$_GET['book_to_when']}}" @endif style="width: 200px; display: inline;" type="date" name="book_to_when"/>
+                <button class="btn btn-secondary" type="submit">Обновить</button>
+
+            @if(isset($books_movie[0]))
+                <div id="d3-container"></div>
+            @else
+                <h3 style="margin-top: 200px; margin-left: 50px">За этот промежуток не было куплено билетов</h3>
+            @endif
         </div>
     </div>
     <div class="row" style="height: 600px; margin-top: 50px; width: 99%; margin-left: 20px;">
@@ -126,6 +136,7 @@
         </div>
     </div>
     </div>
+    </form>
     <script>
         new Chartist.Line('.chart1', {
             labels: ['День 1', 'День 2', 'День 3', 'День 4', 'День 5'],
@@ -139,13 +150,16 @@
             }
         });
     </script>
+    @if(isset($books_movie[0]))
     <script>
         const data = [
-            { name: '{{$books_movie[0]->name}}', score: {{$books_movie[0]->count}} },
-            { name: '{{$books_movie[1]->name}}', score: {{$books_movie[1]->count}} },
-            { name: '{{$books_movie[1]->name}}', score: {{$books_movie[1]->count}} },
-            { name: '{{$books_movie[1]->name}}', score: {{$books_movie[1]->count}} },
-            { name: '{{$books_movie[1]->name}}', score: {{$books_movie[1]->count}} },
+            @foreach($books_movie as $key => $book_movie)
+                @if($key <= 5)
+                    { name: '{{$book_movie->name}}', score: {{$book_movie->count}} },
+                @else
+                    @break
+                @endif
+            @endforeach
         ];
 
         const width = 750;
@@ -198,6 +212,7 @@
 
 
     </script>
+    @endif
     <script>
         var Circle = function(sel){
             var circles = document.querySelectorAll(sel);

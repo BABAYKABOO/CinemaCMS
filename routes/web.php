@@ -61,8 +61,8 @@ Route::post('/user/registration/reg', [App\Http\Controllers\AuthController::clas
 
 Route::middleware([App\Http\Middleware\AuthAdmin::class])->group(function (){
     Route::prefix('admin')->group(function () {
-        Route::get('/', [App\Http\Controllers\StatisticController::class, 'index'])->name('statistic');
-        Route::get('/statistic', [App\Http\Controllers\StatisticController::class, 'index'])->name('statistic');
+        Route::get('/', [App\Http\Controllers\StatisticController::class, 'index'])->name('admin-statistic');
+        Route::get('/statistic', [App\Http\Controllers\StatisticController::class, 'index'])->name('admin-statistic');
 
 
         Route::get('/banners', [App\Http\Controllers\Banners_AdminController::class, 'showPage'])->name('admin-banners');

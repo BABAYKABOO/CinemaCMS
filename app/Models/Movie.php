@@ -62,9 +62,9 @@ class Movie extends Model
             foreach (Movie::getMovies() as $movie)
             {
                 $time = Timetable::select('data')
-                    ->orderBy('data')
+                    ->where('data', '>=', date("Y-m-d"))
                     ->where('movie_id', $movie->movie_id)
-                    ->limit(1)
+                    ->orderBy('data')
                     ->first();
                 if (isset($time) && $time->data == $data)
                 {

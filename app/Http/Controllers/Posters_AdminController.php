@@ -14,14 +14,15 @@ class Posters_AdminController extends Controller
         $movies_without_tt = array();
         foreach ($movies_id as $id) {
             $isntHave = true;
-                foreach (Timetable::orderBy('data', 'desc')->get()->unique('movie_id')  as $timetable) {
-                    if ($id->movie_id == $timetable->movie_id) {
-                        if ($timetable->data > today()){
-                        $isntHave = false;
-                        break;
-                        }
+
+            foreach (Timetable::orderBy('data', 'desc')->get()->unique('movie_id')  as $timetable) {
+                if ($id->movie_id == $timetable->movie_id) {
+                    if ($timetable->data >= date("Y-m-d")){
+                    $isntHave = false;
                     }
+                    break;
                 }
+            }
             if ($isntHave)
                 $movies_without_tt[] = Movie::where('movie_id', $id->movie_id)
                     ->join('images', 'images.image_id', '=', 'movies.mainimg')->first();

@@ -3,7 +3,11 @@
 namespace App\Http\Controllers;
 
 use App\Filters\TimetablesFilter;
+use App\Models\Cinema;
+use App\Models\CinemaHall;
+use App\Models\Movie;
 use App\Models\Timetable;
+use App\Models\Type;
 use Illuminate\Http\Request;
 
 class Timetables_AdminController extends Controller
@@ -22,21 +26,18 @@ class Timetables_AdminController extends Controller
             ->paginate(6);
 
 
-        $types = Timetable::join('types', 'types.type_id', '=', 'timetables.type_id')
-            ->get()
-            ->unique('type_id');
+        $types = Type::get();
 
-        $cinemas = Timetable::join('cinemas', 'cinemas.cinema_id', '=', 'timetables.cinema_id')
-            ->get()
-            ->unique('cinema_id');
+        $cinemas = Cinema::get();
 
-        $movies = Timetable::join('movies', 'movies.movie_id', '=', 'timetables.movie_id')
-            ->get()
-            ->unique('movie_id');
+        $movies = Movie::get();
 
-        $halls = Timetable::join('halls', 'halls.hall_id', '=', 'timetables.hall_id')
-            ->get()
-            ->unique('hall_id');
+        $halls = array();
+        foreach($cinemas as $cinema)
+            $halls[$cinema->cinema_id] = CinemaHall::where('cinema_id', $cinema->cinema_id)
+                ->join('halls', 'halls.hall_id', '=', 'cinema_halls.hall_id')
+                ->get();
+
         return view('admin.timetables', [
             'timetables' => $timetables,
             'types' => $types,

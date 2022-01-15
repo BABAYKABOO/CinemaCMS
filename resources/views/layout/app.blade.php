@@ -10,6 +10,7 @@
 
 </head>
 <body style="background: url(@yield('img'));">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 @include('partials.header')
 
    @yield('content')

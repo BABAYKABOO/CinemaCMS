@@ -32,7 +32,7 @@
                 <a href="{{route('cinemas')}}" class="nav-link">Кинотеатры</a>
             </li>
             <li class="nav-item d-none d-sm-inline-block">
-                <a href="{{route('discounts')}}" class="nav-link">Акции</a>
+                <a href="{{route('timetables')}}" class="nav-link">Расписание</a>
             </li>
             <li class="nav-item d-none d-sm-inline-block">
                 <a href="{{route('events')}}" class="nav-link">Новости</a>

@@ -18,23 +18,23 @@
                     <div class="col-2">
                         <label class="form-label">Условия</label>
                     </div>
-                    <div class="col-4" id="conditions">
+                    <div class="col-5" id="conditions_active">
                         @foreach($conditions_active as $cond)
-                            <div id="cond_{{$cond->condition_id}}_active" style="float: left;padding: 5px; margin: 5px; color: white; background-color: #3FE111; border-radius: 15px;">
-                                {{$cond->condition_name}}
-                                <input type="checkbox" name="conditions_active[{{$cond->condition_id}}]" style="display: none;"checked>
+                            <div class="cond_active" id="cond_{{$cond->condition_id}}">
+                                <p>{{$cond->condition_name}}
+                                <input type="checkbox" name="conditions_active[cond_{{$cond->condition_id}}]" style="display: none;"checked>
                             </div>
                         @endforeach
                     </div>
                     <div class="col-1">
-                        <img width="20" height="20" src="http://cinema.com/storage/img/icon_added.png"/>
+                        <img id="add_or_subtract" style="cursor: pointer;" width="20" height="20" src="http://cinema.com/storage/img/icon_added.png"/>
                     </div>
-                    <div class="col-3" style="background-color: #ffffff;padding: 0px  10px 10px 0px; border-radius: 20px; border: 1px solid black">
+                    <div class="col-3" id="div_tags" style="position: absolute; margin-left: 650px; width: max-content; display: none;background-color: #ffffff;padding: 0px 20px 10px 20px; border-radius: 20px; border: 1px solid black">
                         @foreach($conditions_all as $cond)
                             @php($isAdd = true)
                             @foreach($conditions_active as $cond_temp)
                                 @if($cond_temp->condition_id == $cond->condition_id)
-                                    <div id="cond_{{$cond->condition_id}}_all" style="padding: 5px 10px 5px 10px; border-radius: 20px; width: max-content; margin-left: 20px; margin-top: 10px; color: white; background-color: #3FE111;">
+                                    <div class="cond_all" preview-id="cond_{{$cond->condition_id}}" id="cond_{{$cond->condition_id}}_all" style="color: white; background-color: #3FE111;">
                                         {{$cond->condition_name}}
                                     </div>
                                     @php($isAdd = false)
@@ -42,13 +42,67 @@
                                 @endif
                             @endforeach
                             @if($isAdd)
-                                <div id="cond_{{$cond->condition_id}}_all" style="background-color: #D2D3C2; padding: 5px 10px 5px 10px; border-radius: 20px; width: max-content; margin-left: 20px; margin-top: 10px; ">
+                                <div class="cond_all" preview-id="cond_{{$cond->condition_id}}" id="cond_{{$cond->condition_id}}_all" style="background-color: #D2D3C2;">
                                     {{$cond->condition_name}}
                                 </div>
                             @endif
                         @endforeach
                     </div>
                 </div>
+                <style>
+                    .cond_all{
+                        padding: 5px 10px 5px 10px;
+                        border-radius: 20px;
+                        width: max-content;
+                        cursor: pointer;
+                        margin-top: 10px;
+                    }
+                    .cond_active{
+                        float: left;
+                        padding: 5px;
+                        cursor: pointer;
+                        margin: 5px;
+                        color: white;
+                        background-color: #3FE111;
+                        border-radius: 15px;
+                    }
+                </style>
+                <script>
+                    $("body").on("click", '.cond_active', function () {
+                        var div = $(this).remove();
+                        $('#' + div.attr('id') + '_all').css('background-color', '#D2D3C2').css('color', '');
+
+                    });
+
+                    $("body").on("click", '#add_or_subtract', function () {
+                        var img = $(this);
+                        if(img.attr('src') === 'http://cinema.com/storage/img/icon_added.png') {
+                            img.attr('src', 'http://cinema.com/storage/img/icon_minus.png');
+                            $('#div_tags').css('display', '');
+                        }
+                        else{
+                            img.attr('src', 'http://cinema.com/storage/img/icon_added.png');
+                            $('#div_tags').css('display', 'none');
+                        }
+                    });
+
+                    $("body").on("click", '.cond_all', function () {
+                        var div = $(this);
+                        if (div.css('background-color') === 'rgb(63, 225, 17)')
+                        {
+                            $('#' + div.attr('preview-id')).click();
+                        }
+                        else
+                        {
+                            var condition = '<div class="cond_active" id="'+ div.attr('preview-id') +'">' +
+                                 div.text() +
+                                '<input type="checkbox" name="conditions_active['+ div.attr('preview-id') +']" style="display: none;"checked>' +
+                                '</div>';
+                            $('#conditions_active').append(condition);
+                            div.css('background-color', '#3FE111').css('color', 'white');
+                        }
+                    });
+                </script>
             </div>
             <div class="mb-5" style="width: 200px;">
                 <label for="icon_upload">Главная:<br>

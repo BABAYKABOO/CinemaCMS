@@ -4,6 +4,7 @@
 @section('content')
     <div style="text-align: center; margin-bottom: -155px;">
         <div class="main-div" style="background-color: #f7f6f6;">
+            @if(isset($banner_main[0]))
             <div class="slider">
                 @foreach($banner_main as $banner)
                     <div class="item">
@@ -63,8 +64,8 @@
                 }
 
             </script>
-
-            <h2>Смотрите сегодня, {{$data[2]." ".$data[1]}}</h2>
+            @endif
+            <h2 style="margin-top: 50px;">Смотрите сегодня, {{$data[2]." ".$data[1]}}</h2>
             <div style="margin-bottom: 50px; width: 90%; margin: 0 auto; text-align: left;">
             @foreach($moviesToday as $movie)
                 <div class="main-moviediv">
@@ -95,6 +96,7 @@
                 </div>
             @endforeach
             </div>
+            @if(isset($banner_news[0]))
             <div style="margin-bottom: 50px">
                 <h2>Новости и акции</h2>
                 <div class="slider">
@@ -157,6 +159,7 @@
 
                 </script>
             </div>
+            @endif
             <div style="text-align: center">
                 <h4>SEO текст</h4>
                 <span>{{$info_page->seo_text}}</span>

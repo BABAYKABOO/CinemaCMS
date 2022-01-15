@@ -15,12 +15,16 @@ class MainController extends Controller
     {
 
         return view('main', [
-            'banner_main' => Banner::where('position_id', 1)
-                             ->join('images', 'images.image_id', '=', 'banners.img')
-                             ->get(),
-            'banner_news' => Banner::where('position_id', 3)
-                             ->join('images', 'images.image_id', '=', 'banners.img')
-                             ->get(),
+            'banner_main' => Banner::where('banners.position_id', 1)
+                            ->join('images', 'images.image_id', '=', 'banners.img')
+                            ->join('position_banners', 'position_banners.position_id', '=', 'banners.position_id')
+                            ->where('position_banners.status', '1')
+                            ->get(),
+            'banner_news' => Banner::where('banners.position_id', 3)
+                            ->join('images', 'images.image_id', '=', 'banners.img')
+                            ->join('position_banners', 'position_banners.position_id', '=', 'banners.position_id')
+                            ->where('position_banners.status', '1')
+                            ->get(),
             'info_page' => PageMain::first(),
             'moviesToday' => Movie::getMovies(date("Y-m-d")),
             'moviesSoon' => Movie::getMovies("soon"),

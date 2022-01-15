@@ -33,22 +33,6 @@ class CinemaEdit_AdminController extends Controller
             ->join('conditions', 'conditions.condition_id', '=', 'cinema_conditions.condition_id')
             ->get();
 
-        $conditions_inactive = [];
-        foreach($conditions_all as $condition)
-        {
-            $bool = true;
-            foreach ($conditions_active as $active_condition)
-            {
-                if ($condition->condition_id == $active_condition->condition_id)
-                {
-                    $bool = false;
-                    break;
-                }
-            }
-            if ($bool == true)
-                $conditions_inactive[] =$condition;
-        }
-
         $halls = CinemaHall::where('cinema_id', $cinema_id)
             ->join('halls', 'halls.hall_id', '=', 'cinema_halls.hall_id')
             ->get();
@@ -59,13 +43,14 @@ class CinemaEdit_AdminController extends Controller
             'img' => $img,
             'types' => $types,
             'conditions_active' => $conditions_active,
-            'conditions_inactive' => $conditions_inactive,
+            'conditions_all' => $conditions_all,
             'halls' => $halls,
             'seo' => $seo
         ]);
     }
     public function save(Request $request, int $cinema_id)
     {
+        dd($request);
         $cinema = Cinema::where('cinema_id', $cinema_id)->first();
         $seo_id = Seo::where('seo_id', $cinema->seo)->first()->seo_id;
         Seo::saveSeo($request->Seo, $seo_id);

@@ -1,7 +1,6 @@
 @extends('admin.admin')
 @section('title', 'Рассылка')
 @section('content')
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
     <div class="center" style="
     margin: 0 auto;
     margin-top: 30px;
@@ -22,7 +21,6 @@
                 </ul>
             </div>
         @endif
-        @dd(session())
     </div>
     <div class="mb-5" style="width: 80%; margin: 0 auto; padding: 30px; border: 2px solid black; border-radius: 15px">
         <form action="{{route('admin-send-sending')}}" enctype="multipart/form-data" method="post">

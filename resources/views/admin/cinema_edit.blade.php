@@ -14,66 +14,41 @@
                 <textarea class="form-control" aria-label="With textarea" name="desc" id="desc">{{$cinema->desc}}</textarea>
             </div>
             <div class="mb-5">
-                <label class="form-label">Условия</label>
-                <section class="container">
-                    <div>
-                        <select name="conditions_active[]" id="leftValues" size="8" multiple>
-                            @foreach($conditions_active as $condition)
-                                <option name="conditions_active[]" value="{{$condition->condition_id}}" selected>{{$condition->condition_name}}</option>
+                <div class="row" style="width: 80%">
+                    <div class="col-2">
+                        <label class="form-label">Условия</label>
+                    </div>
+                    <div class="col-4" id="conditions">
+                        @foreach($conditions_active as $cond)
+                            <div id="cond_{{$cond->condition_id}}_active" style="float: left;padding: 5px; margin: 5px; color: white; background-color: #3FE111; border-radius: 15px;">
+                                {{$cond->condition_name}}
+                                <input type="checkbox" name="conditions_active[{{$cond->condition_id}}]" style="display: none;"checked>
+                            </div>
+                        @endforeach
+                    </div>
+                    <div class="col-1">
+                        <img width="20" height="20" src="http://cinema.com/storage/img/icon_added.png"/>
+                    </div>
+                    <div class="col-3" style="background-color: #ffffff;padding: 0px  10px 10px 0px; border-radius: 20px; border: 1px solid black">
+                        @foreach($conditions_all as $cond)
+                            @php($isAdd = true)
+                            @foreach($conditions_active as $cond_temp)
+                                @if($cond_temp->condition_id == $cond->condition_id)
+                                    <div id="cond_{{$cond->condition_id}}_all" style="padding: 5px 10px 5px 10px; border-radius: 20px; width: max-content; margin-left: 20px; margin-top: 10px; color: white; background-color: #3FE111;">
+                                        {{$cond->condition_name}}
+                                    </div>
+                                    @php($isAdd = false)
+                                    @break
+                                @endif
                             @endforeach
-                        </select>
+                            @if($isAdd)
+                                <div id="cond_{{$cond->condition_id}}_all" style="background-color: #D2D3C2; padding: 5px 10px 5px 10px; border-radius: 20px; width: max-content; margin-left: 20px; margin-top: 10px; ">
+                                    {{$cond->condition_name}}
+                                </div>
+                            @endif
+                        @endforeach
                     </div>
-                    <div>
-                        <input type="button" id="btnLeft" value="&lt;&lt;" />
-                        <input type="button" id="btnRight" value="&gt;&gt;" />
-                    </div>
-                    <div>
-                        <select id="rightValues" name="conditions_inactive[]" style="width: 300px" size="7" multiple>
-                            @foreach($conditions_inactive as $condition)
-                                <option value="{{$condition->condition_id}}">{{$condition->condition_name}}</option>
-                            @endforeach
-                        </select>
-                        <div>
-                            <input type="text" id="txtRight" />
-                        </div>
-                    </div>
-                </section>
-                <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
-                <style>
-                    SELECT, INPUT[type="text"] {
-                        width: 160px;
-                        box-sizing: border-box;
-                    }
-                    SECTION {
-                        padding: 8px;
-                        background-color: #f0f0f0;
-                        overflow: auto;
-                    }
-                    SECTION > DIV {
-                        float: left;
-                        padding: 4px;
-                    }
-                    SECTION > DIV + DIV {
-                        width: 40px;
-                        text-align: center;
-                    }
-                </style>
-                <script type="text/javascript">
-                    $("#btnLeft").click(function () {
-                        var selectedItem = $("#rightValues option:selected");
-                        $("#leftValues").append(selectedItem);
-                    });
-
-                    $("#btnRight").click(function () {
-                        var selectedItem = $("#leftValues option:selected");
-                        $("#rightValues").append(selectedItem);
-                    });
-
-                    $("#rightValues").change(function () {
-                        var selectedItem = $("#rightValues option:selected");
-                        $("#txtRight").val(selectedItem.text());
-                    });
-                </script>
+                </div>
             </div>
             <div class="mb-5" style="width: 200px;">
                 <label for="icon_upload">Главная:<br>

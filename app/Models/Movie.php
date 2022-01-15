@@ -75,8 +75,7 @@ class Movie extends Model
         }
         else
         {
-            $movies = DB::table('movies')
-                ->join('images', 'images.image_id', '=', 'movies.mainimg')
+            $movies = Movie::join('images', 'images.image_id', '=', 'movies.mainimg')
                 ->join('seos', 'seos.seo_id', '=', 'movies.seo')
                 ->get();
         }

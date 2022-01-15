@@ -45,7 +45,7 @@ class Cinema extends Model
             'mainimg' => Image::saveImg($request, 'mainimg', $cinema->mainimg),
             'logo' => Image::saveImg($request, 'logo', $cinema->logo),
             'topbanner' => Image::saveImg($request, 'topbanner', $cinema->topbanner),
-            'gallery' => Image::uploadGallery($request, $cinema->gallery),
+            'gallery' => Image::uploadGallery($request, 'Gallery', $cinema->gallery),
         ]);
     }
 

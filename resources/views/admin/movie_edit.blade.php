@@ -1,5 +1,5 @@
 @extends('admin.admin')
-@section('title', 'Фильмы')
+@section('title', 'Редактировать фильм')
 @section('content')
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
     <div style="text-align: left">
@@ -92,6 +92,31 @@
                 <label class="form-label">Ссылка на трейлер</label>
                 <input type="text" class="form-control" id="trailer" name="trailer" value="{{$movie->trailer}}">
             </div>
+            <div class="mb-3 form-check">
+                <label class="form-check-label mr-5" for="check">Тип кино</label>
+                <tr>
+                    @foreach($all_types as $all_type)
+                        @foreach($types as $type)
+                            @if($type->name == $all_type->name)
+                                <td>
+                                    <label class="form-check-label" for="exampleCheck1">{{$type->name}}</label>
+                                    <input type="checkbox" class="form-check-input mt-4" name="Types[{{$type->type_id}}]" checked>
+                                </td>
+                                @php
+                                    $all_type = null
+                                @endphp
+                                @break
+                            @endif
+                        @endforeach
+                        @if($all_type != null)
+                            <td>
+                                <label class="form-check-label" for="exampleCheck1">{{$all_type->name}}</label>
+                                <input type="checkbox" class="form-check-input mt-4" name="Types[{{$all_type->type_id}}]">
+                            </td>
+                        @endif
+                    @endforeach
+                </tr>
+            </div>
             <div style="width: 30%; margin-left: 50px;" id="divAppend">
                 <div class="mb-3">
                     <label class="form-label">Год выпуска</label>
@@ -114,62 +139,98 @@
                     <input type="text" style="width: 90%" class="form-control" name="movie_time" value="{{$movie->movie_time}}"  required>
                 </div>
                 <div class="mb-3">
-                    <label class="form-label">Жанр</label>
-                    <section class="container">
-                        <div>
-                            <select name="genres_active[]" id="leftValues" size="8" multiple>
-                                    @foreach($genres_active as $genre)
-                                        <option selected value="{{$genre->genre_id}}">{{$genre->name}}</option>
-                                    @endforeach
-                            </select>
+                    <div class="row" style="width: 100%">
+                        <div class="col-3">
+                            <label class="form-label">Жанр</label>
                         </div>
-                        <div>
-                            <input type="button" id="btnLeft" value="&lt;&lt;" />
-                            <input type="button" id="btnRight" value="&gt;&gt;" />
+                        <div class="col-5" id="genres_active">
+                            @foreach($genres_active as $genre)
+                                <div class="genre_active" id="genre_{{$genre->genre_id}}">
+                                    {{$genre->name}}
+                                    <input type="checkbox" name="genres_active[{{$genre->genre_id}}]" style="display: none;" checked>
+                                </div>
+                            @endforeach
                         </div>
-                        <div>
-                            <select id="rightValues" name="genres_inactive[]" style="width: 200px" size="7" multiple>
-                                @foreach($genres as $genre)
-                                    <option value="{{$genre->genre_id}}">{{$genre->name}}</option>
+                        <div class="col-1">
+                            <img id="add_or_subtract" style="cursor: pointer;" width="20" height="20" src="http://cinema.com/storage/img/icon_added.png"/>
+                        </div>
+                        <div class="col-3" id="div_tags" style="position: absolute; margin-left: 300px; width: max-content; display: none;background-color: #ffffff;padding: 0px 20px 10px 20px; border-radius: 20px; border: 1px solid black">
+                            @foreach($genres_all as $genre)
+                                @php
+                                    $isAdd = true
+                                @endphp
+                                @foreach($genres_active as $genre_temp)
+                                    @if($genre_temp->genre_id == $genre->genre_id)
+                                        <div class="genre_all" preview-id="genre_{{$genre->genre_id}}" id="genre_{{$genre->genre_id}}_all" style="color: white; background-color: #3FE111;">
+                                            {{$genre->name}}
+                                        </div>
+                                        @php
+                                            $isAdd = false
+                                        @endphp
+                                        @break
+                                    @endif
                                 @endforeach
-                            </select>
-                            <div>
-                                <input type="text" id="txtRight" />
-                            </div>
+
+                                @if($isAdd)
+                                <div class="genre_all" preview-id="genre_{{$genre->genre_id}}" id="genre_{{$genre->genre_id}}_all" style="background-color: #D2D3C2;">
+                                    {{$genre->name}}
+                                </div>
+                                @endif
+                            @endforeach
                         </div>
-                    </section>
+
+                    </div>
                     <style>
-                        SELECT, INPUT[type="text"] {
-                            box-sizing: border-box;
+                        .genre_all{
+                            padding: 5px 10px 5px 10px;
+                            border-radius: 20px;
+                            width: max-content;
+                            cursor: pointer;
+                            margin-top: 10px;
                         }
-                        SECTION {
-                            padding: 8px;
-                            background-color: #f0f0f0;
-                            overflow: auto;
-                        }
-                        SECTION > DIV {
+                        .genre_active{
                             float: left;
-                            padding: 4px;
-                        }
-                        SECTION > DIV + DIV {
-                            width: 40px;
-                            text-align: center;
+                            padding: 5px;
+                            cursor: pointer;
+                            margin: 5px;
+                            color: white;
+                            background-color: #3FE111;
+                            border-radius: 15px;
                         }
                     </style>
-                    <script type="text/javascript">
-                        $("#btnLeft").click(function () {
-                            var selectedItem = $("#rightValues option:selected");
-                            $("#leftValues").append(selectedItem);
+                    <script>
+                        $("body").on("click", '.genre_active', function () {
+                            var div = $(this).remove();
+                            $('#' + div.attr('id') + '_all').css('background-color', '#D2D3C2').css('color', '');
                         });
 
-                        $("#btnRight").click(function () {
-                            var selectedItem = $("#leftValues option:selected");
-                            $("#rightValues").append(selectedItem);
+                        $("body").on("click", '#add_or_subtract', function () {
+                            var img = $(this);
+                            if(img.attr('src') === 'http://cinema.com/storage/img/icon_added.png') {
+                                img.attr('src', 'http://cinema.com/storage/img/icon_minus.png');
+                                $('#div_tags').css('display', '');
+                            }
+                            else{
+                                img.attr('src', 'http://cinema.com/storage/img/icon_added.png');
+                                $('#div_tags').css('display', 'none');
+                            }
                         });
 
-                        $("#rightValues").change(function () {
-                            var selectedItem = $("#rightValues option:selected");
-                            $("#txtRight").val(selectedItem.text());
+                        $("body").on("click", '.genre_all', function () {
+                            var div = $(this);
+                            if (div.css('background-color') === 'rgb(63, 225, 17)')
+                            {
+                                $('#' + div.attr('preview-id')).click();
+                            }
+                            else
+                            {
+                                var genre = '<div class="genre_active" id="'+ div.attr('preview-id') +'">' +
+                                    div.text() +
+                                    '<input type="checkbox" name="genres_active['+ parseInt(div.attr('preview-id').match(/\d+/)) +']" style="display: none;" checked>' +
+                                    '</div>';
+                                $('#genres_active').append(genre);
+                                div.css('background-color', '#3FE111').css('color', 'white');
+                            }
                         });
                     </script>
                 </div>
@@ -219,31 +280,6 @@
                     }
                 }
             </script>
-            <div class="mb-3 form-check">
-                <label class="form-check-label mr-5" for="check">Тип кино</label>
-                <tr>
-                @foreach($all_types as $all_type)
-                    @foreach($types as $type)
-                        @if($type->name == $all_type->name)
-                            <td>
-                                <label class="form-check-label" for="exampleCheck1">{{$type->name}}</label>
-                                <input type="checkbox" class="form-check-input mt-4" name="Types[{{$type->type_id}}]" checked>
-                            </td>
-                            @php
-                              $all_type = null
-                            @endphp
-                            @break
-                        @endif
-                    @endforeach
-                    @if($all_type != null)
-                            <td>
-                                <label class="form-check-label" for="exampleCheck1">{{$all_type->name}}</label>
-                                <input type="checkbox" class="form-check-input mt-4" name="Types[{{$all_type->type_id}}]">
-                            </td>
-                    @endif
-                @endforeach
-                </tr>
-            </div>
             <label for="exampleInputPassword1" class="form-label">SEO:</label>
             <div class="mb-3" style="width: 70%; margin-left: 50px">
                     <div class="mb-3" style="">

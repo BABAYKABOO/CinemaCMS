@@ -5,7 +5,7 @@
         <form action="{{route('admin-cinema_create')}}" enctype="multipart/form-data" method="post">
             @csrf
             <div class="mb-3">
-                <label class="form-label">Название фильма</label>
+                <label class="form-label">Название кинотеатр</label>
                 <input type="text" class="form-control" id="name" placeholder="Название" name="name" value="" required>
             </div>
             <div class="mb-3">
@@ -13,60 +13,81 @@
                 <textarea class="form-control" aria-label="With textarea" name="desc" placeholder="Описание" id="desc" required></textarea>
             </div>
             <div class="mb-3">
-                <label class="form-label">Условия</label>
-                <section class="container">
-                    <div>
-                        <select name="conditions_active[]" id="leftValues" size="8" multiple></select>
+                <div class="row" style="width: 80%">
+                    <div class="col-2">
+                        <label class="form-label">Условия</label>
                     </div>
-                    <div>
-                        <input type="button" id="btnLeft" value="&lt;&lt;" />
-                        <input type="button" id="btnRight" value="&gt;&gt;" />
+                    <div class="col-5" id="conditions_active" style="display: none;">
                     </div>
-                    <div>
-                        <select id="rightValues" name="conditions_inactive[]" style="width: 300px" size="7" multiple>
-                            @foreach($conditions as $condition)
-                                <option value="{{$condition->condition_id}}">{{$condition->condition_name}}</option>
-                            @endforeach
-                        </select>
-                        <div>
-                            <input type="text" id="txtRight" />
-                        </div>
+                    <div class="col-1">
+                        <img id="add_or_subtract" style="cursor: pointer;" width="20" height="20" src="http://cinema.com/storage/img/icon_added.png"/>
                     </div>
-                </section>
-                <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+                    <div class="col-3" id="div_tags" style="position: absolute; margin-left: 250px; width: max-content; display: none;background-color: #ffffff;padding: 0px 20px 10px 20px; border-radius: 20px; border: 1px solid black">
+                        @foreach($conditions_all as $cond)
+                            <div class="cond_all" preview-id="cond_{{$cond->condition_id}}" id="cond_{{$cond->condition_id}}_all" style="background-color: #D2D3C2;">
+                                {{$cond->condition_name}}
+                            </div>
+                        @endforeach
+                    </div>
+                </div>
                 <style>
-                    SELECT, INPUT[type="text"] {
-                        width: 160px;
-                        box-sizing: border-box;
+                    .cond_all{
+                        padding: 5px 10px 5px 10px;
+                        border-radius: 20px;
+                        width: max-content;
+                        cursor: pointer;
+                        margin-top: 10px;
                     }
-                    SECTION {
-                        padding: 8px;
-                        background-color: #f0f0f0;
-                        overflow: auto;
-                    }
-                    SECTION > DIV {
+                    .cond_active{
                         float: left;
-                        padding: 4px;
-                    }
-                    SECTION > DIV + DIV {
-                        width: 40px;
-                        text-align: center;
+                        padding: 5px;
+                        cursor: pointer;
+                        margin: 5px;
+                        color: white;
+                        background-color: #3FE111;
+                        border-radius: 15px;
                     }
                 </style>
-                <script type="text/javascript">
-                    $("#btnLeft").click(function () {
-                        var selectedItem = $("#rightValues option:selected");
-                        $("#leftValues").append(selectedItem);
+                <script>
+                    $("body").on("click", '.cond_active', function () {
+                        var div = $(this).remove();
+                        $('#' + div.attr('id') + '_all').css('background-color', '#D2D3C2').css('color', '');
                     });
 
-                    $("#btnRight").click(function () {
-                        var selectedItem = $("#leftValues option:selected");
-                        $("#rightValues").append(selectedItem);
+                    $("body").on("click", '#add_or_subtract', function () {
+                        var img = $(this);
+                        if(img.attr('src') === 'http://cinema.com/storage/img/icon_added.png') {
+                            img.attr('src', 'http://cinema.com/storage/img/icon_minus.png');
+                            $('#div_tags').css('display', '');
+                        }
+                        else{
+                            img.attr('src', 'http://cinema.com/storage/img/icon_added.png');
+                            $('#div_tags').css('display', 'none');
+                        }
                     });
 
-                    $("#rightValues").change(function () {
-                        var selectedItem = $("#rightValues option:selected");
-                        $("#txtRight").val(selectedItem.text());
+                    $("body").on("click", '.cond_all', function () {
+                        var div_cond = $('#conditions_active');
+                        if(div_cond.css('display') === 'none')
+                        {
+                            div_cond.css('display', '');
+                            $('#div_tags').css('margin-left', '650px');
+
+                        }
+                        var div = $(this);
+                        if (div.css('background-color') === 'rgb(63, 225, 17)')
+                        {
+                            $('#' + div.attr('preview-id')).click();
+                        }
+                        else
+                        {
+                            var condition = '<div class="cond_active" id="'+ div.attr('preview-id') +'">' +
+                                div.text() +
+                                '<input type="checkbox" name="conditions_active['+ parseInt(div.attr('preview-id').match(/\d+/)) +']" style="display: none;"checked>' +
+                                '</div>';
+                            div_cond.append(condition);
+                            div.css('background-color', '#3FE111').css('color', 'white');
+                        }
                     });
                 </script>
             </div>

@@ -30,7 +30,7 @@ class MovieEdit_AdminController extends Controller
         $all_types = Type::get();
 
         $positions = PeoplePosition::get();
-        $genres = Genre::get();
+        $genres_all = Genre::get();
         $genres_active = MovieGenre::where('movie_id', $id)
             ->join('genres', 'genres.genre_id', '=', 'movie_genres.genre_id')
             ->get();
@@ -42,7 +42,7 @@ class MovieEdit_AdminController extends Controller
             'types' => $types,
             'all_types' => $all_types,
             'positions' => $positions,
-            'genres' => $genres,
+            'genres_all' => $genres_all,
             'genres_active' => $genres_active,
             'people' => $people
         ]);

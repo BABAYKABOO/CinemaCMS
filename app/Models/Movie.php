@@ -98,17 +98,9 @@ class Movie extends Model
                 'age' => $request->age,
                 'movie_time' => $request->movie_time
             ]);
-        if (count($request->People) != count(MoviePeople::where('movie_id', $movie_id)->get()))
-        {
-            MoviePeople::where('movie_id', $movie_id)->delete();
-            MoviePeople::createPeople($request->People, $movie_id);
-        }
 
-        if (count($request->People) != count(MovieGenre::where('movie_id', $movie_id)->get()))
-        {
-            MovieGenre::where('movie_id', $movie_id)->delete();
-            MovieGenre::createMovieGenre($request->genres_active, $movie_id);
-        }
+        MoviePeople::createPeople($request, $movie_id);
+        MovieGenre::createMovieGenre($request, $movie_id);
         return $movie_id;
     }
 

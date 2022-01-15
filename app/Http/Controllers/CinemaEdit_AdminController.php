@@ -50,7 +50,6 @@ class CinemaEdit_AdminController extends Controller
     }
     public function save(Request $request, int $cinema_id)
     {
-        dd($request);
         $cinema = Cinema::where('cinema_id', $cinema_id)->first();
         $seo_id = Seo::where('seo_id', $cinema->seo)->first()->seo_id;
         Seo::saveSeo($request->Seo, $seo_id);

@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Http\Request;
 
 class MoviePeople extends Model
 {
@@ -17,15 +18,19 @@ class MoviePeople extends Model
         'name',
     ];
 
-    static function createPeople(array $people, int $movie_id)
+    static function createPeople(Request $request, int $movie_id)
     {
-        foreach ($people as $person)
+        if (count($request->People) != count(MoviePeople::where('movie_id', $movie_id)->get()))
         {
-            MoviePeople::insert([
-                'movie_id' => $movie_id,
-                'position_id' => $person['position'],
-                'name' => $person['name']
-            ]);
+            MoviePeople::where('movie_id', $movie_id)->delete();
+            foreach ($request->People as $person)
+            {
+                MoviePeople::insert([
+                    'movie_id' => $movie_id,
+                    'position_id' => $person['position'],
+                    'name' => $person['name']
+                ]);
+            }
         }
     }
 }

@@ -6,7 +6,7 @@
         <form action="{{route('admin-cinema_save', $cinema->cinema_id)}}" enctype="multipart/form-data" method="post">
             @csrf
             <div class="mb-5">
-                <label class="form-label">Название фильма</label>
+                <label class="form-label">Название кинотеатра</label>
                 <input type="text" class="form-control" id="name" name="name" value="{{$cinema->name}}">
             </div>
             <div class="mb-5">
@@ -21,8 +21,8 @@
                     <div class="col-5" id="conditions_active">
                         @foreach($conditions_active as $cond)
                             <div class="cond_active" id="cond_{{$cond->condition_id}}">
-                                <p>{{$cond->condition_name}}
-                                <input type="checkbox" name="conditions_active[cond_{{$cond->condition_id}}]" style="display: none;"checked>
+                                {{$cond->condition_name}}
+                                <input type="checkbox" name="conditions_active[{{$cond->condition_id}}]" style="display: none;" checked>
                             </div>
                         @endforeach
                     </div>
@@ -71,7 +71,6 @@
                     $("body").on("click", '.cond_active', function () {
                         var div = $(this).remove();
                         $('#' + div.attr('id') + '_all').css('background-color', '#D2D3C2').css('color', '');
-
                     });
 
                     $("body").on("click", '#add_or_subtract', function () {
@@ -96,7 +95,7 @@
                         {
                             var condition = '<div class="cond_active" id="'+ div.attr('preview-id') +'">' +
                                  div.text() +
-                                '<input type="checkbox" name="conditions_active['+ div.attr('preview-id') +']" style="display: none;"checked>' +
+                                '<input type="checkbox" name="conditions_active['+ parseInt(div.attr('preview-id').match(/\d+/)) +']" style="display: none;" checked>' +
                                 '</div>';
                             $('#conditions_active').append(condition);
                             div.css('background-color', '#3FE111').css('color', 'white');

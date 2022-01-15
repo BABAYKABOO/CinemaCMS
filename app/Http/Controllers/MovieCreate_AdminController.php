@@ -20,7 +20,7 @@ class MovieCreate_AdminController extends Controller
         return view('admin.movie_create', [
             'all_types' => $all_types,
             'positions' => $positions,
-            'genres' => $genres
+            'genres_all' => $genres
         ]);
     }
 

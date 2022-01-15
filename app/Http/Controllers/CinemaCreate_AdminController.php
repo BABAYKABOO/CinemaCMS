@@ -16,7 +16,7 @@ class CinemaCreate_AdminController extends Controller
         $conditions = Condition::get();
 
         return view('admin.cinema_create',[
-            'conditions' => $conditions
+            'conditions_all' => $conditions
         ]);
     }
 

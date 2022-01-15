@@ -14,10 +14,10 @@
                     @endforeach
                 </ul>
             </div>
-        @elseif(isset(session()->done))
+        @elseif(session()->has('status'))
             <div class="alert alert-success">
                 <ul>
-                        <li>{{session()->done}}</li>
+                    <li>{{session()->get('status')}}</li>
                 </ul>
             </div>
         @endif

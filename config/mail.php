@@ -94,10 +94,7 @@ return [
     |
     */
 
-    'from' => [
-        'address' => env('MAIL_FROM_ADDRESS', 'cinema@google.com'),
-        'name' => env('MAIL_FROM_NAME', 'CinemaCMS'),
-    ],
+    'from' => ['address' => 'luckymr304@example.com', 'name' => 'Cinema'],
 
     /*
     |--------------------------------------------------------------------------

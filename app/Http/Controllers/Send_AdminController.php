@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Jobs\QueueSenderEmail;
 use App\Mail\MailSender;
+use App\Models\Job;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Mail;
@@ -22,8 +23,10 @@ class Send_AdminController extends Controller
                 'files' => $files,
                 'users_count' => count($request->session()->get('users'))
             ]);
+
         return view('admin.send_methods', [
-            'files' => $files
+            'files' => $files,
+            'status' => $status
         ]);
     }
 
@@ -40,7 +43,7 @@ class Send_AdminController extends Controller
         if (isset($request->old_html))
         {
             dispatch(new QueueSenderEmail($request->session()->has('users') ?
-                        $session()->get('users') :
+                        $request->session()->get('users') :
                         User::get(), $request->old_html['name']));
         }
         else
@@ -54,11 +57,11 @@ class Send_AdminController extends Controller
             );
 
             dispatch(new QueueSenderEmail($request->session()->has('users') ?
-                $session()->get('users') :
+                $request->session()->get('users') :
                 User::get(), $request->file('html_pattern')->getClientOriginalName()));
         }
-
-        return redirect(route('admin-send_methods'))->with('done', 'OK');
+        $request->session()->flash('status', 'Emails успешно отправлены в обработку!');
+        return redirect(route('admin-send_methods'));
     }
     public function deleteHtml($file)
     {

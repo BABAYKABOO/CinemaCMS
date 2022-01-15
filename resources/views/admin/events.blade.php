@@ -37,5 +37,8 @@
                 </div>
             @endforeach
         </div>
+        <div style="text-align: center; color: black; height: 100px; margin: 0px 0px 0px 50px">
+            <p>{{ $events->links() }}</p>
+        </div>
     </div>
 @endsection

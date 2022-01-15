@@ -14,6 +14,7 @@ class PostersController extends Controller
         foreach (Movie::getMovies() as $movie)
         {
             $data = Timetable::select('data')
+                ->where('data', '>=', today())
                 ->orderBy('data')
                 ->where('movie_id', $movie->movie_id)
                 ->first();

@@ -22,7 +22,7 @@
                 </option>
             @endforeach
         </select>
-            <div class="row" style="margin-top: 30px">
+            <div class="row" style="cursor: pointer; margin-top: 30px">
                 @foreach($dates as $key => $date)
                 <div target-id="{{$date}}" class="col-1" style="@if(isset($_GET['data']))
                                                                 @if($_GET['data'] == $date)

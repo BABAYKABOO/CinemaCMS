@@ -111,7 +111,7 @@
                                     <div id="preview_{{$banner->banner_id}}" style="background: url({{$banner->image_url}}); background-size: 100%"></div>
                                 </div>
                             </label><br/>
-                            <input type="file" name="Banner_{{$banner->banner_id}}_img" preview-target-id="preview_{{$banner->banner_id}}"><br/>
+                            <input class="file-button" type="file" name="Banner_{{$banner->banner_id}}_img" preview-target-id="preview_{{$banner->banner_id}}"><br/>
                             <label>Url:</label><br/>
                             <input type="text" name="Banner[{{$banner->banner_id}}][url]" value="{{$banner->url}}"><br/>
                             <label>Текст:</label><br/>
@@ -126,9 +126,10 @@
                     </div>
                     <div onclick="addDiv()" style="margin: 30px 0px 0px 70px; color: white;"><a class="btn btn-secondary">Добавить баннер</a></div>
                     <script>
-                        var countDiv = {{count($position[0])}} + 1;
+                        var countDiv = {{count($position[0])}};
                         function addDiv() {
                             if (countDiv < 11) {
+                                countDiv++;
                                 var DivHidden = document.getElementById ('rowDiv');
                                 var str = '<div class="col-sm" id="divHidden' + countDiv + '" style="width: 200px;">' +
                                     '<label for="icon_upload"><br/>' +
@@ -136,7 +137,7 @@
                                     '<div id="add-preview_' + countDiv + '" style="background-size: 100%"></div>' +
                                     '</div>' +
                                     '</label><br/>' +
-                                    '<input type="file" name="newBanner_' + countDiv + '_img" preview-target-id="add-preview_' + countDiv + '"><br/>' +
+                                    '<input class="file-button" type="file" name="newBanner_' + countDiv + '_img" preview-target-id="add-preview_' + countDiv + '"><br/>' +
                                     '<label>Url:</label><br/>' +
                                     '<input type="text" name="newBanner[' + countDiv + '][url]"><br/>' +
                                     '<label>Текст:</label><br/>' +
@@ -144,7 +145,6 @@
                                     '<div onclick="deleteDiv(\''+ 'divHidden' + countDiv +'\')" style="margin: 30px 0px 0px 70px; color: white;"><a class="btn btn-danger">Удалить</a></div>' +
                                     '</div>';
                                 $(DivHidden).append(str);
-                                countDiv++;
                             } else
                             {
                                 alert('Невозможно добавить больше баннеров!');
@@ -184,7 +184,7 @@
                                 </label>
                             </div>
                             <div class="col-6" style="padding: 50px">
-                                <input type="file" name="Banner_{{$banner->banner_id}}_img" preview-target-id="main-preview_1" title="1">
+                                <input class="file-button" type="file" name="Banner_{{$banner->banner_id}}_img" preview-target-id="main-preview_1" title="1">
                                 <button type="submit" class="btn btn-primary">Сохранить</button>
                             </div>
                         </div>
@@ -221,7 +221,7 @@
                                         <div id="preview_{{$banner->banner_id}}" style="background: url({{$banner->image_url}}); background-size: 100%"></div>
                                     </div>
                                 </label><br/>
-                                <input type="file" name="Banner_{{$banner->banner_id}}_img" preview-target-id="preview_{{$banner->banner_id}}"><br/>
+                                <input class="file-button" type="file" name="Banner_{{$banner->banner_id}}_img" preview-target-id="preview_{{$banner->banner_id}}"><br/>
                                 <label>Url:</label><br/>
                                 <input type="text" name="Banner[{{$banner->banner_id}}][url]" value="{{$banner->url}}"><br/>
                                 <label>Текст:</label><br/>
@@ -238,15 +238,16 @@
                 <script>
                     var x = {{count($position[2])}};
                     function addNewsDiv() {
-                        if (countDiv < 11) {
-                            var newsDivHidden = document.getElementById ('newsRowDiv');
+                        if (x < 10) {
+                            x++;
+                            var newsDivHidden = $('#newsRowDiv');
                             var str = '<div class="col-sm" id="newsdivHidden' + countDiv + '" style="width: 200px;">' +
                                 '<label for="icon_upload"><br/>' +
                                 '<div class="icon_wrapper">' +
                                 '<div id="add-news-preview_' + countDiv + '" style="background-size: 100%"></div>' +
                                 '</div>' +
                                 '</label><br/>' +
-                                '<input type="file" name="newBanner_' + countDiv + '_img" preview-target-id="add-news-preview_' + countDiv + '"><br/>' +
+                                '<input class="file-button" type="file" name="newBanner_' + countDiv + '_img" preview-target-id="add-news-preview_' + countDiv + '"><br/>' +
                                 '<label>Url:</label><br/>' +
                                 '<input type="text" name="newBanner[' + countDiv + '][url]"><br/>' +
                                 '<label>Текст:</label><br/>' +
@@ -254,7 +255,6 @@
                                 '<div onclick="deleteDiv(\''+ 'divNewsHidden' + countDiv +'\')" style="margin: 30px 0px 0px 70px; color: white;"><a class="btn btn-danger">Удалить</a></div>' +
                                 '</div>';
                             $(newsDivHidden).append(str);
-                            countDiv++;
                         } else
                         {
                             alert('Невозможно добавить больше баннеров!');
@@ -267,7 +267,7 @@
                     }
                 </script>
                 <script>
-                    $('input[type="file"][preview-target-id]').on('change', function() {
+                    $("body").on("change", ".file-button", function () {
                         var input = $(this)
                         if (!window.FileReader) return false // check for browser support
                         if (input[0].files && input[0].files[0]) {
@@ -280,8 +280,7 @@
                             }
                             reader.readAsDataURL(input[0].files[0]);
                         }
-                    })
-
+                    });
                 </script>
                 <div class="row" style="width: 90%; margin: 50px 0px 30px 150px;">
                     <div class="col-2">

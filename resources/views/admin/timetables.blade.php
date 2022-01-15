@@ -85,7 +85,7 @@
             }
         })
     </script>
-    <div style="text-align: center; width: 90%; margin: 0 auto; margin-left: 100px; margin-bottom: 50px;">
+    <div style="text-align: center; width: 90%; height: 700px; margin: 0 auto; margin-left: 100px; margin-bottom: 50px;">
         <h2>Расписание сеансов</h2>
         <div class="row" style="text-align: center; margin-top: 50px">
             <div class="col-2" style="height: 40px; border: 1px solid black;background-color: #cbcbcb">

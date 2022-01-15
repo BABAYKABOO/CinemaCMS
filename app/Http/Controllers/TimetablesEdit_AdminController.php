@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Booking;
 use App\Models\Cinema;
+use App\Models\CinemaHall;
 use App\Models\Hall;
 use App\Models\Movie;
 use App\Models\Timetable;
@@ -19,7 +20,12 @@ class TimetablesEdit_AdminController extends Controller
         $cinemas = Cinema::get();
         $types = Type::get();
         $movies = Movie::get();
-        $halls = Hall::get();
+        $halls = array();
+        foreach($cinemas as $cinema)
+            $halls[$cinema->cinema_id] = CinemaHall::where('cinema_id', $cinema->cinema_id)
+                ->join('halls', 'halls.hall_id', '=', 'cinema_halls.hall_id')
+                ->get();
+
         return view('admin.timetable_edit',[
             'timetable' => $timetable,
             'cinemas' => $cinemas,

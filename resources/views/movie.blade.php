@@ -14,21 +14,45 @@
 
     <div style="width: 80%; margin: 0 auto">
         <form action="{{route('movie', $movie->movie_id)}}" method="get">
-        <span style="font-size: 40px"> Расписание сеансов кинотеатра:</span>
-        <select name="cinema_id" style="margin-left: 100px; font-size: 20px; height: 40px; width: 250px">
-            @foreach($cinemas as $cinema)
-                <option value="{{$cinema->cinema_id}}" @if(isset($_GET['cinema_id'])) @if($_GET['cinema_id'] == $cinema->cinema_id) selected @endif @endif>
-                    {{$cinema->name}}
-                </option>
-            @endforeach
-        </select>
-            <div class="row" style="cursor: pointer; margin-top: 30px">
+            <div class="row" >
+                <div class="col">
+                    <span style="font-size: 30px"> Расписание сеансов кинотеатра:</span>
+                </div>
+                <div class="col-3">
+                    <select name="cinema_id" style="font-size: 20px; height: 40px; width: 250px">
+                        @foreach($cinemas as $cinema)
+                            <option value="{{$cinema->cinema_id}}" @if(isset($_GET['cinema_id'])) @if($_GET['cinema_id'] == $cinema->cinema_id) selected @endif @endif>
+                                {{$cinema->name}}
+                            </option>
+                        @endforeach
+                    </select>
+                </div>
+                <div target-id="type_all" class="col-1" style="@if(isset($_GET['type_id']))
+                @if($_GET['type_id'] == 'all')
+                    background-color: rgb(192, 192, 192);
+                @else background-color: white;
+                @endif @endif cursor: pointer; text-align:center; border:1px solid black;">
+                    <h2>Все</h2>
+                    <input class="types" type="radio" id="type_all" name="type_id" value="all" @if(isset($_GET['type_id']))  @if($_GET['type_id'] == 'all') checked @endif @endif style="display: none;"/>
+                </div>
+                @foreach($types as $type)
+                    <div target-id="type_{{$type->type_id}}" class="col-1" style="@if(isset($_GET['type_id']))
+                    @if($_GET['type_id'] == $type->type_id)
+                        background-color: rgb(192, 192, 192);
+                    @else background-color: white;
+                    @endif @endif cursor: pointer; text-align:center; border:1px solid black;margin-left: 20px;">
+                        <h2>{{$type->name}}</h2>
+                        <input class="types" type="radio" id="type_{{$type->type_id}}" name="type_id" value="{{$type->type_id}}" @if(isset($_GET['type_id']))  @if($_GET['type_id'] == $type->type_id) checked @endif @endif style="display: none;"/>
+                    </div>
+                @endforeach
+            </div>
+            <div class="row" style=" margin-top: 30px">
                 @foreach($dates as $key => $date)
                 <div target-id="{{$date}}" class="col-1" style="@if(isset($_GET['data']))
                                                                 @if($_GET['data'] == $date)
                                                                 background-color: rgb(192, 192, 192);
                                                                 @else background-color: white;
-                                                                @endif @endif border:1px solid black;margin-left: 30px;">
+                                                                @endif @endif cursor: pointer; border:1px solid black;margin-left: 30px;">
                     <h2>{{$key}}</h2>
                     <input class="day-week" type="radio" id="{{$date}}" name="data" value="{{$date}}" @if(isset($_GET['data']))  @if($_GET['data'] == $date) checked @endif @endif style="display: none;"/>
                     <h5>{{\App\Models\Timetable::translateMonth(explode('-',$date)[1]-1)}}</h5>
@@ -43,7 +67,7 @@
                     var div = $(this);
                     var target = $('#' + div.attr('target-id'));
                     if(div.css('background-color') === 'rgb(255, 255, 255)') {
-                        var input = $('.day-week');
+                        var input = $('.' + target.attr('class'));
                         input.prop('checked', false);
                         input.parent().css('background-color', 'rgb(255, 255, 255)');
                         div.css('background-color', 'rgb(192, 192, 192)');

@@ -46,6 +46,7 @@ class MovieController extends Controller
             ->get();
 
         $cinemas = Cinema::get();
+        $types = Type::get();
 
         $start_date = date('Y-m-d');
         $dates = array();
@@ -67,6 +68,7 @@ class MovieController extends Controller
             'genres' => $genres,
             'dates' => $dates,
             'cinemas' => $cinemas,
+            'types' => $types,
             'timetables' => $timetables
         ]);
     }

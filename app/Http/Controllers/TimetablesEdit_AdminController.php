@@ -26,11 +26,17 @@ class TimetablesEdit_AdminController extends Controller
                 ->join('halls', 'halls.hall_id', '=', 'cinema_halls.hall_id')
                 ->get();
 
+        $tickets = Booking::join('users', 'users.user_id', '=', 'bookings.user_id')
+            ->join('places', 'places.place_id', '=', 'bookings.place_id')
+            ->where('timetable_id', $timetable_id)
+            ->get();
+
         return view('admin.timetable_edit',[
             'timetable' => $timetable,
             'cinemas' => $cinemas,
             'types' => $types,
             'movies' => $movies,
+            'tickets' => $tickets,
             'halls' => $halls
         ]);
     }

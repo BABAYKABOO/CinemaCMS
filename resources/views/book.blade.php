@@ -72,7 +72,15 @@
                             </div>
                             <div style="height: 50px;"></div>
                         @endforeach
-                        <button type="submit" id="button_book" style="display: none; margin: 0 auto; margin-top: 50px;" class="btn btn-secondary">Забронировать</button>
+                        @if(date("Y-m-d G:i", strtotime(date("Y-m-d G:i") . '+ 1 hour')) < $timetable->data.' '.$timetable->time)
+                            <button type="submit" id="button_book" style="display: none; margin: 0 auto; margin-top: 50px;" class="btn btn-secondary">Забронировать</button>
+                        @elseif(date("Y-m-d G:i") > date("Y-m-d G:i", strtotime($timetable->data.' '.$timetable->time . '+ 3 hour')))
+                            <h2 style="text-align: center; margin: 0 auto; margin-top: 50px;">Сеанс завершен</h2>
+                        @elseif(date("Y-m-d G:i") > $timetable->data.' '.$timetable->time)
+                            <h2 style="text-align: center; margin: 0 auto; margin-top: 50px;">Сеанс уже начался</h2>
+                        @else
+                            <h2 style="text-align: center; margin: 0 auto; margin-top: 50px;">Невозможно забронировать билеты.<br/>До сеанса осталось меньше 1 часа</h2>
+                        @endif
                     </form>
                 <script>
                     $('div[class="place"][target-id]').on('click', function() {

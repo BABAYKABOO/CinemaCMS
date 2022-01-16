@@ -53,12 +53,46 @@
                         @endforeach
                     </select>
                 </div>
-                <div class="mb-3">
+                <div class="mb-5">
                     <label class="form-label">Цена</label>
                     <input required type="text" class="form-control" name="price" value="{{$timetable->price}}">
                 </div>
             </div>
+            @if(isset($tickets[0]))
+            <div class="mb-3">
+                <h2 style="text-align: center;">Список забронированных мест</h2>
+                <div style="text-align: center; height: max-content;padding-left: 30%;">
+
+                    <div class="row" style="">
+                        <div class="col-3" style="height: 40px; border: 1px solid black;background-color: #cbcbcb;">
+                            Имя покупателя
+                        </div>
+                        <div class="col-2" style="border: 1px solid black;background-color: #cbcbcb;">
+                            Ряд
+                        </div>
+                        <div class="col-2" style="border: 1px solid black;background-color: #cbcbcb;">
+                            Номер
+                        </div>
+                    </div>
+                        @foreach($tickets as $ticket)
+                        <div class="row" style="">
+                            <div class="col-3" style="height: 40px; border: 1px solid black; background-color: white;">
+                                {{$ticket->name}} {{$ticket->surname}}
+                            </div>
+                            <div class="col-2" style="border: 1px solid black; background-color: white;">
+                                {{$ticket->row}}
+                            </div>
+                            <div class="col-2" style="border: 1px solid black; background-color: white;">
+                                {{$ticket->place}}
+                            </div>
+                        </div>
+                        @endforeach
+
+                </div>
+            </div>
+            @endif
             <button type="submit" class="btn btn-primary" style="display: inline-block; margin: 10px 0px 50px 30px">Сохранить</button>
+
         </form>
         <script>
             $('select[name="cinema_id"]').on('change', function() {

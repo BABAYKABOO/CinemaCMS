@@ -16,7 +16,8 @@ Route::middleware([App\Http\Middleware\CheckVisit::class])->group(function (){
     Route::get('/', [App\Http\Controllers\MainController::class, 'index'])->name('main');
 
     Route::get('/posters', [App\Http\Controllers\PostersController::class, 'showMovies'])->name('posters');
-    Route::get('/posters/{id}', [App\Http\Controllers\MovieController::class, 'showMovie'])->name('movie');
+    Route::get('/posters/search/', [App\Http\Controllers\PostersController::class, 'showMoviesByName'])->name('posters-search');
+    Route::get('/posters/movie/{id}', [App\Http\Controllers\MovieController::class, 'showMovie'])->name('movie');
 
     Route::get('/timetables', [App\Http\Controllers\Timetables_Controller::class, 'showTimetables'])->name('timetables');
     Route::middleware([App\Http\Middleware\AuthUser::class])->group(function (){

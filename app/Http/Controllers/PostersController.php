@@ -28,4 +28,24 @@ class PostersController extends Controller
             'movies' => $movies
         ]);
     }
+    public function showMoviesByName(Request $request)
+    {
+        $movies = [];
+        foreach (Movie::getMovies() as $movie)
+        {
+            $data = Timetable::select('data')
+                ->where('data', '>=', today())
+                ->orderBy('data')
+                ->where('movie_id', $movie->movie_id)
+                ->first();
+            if (isset($data) && $movie->name == $request->movie_name)
+            {
+                $movie->data = $data->data;
+                $movies[] = $movie;
+            }
+        }
+        return view('posters', [
+            'movies' => $movies
+        ]);
+    }
 }

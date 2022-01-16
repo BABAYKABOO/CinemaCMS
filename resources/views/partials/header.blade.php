@@ -6,7 +6,15 @@
             </div>
             <div class="col-8" style="overflow: hidden;">
                 <div class="header-column" style="width: 200px">
-                    <input type="text" value="Поиск" style="border: 2px solid black" />
+                    <form  action="{{route('posters-search')}}" method="get">
+                        <input name="movie_name" type="text" id="search" placeholder="Поиск" style="border: 2px solid black" />
+                        <button id="do_search" type="submit" style="display: none"></button>
+                    </form>
+                    <script>
+                        $("body").on("change", "#search", function () {
+                            $('#do_search').click();
+                        });
+                    </script>
                 </div>
                 <div class="header-column" style="width: 250px">
                     <div class="social facebook">

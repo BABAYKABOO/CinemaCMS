@@ -11,6 +11,8 @@ class Seo extends Model
 
     public $timestamps = false;
 
+    protected $primaryKey = 'seo_id';
+
     protected $fillable = [
         'seo_id',
         'seo_url',

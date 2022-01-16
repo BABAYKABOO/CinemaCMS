@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Jobs\QueueSenderEmail;
 use App\Mail\MailSender;
 use App\Models\Job;
+use App\Models\StatusJob;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Mail;
@@ -24,6 +25,8 @@ class Send_AdminController extends Controller
                 'users_count' => count($request->session()->get('users'))
             ]);
 
+        $status['count'] = StatusJob::sum('count_mails');
+        $status['progress'] = 100 - (100 * count(Job::get()) / StatusJob::orderBy('date', 'desc')->first()->count_queue);
         return view('admin.send_methods', [
             'files' => $files,
             'status' => $status
@@ -40,6 +43,27 @@ class Send_AdminController extends Controller
             throw \Illuminate\Validation\ValidationException::withMessages([
                 'html' => 'Выберите html шаблон'
             ]);
+
+        if (count(Job::get()) == 0)
+            StatusJob::insert([
+                'count_queue' => 1,
+                'count_mails' => $request->session()->has('users') ?
+                    count($request->session()->get('users')) :
+                    count(User::get()),
+            ]);
+        else
+        {
+            StatusJob::orderBy('date', 'desc')
+                ->limit(1)
+                ->increment('count_queue');
+            StatusJob::orderBy('date', 'desc')
+                ->limit(1)
+                ->increment('count_mails', $request->session()->has('users') ?
+                    count($request->session()->get('users')) :
+                    count(User::get()));
+        }
+
+
         if (isset($request->old_html))
         {
             dispatch(new QueueSenderEmail($request->session()->has('users') ?
@@ -60,6 +84,7 @@ class Send_AdminController extends Controller
                 $request->session()->get('users') :
                 User::get(), $request->file('html_pattern')->getClientOriginalName()));
         }
+
         $request->session()->flash('status', 'Emails успешно отправлены в обработку!');
         return redirect(route('admin-send_methods'));
     }

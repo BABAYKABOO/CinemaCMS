@@ -15,6 +15,8 @@ class PageMain extends Model
 
     public $timestamps = false;
 
+    protected $primaryKey = 'page_id';
+
     protected $fillable = [
         'page_id',
         'phone_1',

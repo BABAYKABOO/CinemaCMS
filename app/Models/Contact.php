@@ -12,6 +12,8 @@ class Contact extends Model
 
     public $timestamps = false;
 
+    protected $primaryKey = 'contact_id';
+
     protected $fillable = [
         'contact_id',
         'status',

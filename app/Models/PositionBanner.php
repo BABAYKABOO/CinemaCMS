@@ -10,6 +10,8 @@ class PositionBanner extends Model
     use HasFactory;
     public $timestamps = false;
 
+    protected $primaryKey = 'position_id';
+
     protected $fillable = [
         'position_id',
         'status',

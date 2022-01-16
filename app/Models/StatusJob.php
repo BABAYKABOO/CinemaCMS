@@ -5,16 +5,17 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Type extends Model
+class StatusJob extends Model
 {
     use HasFactory;
-
-    protected $primaryKey = 'type_id';
 
     public $timestamps = false;
 
     protected $fillable = [
-        'type_id',
-        'name'
-    ];
+        'id',
+        'count_queue',
+        'count_mails',
+        'date'
+        ];
+
 }

@@ -11,6 +11,8 @@ class Gallery extends Model
 
     public $timestamps = false;
 
+    protected $primaryKey = 'gallery_id';
+
     protected $fillable = [
         'gallery_id',
         'image_id'

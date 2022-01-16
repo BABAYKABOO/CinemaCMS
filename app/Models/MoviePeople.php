@@ -11,6 +11,8 @@ class MoviePeople extends Model
     use HasFactory;
     public $timestamps = false;
 
+    protected $primaryKey = 'people_id';
+
     protected $fillable = [
         'people_id',
         'movie_id',

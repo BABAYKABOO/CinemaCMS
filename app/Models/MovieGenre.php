@@ -11,6 +11,11 @@ class MovieGenre extends Model
     use HasFactory;
     public $timestamps = false;
 
+    protected $primaryKey = [
+        'genre_id',
+        'movie_id'
+    ];
+
     protected $fillable = [
         'genre_id',
         'movie_id'

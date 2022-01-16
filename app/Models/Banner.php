@@ -12,6 +12,8 @@ class Banner extends Model
     use HasFactory;
     public $timestamps = false;
 
+    protected $primaryKey = 'banner_id';
+
     protected $fillable = [
         'banner_id',
         'postion_id',

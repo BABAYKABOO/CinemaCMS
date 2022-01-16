@@ -12,6 +12,8 @@ class Timetable extends Model
 {
     use HasFactory;
 
+    protected $primaryKey = 'timetable_id';
+
     public $timestamps = false;
 
     protected $fillable = [

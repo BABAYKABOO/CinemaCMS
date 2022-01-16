@@ -9,6 +9,8 @@ class Place extends Model
 {
     use HasFactory;
 
+    protected $primaryKey = 'place_id';
+
     public $timestamps = false;
 
     protected $fillable = [

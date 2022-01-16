@@ -60,9 +60,9 @@
         </div>
         <div class="mb-3" style="height: 60px;">
             <label style="margin-right: 30px;" class="form-label">Кол-во писем</label>
-            <a  style="margin-right: 50px;" id="html_use_name">3</a>
+            <a  style="margin-right: 50px;" id="count_mail">{{$status['count']}}</a>
             <label style="margin-right: 30px;" class="form-label">Рассылка выполнена на:</label>
-            <a id="html_use_name">100%</a>
+            <a id="html_use_name">{{$status['progress'] == 0 ? $status['progress'].'%'.'  Рассылка скоро начнется' : $status['progress'].'%'}}</a>
         </div>
         <button type="submit" class="btn btn-secondary">Начать рассылку</button>
         </form>

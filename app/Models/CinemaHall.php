@@ -11,6 +11,11 @@ class CinemaHall extends Model
 
     public $timestamps = false;
 
+    protected $primaryKey = [
+        'cinema_id',
+        'hall_id'
+        ];
+
     protected $fillable = [
         'cinema_id',
         'hall_id'

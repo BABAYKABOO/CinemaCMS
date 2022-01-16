@@ -11,6 +11,8 @@ class Genre extends Model
 
     public $timestamps = false;
 
+    protected $primaryKey = 'genre_id';
+
     protected $fillable = [
         'genre_id',
         'name'

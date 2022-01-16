@@ -11,6 +11,11 @@ class MovieType extends Model
 
     public $timestamps = false;
 
+    protected $primaryKey = [
+        'movie_id',
+        'type_id',
+        ];
+
     protected $fillable = [
         'movie_id',
         'type_id'

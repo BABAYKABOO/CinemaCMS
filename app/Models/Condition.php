@@ -10,6 +10,8 @@ class Condition extends Model
     use HasFactory;
     public $timestamps = false;
 
+    protected $primaryKey = 'condition_id';
+
     protected $fillable = [
         'condition_id',
         'condition_name',

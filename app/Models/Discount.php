@@ -12,6 +12,8 @@ class Discount extends Model
 
     public $timestamps = false;
 
+    protected $primaryKey = 'discount_id';
+
     protected $fillable = [
         'discount_id',
         'ua/ru',

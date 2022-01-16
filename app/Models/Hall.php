@@ -12,6 +12,8 @@ class Hall extends Model
 
     public $timestamps = false;
 
+    protected $primaryKey = 'hall_id';
+
     protected $fillable = [
         'hall_id',
         'number',

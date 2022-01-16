@@ -13,6 +13,8 @@ class Booking extends Model
     use HasFactory;
     public $timestamps = false;
 
+    protected $primaryKey = 'booking_id';
+
     protected $fillable = [
         'booking_id',
         'user_id',

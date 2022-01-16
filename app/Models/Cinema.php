@@ -12,6 +12,8 @@ class Cinema extends Model
 
     public $timestamps = false;
 
+    protected $primaryKey = 'cinema_id';
+
     protected $fillable = [
         'cinema_id',
         'name',

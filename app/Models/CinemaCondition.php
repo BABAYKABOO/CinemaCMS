@@ -11,6 +11,11 @@ class CinemaCondition extends Model
     use HasFactory;
     public $timestamps = false;
 
+    protected $primaryKey = [
+        'cinema_id',
+        'condition_id'
+    ];
+
     protected $fillable = [
         'cinema_id',
         'condition_id'

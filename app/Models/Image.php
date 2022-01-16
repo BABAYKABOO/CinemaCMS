@@ -13,6 +13,8 @@ class Image extends Model
 
     public $timestamps = false;
 
+    protected $primaryKey = 'image_id';
+
     protected $fillable = [
         'image_id',
         'image_url'

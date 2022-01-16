@@ -25,7 +25,7 @@ class Book_Controller extends Controller
             ->first();
 
 
-        $places = Booking::bookPlace($timetable_id, $timetable->hall_id);
+        $places = Booking::bookPlace($timetable_id);
 
         return view('book', [
             'timetable' => $timetable,

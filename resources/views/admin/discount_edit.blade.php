@@ -2,6 +2,20 @@
 @section('title', 'Новая акция')
 @section('content')
     <style>
+        .icon_wrapper {
+            height: 90px; width: 200px;
+            background-color: #fefefe;
+            border: dashed 1px #ccc;
+        }
+        .icon_wrapper div {
+            background-size: contain;
+            background-position: center;
+            background-repeat: no-repeat;
+            height: 90px; width: 200px;
+        }
+        input[type='file'] {
+            color: transparent;
+        }
         .switch {
             position: relative;
             display: inline-block;
@@ -58,7 +72,6 @@
             border-radius: 50%;
         }
     </style>
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
     <div style="text-align: left; margin-left: 20px">
         <form action="{{route('admin-discount-save', $discount->discount_id )}}" enctype="multipart/form-data" method="post">
             @csrf
@@ -91,80 +104,18 @@
                     </div>
                 </label>
                 <input type="file" name="mainimg" preview-target-id="preview_1" title="1">
-                <style>
-                    .icon_wrapper {
-                        height: 90px; width: 200px;
-                        background-color: #fefefe;
-                        border: dashed 1px #ccc;
-                    }
-                    .icon_wrapper div {
-                        background-size: contain;
-                        background-position: center;
-                        background-repeat: no-repeat;
-                        height: 90px; width: 200px;
-                    }
-                    input[type='file'] {
-                        color: transparent;
-                    }
-                </style>
-                <script>
-                    $('input[type="file"][preview-target-id]').on('change', function() {
-                        var input = $(this)
-                        if (!window.FileReader) return false // check for browser support
-                        if (input[0].files && input[0].files[0]) {
-                            var reader = new FileReader()
-                            reader.onload = function (e) {
-                                var target = $('#' + input.attr('preview-target-id'))
-                                var background_image = 'url(' + e.target.result + ')'
-                                target.css('background-image', background_image)
-                                target.parent().show()
-                            }
-                            reader.readAsDataURL(input[0].files[0]);
-                        }
-                    })
                 </script>
             </div>
             <div class="mb-3" style="width: 200px;">
                 <label for="icon_upload">Вверхний баннер:<br>
-                    <div class="icon_wrapper" style="height: 100px; width: 200px;">
-                        <div id="top-preview_1" style="background: url({{$topbanner->image_url}}); height: 100px; width: 200px; background-size: 100%">
+                    <div class="icon_wrapper" style="height: 80px; width: 200px;">
+                        <div id="top-preview_1" style="background: url({{$topbanner->image_url}}); height: 80px; width: 200px; background-size: 100%">
 
                         </div>
                     </div>
                 </label>
                 <input type="file" name="topbanner" preview-target-id="top-preview_1" title="1">
-                <style>
-                    .icon_wrapper {
-                        height: 90px; width: 200px;
-                        background-color: #fefefe;
-                        border: dashed 1px #ccc;
-                    }
-                    .icon_wrapper div {
-                        background-size: contain;
-                        background-position: center;
-                        background-repeat: no-repeat;
-                        height: 90px; width: 200px;
-                    }
-                    input[type='file'] {
-                        color: transparent;
-                    }
-                </style>
-                <script>
-                    $('input[type="file"][preview-target-id]').on('change', function() {
-                        var input = $(this)
-                        if (!window.FileReader) return false // check for browser support
-                        if (input[0].files && input[0].files[0]) {
-                            var reader = new FileReader()
-                            reader.onload = function (e) {
-                                var target = $('#' + input.attr('preview-target-id'))
-                                var background_image = 'url(' + e.target.result + ')'
-                                target.css('background-image', background_image)
-                                target.parent().show()
-                            }
-                            reader.readAsDataURL(input[0].files[0]);
-                        }
-                    })
-                </script>
+
             </div>
             <label for="label" class="form-label">SEO:</label>
             <div class="mb-3" style="width: 70%; margin-left: 50px">
@@ -184,5 +135,21 @@
                 Вернуть базовую версию
             </a>
         </form>
+        <script>
+            $('input[type="file"][preview-target-id]').on('change', function() {
+                var input = $(this)
+                if (!window.FileReader) return false // check for browser support
+                if (input[0].files && input[0].files[0]) {
+                    var reader = new FileReader()
+                    reader.onload = function (e) {
+                        var target = $('#' + input.attr('preview-target-id'))
+                        var background_image = 'url(' + e.target.result + ')'
+                        target.css('background-image', background_image)
+                        target.parent().show()
+                    }
+                    reader.readAsDataURL(input[0].files[0]);
+                }
+            })
+        </script>
     </div>
 @endsection

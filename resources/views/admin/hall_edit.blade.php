@@ -3,7 +3,7 @@
 @section('content')
     <div style="text-align: left; margin-left: 20px">
         <form action="{{route('admin-cinema_hall-save', [
-                                 'cinema_id' => $cinema->cinema_id,
+                                 'cinema_id' => $cinema_id,
                                  'hall_id' => $hall->hall_id
                             ])}}" enctype="multipart/form-data" method="post">
             @csrf
@@ -16,14 +16,8 @@
                 <textarea class="form-control" aria-label="With textarea" name="desc" id="desc">{{$hall->desc}}</textarea>
             </div>
             <div class="mb-3" style="width: 200px;">
-                <label for="icon_upload">Схема зала:<br>
-                    <div class="icon_wrapper" style="height: 150px; width: 200px;"><div id="schema-preview_1" style="height: 150px; width: 200px; background: url({{$img['schema']}}); background-size: 100%"></div></div>
-                </label>
-                <input type="file" name="schema" preview-target-id="schema-preview_1" title="1">
-            </div>
-            <div class="mb-3" style="width: 200px;">
                 <label for="icon_upload">Фото верхнего баннера:<br>
-                    <div class="icon_wrapper"><div id="topbanner-preview_1" style="background: url({{$img['topbanner']}}); background-size: 100%"></div></div>
+                    <div class="icon_wrapper"><div id="topbanner-preview_1" style="background: url({{$hall->image_url}}); background-size: 100%"></div></div>
                 </label>
                 <input type="file" name="topbanner" preview-target-id="topbanner-preview_1" title="1">
             </div>
@@ -32,31 +26,31 @@
                 <div class="row">
                     <div class="col-sm" style="width: 200px;">
                         <label for="icon_upload">Image:<br>
-                            <div class="icon_wrapper"><div id="gallery-preview_1" style="background: url({{$img['gallery'][0]->image_url}}); background-size: 100%"></div></div>
+                            <div class="icon_wrapper"><div id="gallery-preview_1" style="background: url({{$gallery[0]->image_url}}); background-size: 100%"></div></div>
                         </label><br/>
                         <input type="file" name="Gallery[0]" preview-target-id="gallery-preview_1" title="1">
                     </div>
                     <div class="col-sm" style="width: 200px">
                         <label for="icon_upload">Image:<br>
-                            <div class="icon_wrapper"><div id="gallery-preview_2" style="background: url({{$img['gallery'][1]->image_url}}); background-size: 100%"></div></div>
+                            <div class="icon_wrapper"><div id="gallery-preview_2" style="background: url({{$gallery[1]->image_url}}); background-size: 100%"></div></div>
                         </label>
                         <input type="file" name="Gallery[1]" preview-target-id="gallery-preview_2">
                     </div>
                     <div class="col-sm" style="width: 200px">
                         <label for="icon_upload">Image:<br>
-                            <div class="icon_wrapper"><div id="gallery-preview_3" style="background: url({{$img['gallery'][2]->image_url}}); background-size: 100%"></div></div>
+                            <div class="icon_wrapper"><div id="gallery-preview_3" style="background: url({{$gallery[2]->image_url}}); background-size: 100%"></div></div>
                         </label>
                         <input type="file" name="Gallery[2]" preview-target-id="gallery-preview_3">
                     </div>
                     <div class="col-sm" style="width: 200px">
                         <label for="icon_upload">Image:<br>
-                            <div class="icon_wrapper"><div id="gallery-preview_4" style="background: url({{$img['gallery'][3]->image_url}}); background-size: 100%"></div></div>
+                            <div class="icon_wrapper"><div id="gallery-preview_4" style="background: url({{$gallery[3]->image_url}}); background-size: 100%"></div></div>
                         </label>
                         <input type="file" name="Gallery[3]" preview-target-id="gallery-preview_4">
                     </div>
                     <div class="col-sm" style="width: 200px">
                         <label for="icon_upload">Image:<br>
-                            <div class="icon_wrapper"><div id="gallery-preview_5" style="background: url({{$img['gallery'][4]->image_url}}); background-size: 100%"></div></div>
+                            <div class="icon_wrapper"><div id="gallery-preview_5" style="background: url({{$gallery[4]->image_url}}); background-size: 100%"></div></div>
                         </label>
                         <input type="file" name="Gallery[4]" preview-target-id="gallery-preview_5">
                     </div>
@@ -78,7 +72,6 @@
                     color: transparent;
                 }
             </style>
-            <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
             <script>
                 $('input[type="file"][preview-target-id]').on('change', function() {
                     var input = $(this)
@@ -109,7 +102,10 @@
                 </div>
             </div>
             <button type="submit" class="btn btn-primary" style="display: inline-block; margin: 10px 0px 50px 30px">Сохранить</button>
-            <a class="btn btn-secondary" style="display: inline-block;  margin: 10px 0px 50px 30px" href="{{route('admin-cinema_hall-edit', $hall->hall_id)}}">
+            <a class="btn btn-secondary" style="display: inline-block;  margin: 10px 0px 50px 30px" href="{{route('admin-cinema_hall-edit', [
+                                 'cinema_id' => $cinema_id,
+                                 'hall_id' => $hall->hall_id
+                            ])}}">
                 Вернуть базовую версию
             </a>
             <a class="btn btn-danger" style="display: inline-block;  margin: 10px 0px 50px 30px" href="{{}}">

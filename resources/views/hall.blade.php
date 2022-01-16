@@ -2,7 +2,7 @@
 @section('title', 'Зал')
 @section('content')
     <div style="margin-top:50px; margin-bottom: 50px">
-        <img width="100%" height="500" src="{{$img['topbanner']}}"/>
+        <img width="100%" height="500" src="{{$hall->image_url}}"/>
     </div>
     <div class="row" style="margin: 0 auto; width:98%;">
         <div class="col-2" style="margin-right: 70px">
@@ -29,7 +29,7 @@
                 {{$hall->desc}}
             </div>
             <div style="width: 80%; margin: 0 auto">
-                <img width="100%" src="{{$img['schema']}}">
+                <img width="100%" src="http://cinema.com/storage/img/schema_hall.png">
             </div>
             <div style="margin: 0 auto; width: 60%; margin-top: 50px">
                 <style>
@@ -50,7 +50,7 @@
                     }
                 </style>
                 <div class="slider">
-                    @foreach($img['gallery'] as $image)
+                    @foreach($gallery as $image)
                         <div class="news-item">
                             <img src="{{$image->image_url}}" alt="слайд">
                         </div>
@@ -59,7 +59,7 @@
                     <a class="next" onclick="plusNewsSlide()">&#10095;</a>
                 </div>
                 <div class="slider-news-dots">
-                    @for($i = 1; $i <= count($img['gallery']); $i++)
+                    @for($i = 1; $i <= count($gallery); $i++)
                         <span class="slider-news-dots_item" onclick="currentNewsSlide({{$i}})"></span>
                     @endfor
                 </div>
@@ -70,13 +70,13 @@
 
                     /* Функция увеличивает индекс на 1, показывает следующй слайд*/
                     function plusNewsSlide() {
-                        setInterval(showNewsSlides(slideIndex += 1), 5000);
+                        showNewsSlides(slideIndex += 1);
 
                     }
 
                     /* Функция уменьшает индекс на 1, показывает предыдущий слайд*/
                     function minusNewsSlide() {
-                        setInterval(showNewsSlides(slideIndex -= 1), 5000);
+                        showNewsSlides(slideIndex -= 1);
                     }
 
                     /* Устанавливает текущий слайд */

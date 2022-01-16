@@ -16,11 +16,9 @@ class HallController extends Controller
     public function showHall(int $cinema_id, int $hall_id)
     {
         $hall = hall::where('hall_id', $hall_id)
+            ->join('images', 'images.image_id', '=', 'halls.topbanner')
             ->first();
-
-        $img['schema'] = Image::where('image_id', $hall->schema)->first()->image_url;
-        $img['topbanner'] = Image::where('image_id', $hall->topbanner)->first()->image_url;
-        $img['gallery'] = Gallery::where('gallery_id', $hall->gallery)
+        $gallery = Gallery::where('gallery_id', $hall->gallery)
             ->join('images', 'images.image_id', '=', 'galleries.image_id')
             ->get();
 
@@ -30,7 +28,7 @@ class HallController extends Controller
         return view('hall', [
             'cinema_id' => $cinema_id,
             'hall' => $hall,
-            'img' => $img,
+            'gallery' => $gallery,
             'halls' => $halls
         ]);
     }

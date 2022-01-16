@@ -21,7 +21,7 @@
                     ЦЕНА В ГРН:
                 </div>
                 <div class="col-1" >
-                    <div style="padding-left: 9px; padding-top: 5px; color: white; font-weight: bolder; background-color: #f9c835; width: 36px; height: 36px;">
+                    <div style="padding: 5px 9px 0px 9px; color: white; font-weight: bolder; background-color: #f9c835; width: min-content; height: 36px;">
                     {{$timetable->price}}
                     </div>
                 </div>

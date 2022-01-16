@@ -20,13 +20,13 @@ class MovieController extends Controller
     public function translateDate(string $date) : string
     {
         $week = [
-            'Вc',
             'Пн',
             'Вт',
             'Ср',
             'Чт',
             'Пт',
-            'Сб'
+            'Сб',
+            'Вc'
         ];
 
         $arr = new DateTime($date);
@@ -41,8 +41,10 @@ class MovieController extends Controller
             ->join('images', 'images.image_id', '=', 'galleries.image_id')
             ->get();
         $people = MoviePeople::join('people_positions', 'people_positions.position_id', '=', 'movie_people.position_id')
+            ->where('movie_id', $id)
             ->get();
         $genres = MovieGenre::join('genres', 'genres.genre_id', '=', 'movie_genres.genre_id')
+            ->where('movie_id', $id)
             ->get();
 
         $cinemas = Cinema::get();

@@ -108,11 +108,11 @@
         <div>
             <h1 style="text-align:center">Фильм не в показе</h1>
         </div>
-    @endif
+        @endif
     <div style="margin-top: 50px;">
         <div class="row" style="margin: 0 auto; width: 90%;" align="center">
             <div class="col">
-                <img src="{{$movie->image_url}}"/>
+                <img src="{{$movie->image_url}}" style="margin-bottom: 10px;height: 375px;width: 250px;background: url({{$movie->image_url}});background-size: 100%;"/>
             </div>
             <div class="col">
                 <button class="btn btn-success" style="font-size: 30px; width: 300px; height: 60px; margin-bottom: 20px">Купить билет</button>
@@ -157,7 +157,7 @@
                         <div class="col" style="height: 35px; padding: 5px">
                             <h5>Жанр</h5>
                         </div>
-                        <div class="col" style="height: 35px; padding: 5px; color: #99a1aa">
+                        <div class="col" style="height: min-content; padding: 5px; color: #99a1aa">
                             <span class="valuespan">@foreach($genres as $genre){{$genre->name . ' | '}}@endforeach</span>
                         </div>
                         @php($i = $i == true ? false : true)

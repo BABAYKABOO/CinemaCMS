@@ -55,10 +55,10 @@ class Booking extends Model
         }
     }
 
-    static function bookPlace(int $timetable_id, int $hall_id)
+    static function bookPlace(int $timetable_id)
     {
         $places = array();
-        $schema = HallSchema::where('hall_id', $hall_id)->orderBy('row_number')->get();
+        $schema = HallSchema::where('hall_id', 5)->orderBy('row_number')->get();
         $bookings = Booking::where('timetable_id', $timetable_id)->get();
         $places_book = array();
         foreach ($bookings as $booking) {

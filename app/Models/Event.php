@@ -22,7 +22,6 @@ class Event extends Model
         'name',
         'desc',
         'mainimg',
-        'topbanner',
         'seo',
     ];
 
@@ -34,7 +33,6 @@ class Event extends Model
             'name' => $request->name,
             'desc' => $request->desc,
             'mainimg' => Image::saveImg($request, 'mainimg'),
-            'gallery' => Image::uploadGallery($request),
             'seo' => $seo_id
         ]);
 
@@ -50,7 +48,6 @@ class Event extends Model
             'name' => $request->name,
             'desc' => $request->desc,
             'mainimg' => Image::saveImg($request, 'mainimg', $event->mainimg),
-            'gallery' => Image::uploadGallery($request, $event->gallery, $event->gallery)
         ]);
     }
 

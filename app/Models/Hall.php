@@ -18,7 +18,6 @@ class Hall extends Model
         'hall_id',
         'number',
         'desc',
-        'schema',
         'topbanner',
         'gallery',
         'seo'
@@ -42,9 +41,8 @@ class Hall extends Model
         Hall::where('hall_id', $hall_id)->update([
             'number' => $request->number,
             'desc' => $request->desc,
-            'schema' => Image::saveImg($request, 'schema', $hall->schema),
             'topbanner' => Image::saveImg($request, 'topbanner', $hall->topbanner),
-            'gallery' => Image::uploadGallery($request, $hall->gallery),
+            'gallery' => Image::uploadGallery($request, 'Gallery', $hall->gallery),
         ]);
     }
 
@@ -53,9 +51,8 @@ class Hall extends Model
         Hall::insert([
             'number' => $request->number,
             'desc' => $request->desc,
-            'schema' => Image::saveImg($request, 'schema'),
             'topbanner' => Image::saveImg($request, 'topbanner'),
-            'gallery' => Image::uploadGallery($request),
+            'gallery' => Image::uploadGallery($request, 'Gallery'),
             'seo' => $seo_id
         ]);
         return Hall::max('hall_id');
@@ -68,7 +65,6 @@ class Hall extends Model
         CinemaHall::where('hall_id', $hall_id)->delete();
         Hall::where('hall_id', $hall_id)->delete();
 
-        Image::deleteImg($hall->schema);
         Image::deleteImg($hall->topbanner);
 
         foreach (Gallery::where('gallery_id', $hall->gallery)->get() as $image)

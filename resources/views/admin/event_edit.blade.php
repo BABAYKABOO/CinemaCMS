@@ -106,56 +106,6 @@
                 </label>
                 <input type="file" name="mainimg" preview-target-id="main-preview_11" title="1">
             </div>
-            <div class="mb-3">
-                <label>Галерея</label>
-                <div class="row">
-                    <div class="col-sm" style="width: 200px;">
-                        <label for="icon_upload">Image:<br>
-                            <div class="icon_wrapper"><div id="preview_1" style="background: url({{$gallery[1]->image_url}}); background-size: 100%"></div></div>
-                        </label>
-                        <input type="file" name="Gallery[0]" preview-target-id="preview_1" title="1">
-                    </div>
-                    <div class="col-sm" style="width: 200px">
-                        <label for="icon_upload">Image:<br>
-                            <div class="icon_wrapper"><div id="preview_2" style="background: url({{$gallery[1]->image_url}}); background-size: 100%"></div></div>
-                        </label>
-                        <input type="file" name="Gallery[1]" preview-target-id="preview_2">
-                    </div>
-                    <div class="col-sm" style="width: 200px">
-                        <label for="icon_upload">Image:<br>
-                            <div class="icon_wrapper"><div id="preview_3" style="background: url({{$gallery[2]->image_url}}); background-size: 100%"></div></div>
-                        </label>
-                        <input type="file" name="Gallery[2]" preview-target-id="preview_3">
-                    </div>
-                    <div class="col-sm" style="width: 200px">
-                        <label for="icon_upload">Image:<br>
-                            <div class="icon_wrapper"><div id="preview_4" style="background: url({{$gallery[3]->image_url}}); background-size: 100%"></div></div>
-                        </label>
-                        <input type="file" name="Gallery[3]" preview-target-id="preview_4">
-                    </div>
-                    <div class="col-sm" style="width: 200px">
-                        <label for="icon_upload">Image:<br>
-                            <div class="icon_wrapper"><div id="preview_5" style="background: url({{$gallery[4]->image_url}}); background-size: 100%"></div></div>
-                        </label>
-                        <input type="file" name="Gallery[4]" preview-target-id="preview_5">
-                    </div>
-                    <script>
-                        $('input[type="file"][preview-target-id]').on('change', function() {
-                            var input = $(this)
-                            if (!window.FileReader) return false // check for browser support
-                            if (input[0].files && input[0].files[0]) {
-                                var reader = new FileReader()
-                                reader.onload = function (e) {
-                                    var target = $('#' + input.attr('preview-target-id'))
-                                    var background_image = 'url(' + e.target.result + ')'
-                                    target.css('background-image', background_image)
-                                    target.parent().show()
-                                }
-                                reader.readAsDataURL(input[0].files[0]);
-                            }
-                        })
-                    </script>
-                </div>
             <label for="label" class="form-label">SEO:</label>
             <div class="mb-3" style="width: 70%; margin-left: 50px">
                 <div class="mb-3" style="">
@@ -174,5 +124,21 @@
                 Вернуть базовую версию
             </a>
         </form>
+        <script>
+            $('input[type="file"][preview-target-id]').on('change', function() {
+                var input = $(this)
+                if (!window.FileReader) return false // check for browser support
+                if (input[0].files && input[0].files[0]) {
+                    var reader = new FileReader()
+                    reader.onload = function (e) {
+                        var target = $('#' + input.attr('preview-target-id'))
+                        var background_image = 'url(' + e.target.result + ')'
+                        target.css('background-image', background_image)
+                        target.parent().show()
+                    }
+                    reader.readAsDataURL(input[0].files[0]);
+                }
+            })
+        </script>
     </div>
 @endsection

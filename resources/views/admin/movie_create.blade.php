@@ -226,7 +226,7 @@
                         var DivHidden = $('#divAppend');
                         var str = '<div id="person_' + countDiv + '" class="mb-3" style="border: 1px solid black; padding: 10px; border-radius: 20px">' +
                             '<label class="form-label">Должность</label>' +
-                            '<select class="form-control" name="People["' + countDiv + '][position]">' +
+                            '<select class="form-control" name="People[' + countDiv + '][position]">' +
                             '@foreach($positions as $position)' +
                             '<option value="{{$position->position_id}}">{{$position->position_name}}</option>' +
                             '@endforeach' +

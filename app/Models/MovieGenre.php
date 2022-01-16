@@ -19,7 +19,7 @@ class MovieGenre extends Model
 
     static function createMovieGenre(Request $request, int $movie_id)
     {
-        if (count($request->genres_active) != count(MovieGenre::where('movie_id', $movie_id)->get()))
+        if (isset($request->genres_active) && count($request->genres_active) != count(MovieGenre::where('movie_id', $movie_id)->get()))
         {
             MovieGenre::where('movie_id', $movie_id)->delete();
             foreach ($request->genres_active as $id => $genre)

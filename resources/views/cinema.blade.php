@@ -25,7 +25,7 @@
             <div class="col-9" style="width:1000px">
                 <div class="row">
                     <div class="col-3">
-                        <img width="150" height="100" src="{{$img['logo']}}"/>
+                        <img width="200" height="100" src="{{$img['logo']}}"/>
                     </div>
 
                     <div class="col-8">
@@ -94,13 +94,13 @@
 
                         /* Функция увеличивает индекс на 1, показывает следующй слайд*/
                         function plusNewsSlide() {
-                            setInterval(showNewsSlides(slideIndex += 1), 5000);
+                            showNewsSlides(slideIndex += 1);
 
                         }
 
                         /* Функция уменьшает индекс на 1, показывает предыдущий слайд*/
                         function minusNewsSlide() {
-                            setInterval(showNewsSlides(slideIndex -= 1), 5000);
+                            showNewsSlides(slideIndex -= 1);
                         }
 
                         /* Устанавливает текущий слайд */

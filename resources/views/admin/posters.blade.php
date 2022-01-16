@@ -7,7 +7,7 @@
         <div style="width: 70%; margin: 0 auto; margin-bottom: 50px; text-align: left;">
             @foreach($moviesToday as $movie)
                 <div class="main-moviediv">
-                    <div class="main-movieimg" style="background: url({{$movie->image_url}})">
+                    <div class="main-movieimg" style="background: url({{$movie->image_url}}); background-size: 100%;">
                     </div>
                     <div style="height: 70px;">
                         <a class="main-moviea" href="{{route('admin-movie_id', $movie->movie_id)}}">
@@ -21,7 +21,7 @@
         <div style="width: 70%; margin: 0 auto; text-align: left;">
             @foreach($moviesSoon as $movie)
                 <div class="main-moviediv">
-                    <div class="main-movieimg" style="background: url({{$movie->image_url}})">
+                    <div class="main-movieimg" style="background: url({{$movie->image_url}}); background-size: 100%;">
                     </div>
                     <div style="height: 70px;">
                         <a class="main-moviea" href="{{route('admin-movie_id', $movie->movie_id)}}">
@@ -37,7 +37,7 @@
         <div style="width: 70%; margin: 0 auto; text-align: left;">
             @foreach($movie_wt_tt as $movie)
                 <div class="main-moviediv">
-                    <div class="main-movieimg" style="background: url({{$movie->image_url}})">
+                    <div class="main-movieimg" style="background: url({{$movie->image_url}}); background-size: 100%;">
                     </div>
                     <div style="height: 70px;">
                         <a class="main-moviea" href="{{route('admin-movie_id', $movie->movie_id)}}">

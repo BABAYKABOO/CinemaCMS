@@ -13,17 +13,17 @@ class HallEdit_AdminController extends Controller
 {
     public function showHall(int $cinema_id, int $hall_id)
     {
-        $hall = Hall::where('hall_id', $hall_id)->first();
-        $img['schema'] = Image::where('image_id', $hall->schema)->first()->image_url;
-        $img['topbanner'] = Image::where('image_id', $hall->topbanner)->first()->image_url;
-        $img['gallery'] = Gallery::where('gallery_id', $hall->gallery)
+        $hall = Hall::where('hall_id', $hall_id)
+            ->join('images', 'images.image_id', '=', 'halls.topbanner')
+            ->first();
+        $gallery = Gallery::where('gallery_id', $hall->gallery)
             ->join('images', 'images.image_id', '=', 'galleries.image_id')
             ->get();
         $seo = Seo::where('seo_id', $hall->seo)->first();
         return view('admin.hall_edit', [
             'cinema_id' => $cinema_id,
             'hall' => $hall,
-            'img' => $img,
+            'gallery' => $gallery,
             'seo' => $seo
         ]);
     }

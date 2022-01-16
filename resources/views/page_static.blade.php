@@ -22,11 +22,14 @@
                 <img style="width: 400px; height: 250px;" src="{{$sub_gallery[2]->image_url}}"/>
             </div>
         </div>
+        @if(isset($page->sub_desc))
         <div style="width: 90%; margin: 0 auto">
             <span>
                 {{$page->sub_desc}}
             </span>
         </div>
+        @endif
+        @if(isset($gallery[0]))
         <div style="width: 60%; margin: 0 auto; margin-top: 60px;">
             <style>
                 .slider{
@@ -45,64 +48,65 @@
                     box-shadow: none !important;
                 }
             </style>
-            <h3 style="text-align: center;">ФОТОГАЛЕРЕЯ</h3>
-            <div class="slider">
-                @foreach($gallery as $image)
-                    <div class="news-item">
-                        <img src="{{$image->image_url}}" alt="слайд">
-                    </div>
-                @endforeach
-                <a class="prev" onclick="minusNewsSlide()">&#10094;</a>
-                <a class="next" onclick="plusNewsSlide()">&#10095;</a>
-            </div>
-            <div class="slider-news-dots">
-                @for($i = 1; $i <= count($gallery); $i++)
-                    <span class="slider-news-dots_item" onclick="currentNewsSlide({{$i}})"></span>
-                @endfor
-            </div>
-            <script>
-                /* Индекс слайда по умолчанию */
-                var slideIndex = 1;
-                showNewsSlides(slideIndex);
+                <h3 style="text-align: center;">ФОТОГАЛЕРЕЯ</h3>
+                <div class="slider">
+                    @foreach($gallery as $image)
+                        <div class="news-item">
+                            <img src="{{$image->image_url}}" alt="слайд">
+                        </div>
+                    @endforeach
+                    <a class="prev" onclick="minusNewsSlide()">&#10094;</a>
+                    <a class="next" onclick="plusNewsSlide()">&#10095;</a>
+                </div>
+                <div class="slider-news-dots">
+                    @for($i = 1; $i <= count($gallery); $i++)
+                        <span class="slider-news-dots_item" onclick="currentNewsSlide({{$i}})"></span>
+                    @endfor
+                </div>
+                <script>
+                    /* Индекс слайда по умолчанию */
+                    var slideIndex = 1;
+                    showNewsSlides(slideIndex);
 
-                /* Функция увеличивает индекс на 1, показывает следующй слайд*/
-                function plusNewsSlide() {
-                    setInterval(showNewsSlides(slideIndex += 1), 5000);
+                    /* Функция увеличивает индекс на 1, показывает следующй слайд*/
+                    function plusNewsSlide() {
+                        showNewsSlides(slideIndex += 1);
 
-                }
-
-                /* Функция уменьшает индекс на 1, показывает предыдущий слайд*/
-                function minusNewsSlide() {
-                    setInterval(showNewsSlides(slideIndex -= 1), 5000);
-                }
-
-                /* Устанавливает текущий слайд */
-                function currentNewsSlide(n) {
-                    showNewsSlides(slideIndex = n);
-                }
-
-                /* Основная функция слайдера */
-                function showNewsSlides(n) {
-                    var i;
-                    var slides = document.getElementsByClassName("news-item");
-                    var dots = document.getElementsByClassName("slider-news-dots_item");
-                    if (n > slides.length) {
-                        slideIndex = 1
                     }
-                    if (n < 1) {
-                        slideIndex = slides.length
-                    }
-                    for (i = 0; i < slides.length; i++) {
-                        slides[i].style.display = "none";
-                    }
-                    for (i = 0; i < dots.length; i++) {
-                        dots[i].className = dots[i].className.replace(" active", "");
-                    }
-                    slides[slideIndex - 1].style.display = "block";
-                    dots[slideIndex - 1].className += " active";
-                }
 
-            </script>
+                    /* Функция уменьшает индекс на 1, показывает предыдущий слайд*/
+                    function minusNewsSlide() {
+                        showNewsSlides(slideIndex -= 1);
+                    }
+
+                    /* Устанавливает текущий слайд */
+                    function currentNewsSlide(n) {
+                        showNewsSlides(slideIndex = n);
+                    }
+
+                    /* Основная функция слайдера */
+                    function showNewsSlides(n) {
+                        var i;
+                        var slides = document.getElementsByClassName("news-item");
+                        var dots = document.getElementsByClassName("slider-news-dots_item");
+                        if (n > slides.length) {
+                            slideIndex = 1
+                        }
+                        if (n < 1) {
+                            slideIndex = slides.length
+                        }
+                        for (i = 0; i < slides.length; i++) {
+                            slides[i].style.display = "none";
+                        }
+                        for (i = 0; i < dots.length; i++) {
+                            dots[i].className = dots[i].className.replace(" active", "");
+                        }
+                        slides[slideIndex - 1].style.display = "block";
+                        dots[slideIndex - 1].className += " active";
+                    }
+
+                </script>
         </div>
+        @endif
     </div>
 @endsection

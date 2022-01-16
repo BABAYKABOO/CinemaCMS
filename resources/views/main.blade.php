@@ -13,7 +13,7 @@
                     </div>
                 @endforeach
 
-                <a class="prev" onclick="minusSlide()">&#10094;</a>
+                <a class="prev" style="margin-left: -50%;" onclick="minusSlide()">&#10094;</a>
                 <a class="next" onclick="plusSlide()">&#10095;</a>
             </div>
             <div class="slider-dots">
@@ -107,7 +107,7 @@
                         </div>
                     @endforeach
 
-                    <a class="prev" onclick="minusNewsSlide()">&#10094;</a>
+                    <a class="prev" style="margin-left: -50%;" onclick="minusNewsSlide()">&#10094;</a>
                     <a class="next" onclick="plusNewsSlide()">&#10095;</a>
                 </div>
                 <div class="slider-news-dots">

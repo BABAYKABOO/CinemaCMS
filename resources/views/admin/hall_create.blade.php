@@ -13,12 +13,6 @@
                 <textarea class="form-control" aria-label="With textarea" name="desc" placeholder="Описание" id="desc" required></textarea>
             </div>
             <div class="mb-3" style="width: 200px;">
-                <label for="icon_upload">Схема зала:<br>
-                    <div class="icon_wrapper" style="height: 150px; width: 200px;"><div id="schema-preview_1" style="height: 150px; width: 200px; background-size: 100%"></div></div>
-                </label>
-                <input type="file" name="schema" preview-target-id="schema-preview_1" title="1" required>
-            </div>
-            <div class="mb-3" style="width: 200px;">
                 <label for="icon_upload">Фото верхнего баннера:<br>
                     <div class="icon_wrapper"><div id="topbanner-preview_1" style="background-size: 100%"></div></div>
                 </label>
@@ -75,7 +69,6 @@
                     color: transparent;
                 }
             </style>
-            <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
             <script>
                 $('input[type="file"][preview-target-id]').on('change', function() {
                     var input = $(this)

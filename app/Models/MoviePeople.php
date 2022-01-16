@@ -16,7 +16,7 @@ class MoviePeople extends Model
     protected $fillable = [
         'people_id',
         'movie_id',
-        'position',
+        'position_id',
         'name',
     ];
 

@@ -59,7 +59,7 @@ class Cinema extends Model
             'mainimg' => Image::saveImg($request, 'mainimg'),
             'logo' => Image::saveImg($request, 'logo'),
             'topbanner' => Image::saveImg($request, 'topbanner'),
-            'gallery' => Image::uploadGallery($request),
+            'gallery' => Image::uploadGallery($request, 'Gallery'),
             'seo' => $seo_id
         ]);
         return Cinema::max('cinema_id');

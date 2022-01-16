@@ -30,7 +30,7 @@ class Movie extends Model
         'counrty',
         'budget',
         'age',
-        'time'
+        'movie_time'
     ];
     public function image()
     {
@@ -117,12 +117,12 @@ class Movie extends Model
                 'country' => $request->country,
                 'budget' => $request->budget,
                 'age' => $request->age,
-                'time' => $request->time,
+                'movie_time' => $request->movie_time,
                 'seo' => $seo_id
             ]);
         $movie_id = Movie::max('movie_id');
-        MovieGenre::createMovieGenre($request->genres_active, $movie_id);
-        MoviePeople::createPeople($request->People, $movie_id);
+        MovieGenre::createMovieGenre($request, $movie_id);
+        MoviePeople::createPeople($request, $movie_id);
         return $movie_id;
     }
 }

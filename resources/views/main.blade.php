@@ -4,7 +4,7 @@
 @section('content')
     <div style="text-align: center; margin-bottom: -155px;">
         <div class="main-div" style="background-color: #f7f6f6;">
-            @if(isset($banner_main[0]))
+            @if($positions->where('position_id', 1)->first()->status == 1)
             <div class="slider">
                 @foreach($banner_main as $banner)
                     <div class="item">
@@ -25,7 +25,7 @@
                 /* Индекс слайда по умолчанию */
                 var slideIndex = 1;
                 showSlides(slideIndex);
-                setInterval(plusSlide(), 1000);
+                setInterval(plusSlide, {{$positions->where('position_id', 1)->first()->time * 1000}});
 
                 /* Функция увеличивает индекс на 1, показывает следующй слайд*/
                 function plusSlide() {
@@ -96,7 +96,7 @@
                 </div>
             @endforeach
             </div>
-            @if(isset($banner_news[0]))
+            @if($positions->where('position_id', 3)->first()->status == 1))
             <div style="margin-bottom: 50px">
                 <h2>Новости и акции</h2>
                 <div class="slider">
@@ -117,23 +117,23 @@
                 </div>
                 <script>
                     /* Индекс слайда по умолчанию */
-                    var slideIndex = 1;
-                    showNewsSlides(slideIndex);
+                    var slideNewsIndex = 1;
+                    showNewsSlides(slideNewsIndex);
+                    setInterval(plusNewsSlide, {{$positions->where('position_id', 3)->first()->time * 1000}});
 
                     /* Функция увеличивает индекс на 1, показывает следующй слайд*/
                     function plusNewsSlide() {
-                        setInterval(showNewsSlides(slideIndex += 1), 5000);
-
+                        showNewsSlides(slideNewsIndex += 1)
                     }
 
                     /* Функция уменьшает индекс на 1, показывает предыдущий слайд*/
                     function minusNewsSlide() {
-                        setInterval(showNewsSlides(slideIndex -= 1), 5000);
+                        showNewsSlides(slideNewsIndex -= 1)
                     }
 
                     /* Устанавливает текущий слайд */
                     function currentNewsSlide(n) {
-                        showNewsSlides(slideIndex = n);
+                        showNewsSlides(slideNewsIndex = n);
                     }
 
                     /* Основная функция слайдера */
@@ -142,10 +142,10 @@
                         var slides = document.getElementsByClassName("news-item");
                         var dots = document.getElementsByClassName("slider-news-dots_item");
                         if (n > slides.length) {
-                            slideIndex = 1
+                            slideNewsIndex = 1
                         }
                         if (n < 1) {
-                            slideIndex = slides.length
+                            slideNewsIndex = slides.length
                         }
                         for (i = 0; i < slides.length; i++) {
                             slides[i].style.display = "none";
@@ -153,8 +153,8 @@
                         for (i = 0; i < dots.length; i++) {
                             dots[i].className = dots[i].className.replace(" active", "");
                         }
-                        slides[slideIndex - 1].style.display = "block";
-                        dots[slideIndex - 1].className += " active";
+                        slides[slideNewsIndex - 1].style.display = "block";
+                        dots[slideNewsIndex - 1].className += " active";
                     }
 
                 </script>

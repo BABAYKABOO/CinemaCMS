@@ -11,21 +11,31 @@
                     <p class="copyright">Разработка сайтов: AVADA-MEDIA</p>
                 </div>
                 <div class="col-sm-4 col-md-3 item">
-                    <h3>Афиша</h3>
+                    <a style="color: #4b4c4d" href="{{route('posters')}}"><h3>Афиша</h3></a>
                     <ul>
-                        <li><a href="#">Расписание</a></li>
-                        <li><a href="#">Скоро в прокате</a></li>
-                        <li><a href="#">Кинотеатры</a></li>
-                        <li><a href="#">Акции</a></li>
+                        <li><a href="{{route('timetables')}}">Расписание</a></li>
+                        <li><a href="{{route('soon')}}">Скоро в прокате</a></li>
+                        <li><a href="{{route('cinemas')}}">Кинотеатры</a></li>
+                        <li><a href="{{route('discounts')}}">Акции</a></li>
                     </ul>
                 </div>
                 <div class="col-sm-4 col-md-3 item">
-                    <h3>О кинотеатре</h3>
+                    <a style="color: #4b4c4d" href="{{\App\Models\Page::where('page_id', 7)->first()->status == 1 ? route('page_id', 7) : '#'}}"><h3>О кинотеатре</h3></a>
                     <ul>
-                        <li><a href="#">Новости</a></li>
-                        <li><a href="#">Реклама</a></li>
-                        <li><a href="#">Кафе-Бар</a></li>
-                        <li><a href="#">Контакты</a></li>
+                        <li><a href="{{route('events')}}">&nbsp;Новости</a></li>
+                        @foreach(\App\Models\Page::get() as $page)
+                            @if($page->status == 1 && $page->page_id != 7)
+                                @if($page->page_id == 5)
+                                    <li><a href="{{route('page_mobile')}}">&nbsp;Мобильные прил</a></li>
+                                @elseif($page->page_id == 6)
+                                    <li><a href="{{route('page_cafe')}}">&nbsp;{{$page->name}}</a></li>
+                                @else
+                                    <li><a href="{{route('page_id', $page->page_id)}}">&nbsp;{{$page->name}}</a></li>
+                                @endif
+                            @endif
+                        @endforeach
+                        <li><a href="{{route('page_contacts')}}">&nbsp;Контакты</a></li>
+                        <li><a href="{{route('user-cabinet')}}">&nbsp;Мой кабинет</a></li>
                     </ul>
                 </div>
                 <div class="col-lg-3 item social">
@@ -44,7 +54,7 @@
                     <br/>
                     <br/>
                     <br/>
-                    <p class="copyright">©KinoCMS 2016, All rights reserved</p>
+                    <p class="copyright">©CinemaCMS 2016, All rights reserved</p>
 
                 </div>
             </div>

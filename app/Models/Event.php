@@ -22,6 +22,7 @@ class Event extends Model
         'name',
         'desc',
         'mainimg',
+        'cinema_id',
         'seo',
     ];
 
@@ -33,6 +34,7 @@ class Event extends Model
             'name' => $request->name,
             'desc' => $request->desc,
             'mainimg' => Image::saveImg($request, 'mainimg'),
+            'cinema_id' => $request->cinema_id,
             'seo' => $seo_id
         ]);
 
@@ -48,6 +50,7 @@ class Event extends Model
             'name' => $request->name,
             'desc' => $request->desc,
             'mainimg' => Image::saveImg($request, 'mainimg', $event->mainimg),
+            'cinema_id' => $request->cinema_id,
         ]);
     }
 

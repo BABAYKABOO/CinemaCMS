@@ -102,6 +102,16 @@
                 </label>
                 <input type="file" name="mainimg" preview-target-id="main-preview_1" title="1" required>
             </div>
+            <div class="mb-3">
+                <label style="width: 100px" class="form-label">Кинотеатр</label>
+                <select class="form-control item" style="width: 250px; height: 50px;" name="cinema_id">
+                    @foreach($cinemas as $cinema)
+                        <option value="{{$cinema->cinema_id}}">
+                            {{$cinema->name}}
+                        </option>
+                    @endforeach
+                </select>
+            </div>
             <label for="label" class="form-label">SEO:</label>
             <div class="mb-3" style="width: 70%; margin-left: 50px">
                 <div class="mb-3" style="">

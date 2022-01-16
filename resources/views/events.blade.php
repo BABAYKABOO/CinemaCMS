@@ -9,16 +9,19 @@
         <div class="row" style="width: 100%; padding: 20px; margin: 0 auto; text-align: center; ">
             @foreach($events as $event)
                 @if($event->date <= date("Y-m-d"))
+
                     <div class="col-4" style="width: 200px; color: #99a0a7; text-align: left; margin-top: 10px; margin-bottom: 20px">
                         <img height="250" width="100%" src="{{$event->image_url}}"/>
-                        <div style="margin-top: 10px;padding-left: 7px; border-radius: 10px;background-color: black; color: white; height: 25px; width: 100px;">
-                            <p>{{$event->date}}</p>
+                        <div style="float:left;margin: 10px 0px 0px 10px; border-radius: 10px;background-color: black; color: white; text-align: center; height: 25px; width: max-content;">
+                            <p style="padding: 0px 15px 0px 15px;">{{$event->date}}</p>
                         </div>
-                            <h3 style="color: #40a2df;">{{$event->name}}</h3>
-
-                        <span style="margin-top: 20px">
-                        {{$event->desc}}
-                    </span>
+                        <div style="float:left;margin: 10px 0px 0px 10px; border-radius: 10px;background-color: #bf5df0; color: white; text-align: center; height: 25px; width: max-content;">
+                            <p style="padding: 0px 15px 0px 15px;">{{$event->cinema_name}}</p>
+                        </div>
+                            <h3 style="color: #40a2df; margin-top: 50px;">{{$event->name}}</h3>
+                            <span style="margin-top: 20px">
+                            {{$event->desc}}
+                            </span>
                     </div>
                 @endif
             @endforeach

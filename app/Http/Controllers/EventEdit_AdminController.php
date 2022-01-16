@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Cinema;
 use App\Models\Event;
 use App\Models\Gallery;
 use App\Models\Seo;
@@ -19,12 +20,15 @@ class EventEdit_AdminController extends Controller
             ->join('images', 'images.image_id', '=', 'galleries.image_id')
             ->get();
 
+        $cinemas = Cinema::get();
+
         $seo = Seo::where('seo_id', $event->seo)->first();
 
         return view('admin.event_edit', [
             'event' => $event,
             'gallery' => $gallery,
-            'seo' => $seo
+            'seo' => $seo,
+            'cinemas' => $cinemas
         ]);
     }
     public function save(Request $request, int $event_id)

@@ -25,17 +25,29 @@ class Cinema extends Model
         'seo',
     ];
 
-    public function image()
+    public function hall()
     {
-        return $this->hasOne(Image::class);
+        return $this->belongsTo(Hall::class, 'cinema_id', 'cinema_id');
+    }
+    public function logo()
+    {
+        return $this->hasOne(Image::class, 'image_id', 'logo');
+    }
+    public function topbanner()
+    {
+        return $this->hasOne(Image::class, 'image_id', 'topbanner');
     }
     public function gallery()
     {
-        return $this->hasOne(Gallery::class);
+        return $this->hasOne(Gallery::class, 'gallery_id', 'gallery');
     }
     public function seo()
     {
-        return $this->hasOne(Seo::class);
+        return $this->hasOne(Seo::class, 'seo_id', 'seo');
+    }
+    public function conditions()
+    {
+        return $this->belongsToMany(Condition::class, 'cinema_conditions', 'cinema_id', 'condition_id');
     }
 
     static function saveCinema(Request $request, int $cinema_id)

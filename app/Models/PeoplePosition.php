@@ -16,4 +16,9 @@ class PeoplePosition extends Model
         'people_id',
         'name',
     ];
+
+    public function people()
+    {
+        return $this->belongsTo(MoviePeople::class, 'position_id', 'position_id');
+    }
 }

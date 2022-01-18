@@ -17,4 +17,8 @@ class Type extends Model
         'type_id',
         'name'
     ];
+    public function movie()
+    {
+        return $this->belongsToMany(Movie::class, 'movie_types', 'type_id', 'movie_id');
+    }
 }

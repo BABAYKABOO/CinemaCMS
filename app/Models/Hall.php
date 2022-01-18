@@ -16,23 +16,36 @@ class Hall extends Model
 
     protected $fillable = [
         'hall_id',
+        'cinema_id',
         'number',
         'desc',
         'topbanner',
         'gallery',
         'seo'
     ];
-    public function image()
+    public function place()
     {
-        return $this->hasOne(Image::class);
+        return $this->belongsTo(Place::class, 'hall_id', 'hall_id');
+    }
+    public function schema()
+    {
+        return $this->belongsTo(HallSchema::class, 'hall_id', 'hall_id');
+    }
+    public function topbanner()
+    {
+        return $this->hasOne(Image::class, 'image_id', 'topbanner');
     }
     public function gallery()
     {
-        return $this->hasOne(Gallery::class);
+        return $this->hasOne(Gallery::class, 'gallery_id', 'gallery');
     }
     public function seo()
     {
-        return $this->hasOne(Seo::class);
+        return $this->hasOne(Seo::class, 'seo_id', 'seo');
+    }
+    public function cinema()
+    {
+        return $this->hasOne(Cinema::class, 'cinema_id', 'cinema_id');
     }
 
     static function saveHall(Request $request, int $hall_id)

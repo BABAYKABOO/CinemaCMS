@@ -20,6 +20,15 @@ class MoviePeople extends Model
         'name',
     ];
 
+    public function movie()
+    {
+        return $this->hasOne(Movie::class, 'movie_id', 'movie_id');
+    }
+    public function position()
+    {
+        return $this->hasOne(PeoplePosition::class, 'position_id', 'position_id');
+    }
+
     static function createPeople(Request $request, int $movie_id)
     {
         if (count($request->People) != count(MoviePeople::where('movie_id', $movie_id)->get()))

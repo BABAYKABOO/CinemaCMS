@@ -17,5 +17,8 @@ class Condition extends Model
         'condition_name',
         'desc'
     ];
-
+    public function cinemas()
+    {
+        return $this->belongsToMany(Cinema::class, 'cinema_conditions', 'condition_id', 'cinema_id');
+    }
 }

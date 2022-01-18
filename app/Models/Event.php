@@ -26,6 +26,15 @@ class Event extends Model
         'seo',
     ];
 
+    public function mainimg()
+    {
+        return $this->hasOne(Image::class, 'image_id', 'mainimg');
+    }
+    public function seo()
+    {
+        return $this->hasOne(Seo::class, 'seo_id', 'seo');
+    }
+
     static function createEvent(Request $request, int $seo_id) : int
     {
         Event::insert([

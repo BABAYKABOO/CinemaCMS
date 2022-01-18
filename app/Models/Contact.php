@@ -21,8 +21,22 @@ class Contact extends Model
         'address',
         'coordinates',
         'logo',
+        'mainimg',
         'seo'
     ];
+
+    public function logo()
+    {
+        return $this->hasOne(Image::class, 'image_id', 'logo');
+    }
+    public function mainimg()
+    {
+        return $this->hasOne(Image::class, 'image_id', 'mainimg');
+    }
+    public function seo()
+    {
+        return $this->hasOne(Seo::class, 'seo_id', 'seo');
+    }
 
     static function deleteContacts(array $new_contacts, $old_contacts)
     {

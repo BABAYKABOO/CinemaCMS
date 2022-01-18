@@ -17,4 +17,9 @@ class PositionBanner extends Model
         'status',
         'time'
     ];
+
+    public function banner()
+    {
+        return $this->belongsTo(Banner::class, 'position_id', 'position_id');
+    }
 }

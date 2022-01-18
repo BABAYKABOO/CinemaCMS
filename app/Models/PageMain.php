@@ -25,6 +25,11 @@ class PageMain extends Model
         'seo'
     ];
 
+    public function seo()
+    {
+        return $this->hasOne(Seo::class, 'seo_id', 'seo');
+    }
+
     static function savePage(Request $request, int $page_id)
     {
         PageMain::where('page_id', $page_id)->update([

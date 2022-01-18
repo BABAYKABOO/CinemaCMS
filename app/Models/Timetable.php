@@ -30,19 +30,21 @@ class Timetable extends Model
         $data = explode(':',$value);
         return $data[0].':'.$data[1];
     }
+    public function booking()
+    {
+        return $this->belongsTo(Booking::class, 'timetable_id', 'timetable_id');
+    }
     public function cinema()
     {
-        return $this->hasOne(Cinema::class);
+        return $this->hasOne(Cinema::class, 'cinema_id', 'cinema_id');
     }
-
-    public function hall()
-    {
-        return $this->hasOne(Hall::class);
-    }
-
     public function movie()
     {
-        return $this->hasOne(Movie::class);
+        return $this->hasOne(Movie::class, 'movie_id', 'movie_id');
+    }
+    public function hall()
+    {
+        return $this->hasOne(Hall::class, 'hall_id', 'hall_id');
     }
 
     static function translateMonth(int $month_id)

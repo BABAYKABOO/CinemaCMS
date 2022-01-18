@@ -29,6 +29,23 @@ class Page extends Model
         'seo'
     ];
 
+    public function mainimg()
+    {
+        return $this->hasOne(Image::class, 'image_id', 'topbanner');
+    }
+    public function sub_gallery()
+    {
+        return $this->hasOne(Gallery::class, 'gallery_id', 'sub_gallery');
+    }
+    public function gallery()
+    {
+        return $this->hasOne(Gallery::class, 'gallery_id', 'gallery');
+    }
+    public function seo()
+    {
+        return $this->hasOne(Seo::class, 'seo_id', 'seo');
+    }
+
     static function createPage(Request $request, int $seo_id)
     {
         Page::insert([

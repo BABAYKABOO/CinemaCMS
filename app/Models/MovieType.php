@@ -17,15 +17,6 @@ class MovieType extends Model
         'type_id'
     ];
 
-    public function movie()
-    {
-        $this->hasMany(Movie::class);
-    }
-
-    public function type()
-    {
-        return $this->hasMany(Type::class);
-    }
 
     static function saveTypes(array $arr, int $movie_id)
     {

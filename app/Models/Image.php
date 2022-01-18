@@ -20,6 +20,52 @@ class Image extends Model
         'image_url'
     ];
 
+    public function discount()
+    {
+        return $this->belongsTo(Discount::class, 'mainimg', 'image_id');
+    }
+    public function discountTopbanner()
+    {
+        return $this->belongsTo(Discount::class, 'topbanner', 'image_id');
+    }
+    public function event()
+    {
+        return $this->belongsTo(Event::class, 'mainimg', 'image_id');
+    }
+    public function page()
+    {
+        return $this->belongsTo(Page::class, 'topbanner', 'image_id');
+    }
+    public function movie()
+    {
+        return $this->belongsTo(Movie::class, 'mainimg', 'image_id');
+    }
+    public function hall()
+    {
+        return $this->belongsTo(Hall::class, 'topbanner', 'image_id');
+    }
+    public function cinema()
+    {
+        return $this->belongsTo(Cinema::class, 'mainimg', 'image_id');
+    }
+    public function cinemaLogo()
+    {
+        return $this->belongsTo(Cinema::class, 'logo', 'image_id');
+    }
+    public function banner()
+    {
+        return $this->belongsTo(Banner::class, 'img', 'image_id');
+    }
+    public function contact()
+    {
+        return $this->belongsTo(Contact::class, 'maingimg', 'image_id');
+    }
+    public function contactLogo()
+    {
+        return $this->belongsTo(Contact::class, 'logo', 'image_id');
+    }
+
+
     static function deleteImg(int $image_id)
     {
         Storage::delete('public/img/'.Image::where('image_id', $image_id)->first()->image_url);

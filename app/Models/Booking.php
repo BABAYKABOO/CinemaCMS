@@ -23,6 +23,19 @@ class Booking extends Model
         'booking_date'
     ];
 
+    public function user()
+    {
+        return $this->hasOne(User::class, 'user_id', 'user_id');
+    }
+    public function timetable()
+    {
+        return $this->hasOne(Timetable::class, 'timetable_id', 'timetable_id');
+    }
+    public function place()
+    {
+        return $this->hasOne(Place::class, 'place_id', 'place_id');
+    }
+
     static function createBooking(Request $request, int $timetable_id)
     {
         $places = array();

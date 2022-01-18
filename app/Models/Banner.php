@@ -16,11 +16,19 @@ class Banner extends Model
 
     protected $fillable = [
         'banner_id',
-        'postion_id',
+        'position_id',
         'url',
         'text',
         'img'
     ];
+    public function img()
+    {
+        return $this->hasOne(Image::class, 'image_id', 'img');
+    }
+    public function position()
+    {
+        return $this->hasOne(PositionBanner::class, 'position_id', 'position_id');
+    }
 
     static function deleteBanners(array $new_banners, $old_banners)
     {

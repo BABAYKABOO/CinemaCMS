@@ -19,4 +19,13 @@ class Place extends Model
         'place',
         'hall_id'
     ];
+
+    public function booking()
+    {
+        return $this->belongsTo(Booking::class, 'place_id', 'place_id');
+    }
+    public function hall()
+    {
+        return $this->hasOne(Hall::class, 'hall_id', 'hall_id');
+    }
 }

@@ -41,6 +41,11 @@ class User extends Authenticatable
         $data = explode(' ',$value);
         return $data[0];
     }
+    public function bookings()
+    {
+        return $this->belongsTo(Booking::class, 'user_id', 'user_id');;
+    }
+
     public function scopeFilter(Builder $builder, QueryFilter $filter)
     {
         return $filter->apply($builder);

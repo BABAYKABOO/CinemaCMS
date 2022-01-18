@@ -32,13 +32,30 @@ class Movie extends Model
         'age',
         'movie_time'
     ];
-    public function image()
+
+    public function mainimg()
     {
-        $this->hasMany(Image::class);
+        return $this->hasOne(Image::class, 'image_id', 'mainimg');
+    }
+    public function gallery()
+    {
+        return $this->hasOne(Gallery::class, 'gallery_id', 'gallery');
     }
     public function seo()
     {
-        return $this->hasOne(Seo::class);
+        return $this->hasOne(Seo::class, 'seo_id', 'seo');
+    }
+    public function types()
+    {
+        return $this->belongsToMany(Type::class, 'movie_types', 'movie_id', 'type_id');
+    }
+    public function genres()
+    {
+        return $this->belongsToMany(Genre::class, 'movie_genre', 'movie_id', 'genre_id');
+    }
+    public function people()
+    {
+        return $this->belongsTo(MoviePeople::class, 'movie_id', 'movie_id');
     }
 
     static function getMovies($data = null)

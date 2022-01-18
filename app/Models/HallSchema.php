@@ -18,4 +18,9 @@ class HallSchema extends Model
         'row_number',
         'place_number'
     ];
+
+    public function hall()
+    {
+        return $this->hasOne(Hall::class, 'hall_id', 'hall_id');
+    }
 }

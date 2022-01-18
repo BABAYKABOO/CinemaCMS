@@ -26,6 +26,19 @@ class Discount extends Model
 
     ];
 
+    public function mainimg()
+    {
+        return $this->hasOne(Image::class, 'image_id', 'mainimg');
+    }
+    public function topbanner()
+    {
+        return $this->hasOne(Image::class, 'image_id', 'topbanner');
+    }
+    public function seo()
+    {
+        return $this->hasOne(Seo::class, 'seo_id', 'seo');
+    }
+
     static function createDiscount(Request $request, int $seo_id) : int
     {
         Discount::insert([

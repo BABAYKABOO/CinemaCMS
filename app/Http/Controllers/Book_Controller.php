@@ -25,7 +25,6 @@ class Book_Controller extends Controller
 
 
         $places = Booking::bookPlace($timetable_id);
-
         return view('book', [
             'timetable' => $timetable,
             'date' => $date,
@@ -37,6 +36,8 @@ class Book_Controller extends Controller
     public function book(Request $request, int $timetable_id)
     {
         Booking::createBooking($request, $timetable_id);
+        $request->session()
+            ->flash('status', "Билеты успешно забронированы.\nБилеты нужно выкупить в кассе не позднее чем за пол часа");
         return redirect(route('book', $timetable_id));
     }
 }

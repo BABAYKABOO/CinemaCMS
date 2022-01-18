@@ -9,6 +9,7 @@
         <div class="col-3" >
             <img width="90%" src="{{$movie->image_url}}"/>
         </div>
+
         <div class="col" >
             <div style="padding: 5px; color: white; width: max-content; background-color: #b63d26; border-radius: 10px;">
                 <h5>{{$movie->name}}</h5>
@@ -16,6 +17,19 @@
             <div style="margin-top: 10px;">
                 <span style="color: #746f6e">{{$date}}</span>
             </div>
+            @if(session()->has('status'))
+                <div class="center" style="
+    margin: 0 auto;
+    margin-top: 30px;
+    width: 40%;
+">
+                        <div class="alert alert-success">
+                            <ul>
+                                <li>{{session()->get('status')}}</li>
+                            </ul>
+                        </div>
+                </div>
+            @endif
             <div class="row" style="margin-top: 20px;">
                 <div class="col-2" >
                     ЦЕНА В ГРН:
@@ -46,7 +60,6 @@
                     </div>
                 </div>
             </div>
-
             <div style="margin: 0 auto; height: 800px;">
                     <hr class="rounded_underline"/>
                     <h5 style="text-align: center; margin-top: -80px; margin-bottom: 80px;">ЭКРАН</h5>

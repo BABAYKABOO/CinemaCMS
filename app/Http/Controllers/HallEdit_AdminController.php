@@ -2,7 +2,6 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\CinemaHall;
 use App\Models\Gallery;
 use App\Models\Hall;
 use App\Models\Image;

@@ -4,8 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Models\Cinema;
 use App\Models\CinemaCondition;
-use App\Models\CinemaHall;
 use App\Models\Gallery;
+use App\Models\Hall;
 use App\Models\Image;
 use App\Models\Type;
 use Illuminate\Http\Request;
@@ -30,9 +30,7 @@ class CinemaIDController extends Controller
                             ->join('conditions', 'conditions.condition_id', '=', 'cinema_conditions.condition_id')
                             ->get();
 
-        $halls = CinemaHall::where('cinema_id', $cinema_id)
-                ->join('halls', 'halls.hall_id', '=', 'cinema_halls.hall_id')
-                ->get();
+        $halls = Hall::where('cinema_id', $cinema_id)->get();
         return view('cinema', [
             'cinema' => $cinema,
             'img' => $img,

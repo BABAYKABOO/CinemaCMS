@@ -4,7 +4,6 @@ namespace App\Http\Controllers;
 
 use App\Models\Cinema;
 use App\Models\CinemaCondition;
-use App\Models\CinemaHall;
 use App\Models\Condition;
 use App\Models\Seo;
 use Illuminate\Http\Request;

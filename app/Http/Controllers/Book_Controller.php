@@ -8,7 +8,6 @@ use App\Models\HallSchema;
 use App\Models\Movie;
 use App\Models\Place;
 use App\Models\Timetable;
-use Doctrine\Inflector\Rules\NorwegianBokmal\Inflectible;
 use Illuminate\Http\Request;
 
 class Book_Controller extends Controller

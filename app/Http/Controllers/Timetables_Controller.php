@@ -4,7 +4,6 @@ namespace App\Http\Controllers;
 
 use App\Filters\TimetablesFilter;
 use App\Models\Cinema;
-use App\Models\CinemaHall;
 use App\Models\Hall;
 use App\Models\Movie;
 use App\Models\Timetable;
@@ -55,9 +54,7 @@ class Timetables_Controller extends Controller
 
         $halls = array();
         foreach($cinemas as $cinema)
-            $halls[$cinema->cinema_id] = CinemaHall::where('cinema_id', $cinema->cinema_id)
-                ->join('halls', 'halls.hall_id', '=', 'cinema_halls.hall_id')
-                ->get();
+            $halls[$cinema->cinema_id] = Hall::where('cinema_id', $cinema->cinema_id)->get();
 
         $dates = Timetable::where('data', '>=', date("Y-m-d"))
             ->orderBy('data')
